@@ -1,11 +1,10 @@
 class WebhooksController < ApplicationController
   def messenger
-   if params[‘hub.verify_token’] == “mytoken”
-     puts "success"
-     render text: params[‘hub.challenge’] and return
-   else
-     render text: ‘error’ and return
-     puts "error"
-   end
+    verification_token = "mytoken"
+    if params["hub.verify_token"] == verification_token
+      render plain: params["hub.challenge"]
+    else
+      render plain: "error"
+    end
   end
 end
