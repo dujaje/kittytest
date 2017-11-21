@@ -7,4 +7,16 @@ class WebhooksController < ApplicationController
       render plain: "error"
     end
   end
+
+  def receive_message
+    therequest = request.body.read
+    data = JSON.parse(therequest)
+    entries = data["entry"]
+    entries.each do |entry|
+      entry["messaging"].each do |messaging|
+        sender = messaging["sender"]["id"]
+        text = messaging["message"]["text"]
+      end
+    end
+  end
 end
