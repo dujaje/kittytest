@@ -1,7 +1,8 @@
 class WebhooksController < ApplicationController
-  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
   def messenger
+    p params
     verification_token = "mytoken"
     if params["hub.verify_token"] == verification_token
       render plain: params["hub.challenge"]
@@ -11,9 +12,11 @@ class WebhooksController < ApplicationController
   end
 
   def receive_message
+    p params
     therequest = request.body.read
     data = JSON.parse(therequest)
     entries = data["entry"]
+    my_reply = nil
     entries.each do |entry|
       entry["messaging"].each do |messaging|
         sender = messaging["sender"]["id"]
@@ -24,13 +27,13 @@ class WebhooksController < ApplicationController
                         "id": "#{sender}"
                       },
                       "message": {
-                      "text": "meow #{text}"
+                      "text": "meow #{text}!!!"
                       }
                     }
         puts HTTP.post(url, json: my_reply)
       end
     end
-    render "recieved_data"
+    render plain: my_reply
   end
 
   def url
