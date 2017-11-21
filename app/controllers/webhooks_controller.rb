@@ -2,7 +2,6 @@ class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def messenger
-    # p params
     if params["hub.verify_token"] == ENV['MESSENGER_VERIFICATION_TOKEN']
       render plain: params["hub.challenge"]
     else
@@ -31,9 +30,25 @@ class WebhooksController < ApplicationController
                             "id": "#{sender}"
                           },
                           "message": {
-                          "text": "#{ENV['DEVELOPER_TOKEN']} #{text}!!!"
+                                "attachment": {
+                                  "type": "template",
+                                  "payload": {
+                                    "template_type": "generic",
+                                    "elements": [{
+                                      "title": "Is this the right picture?",
+                                      "subtitle": "Tap a button to answer.",
+                                      "buttons": [
+                                        {
+                                          "type": "postback",
+                                          "title": "#{ENV['DEVELOPER_TOKEN']}Yes!",
+                                          "payload": "yes",
+                                        },
+                                      ],
+                                    }]
+                                  }
+                                }
+                              }
                           }
-                        }
             HTTP.post(url, json: my_reply)
           end
         end
