@@ -2,8 +2,8 @@ class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def messenger
-    p params
-    if params["hub.verify_token"] == ENV['messenger_verification_token']
+    # p params
+    if params["hub.verify_token"] == ENV['MESSENGER_VERIFICATION_TOKEN']
       render plain: params["hub.challenge"]
     else
       render plain: "error"
@@ -28,31 +28,31 @@ class WebhooksController < ApplicationController
                       },
                       "message": {
                       "attachment": {
-        "type": "template",
-        "payload": {
-        "template_type": "generic",
-          "elements": [{
-          "title": "Welcome to Kitty",
-            "subtitle": "The best app for money sharing",
-            "image_url": "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/23658371_154645468621882_4383150760338193341_n.png?oh=f21774eb176fef440d61a6a20c577ba7&oe=5A9BF90F",
-            "buttons": [{
-              "type": "web_url",
-              "url": "http://kittymoneysplitter.herokuapp.com/extension/welcome",
-              "title": "Open Kitty"
-            }, {
-              "type": "postback",
-              "title": "Meow",
-              "payload": "Payload for first element in a generic bubble",
-            }],
-          }]
-        }
-      }
+                                      "type": "template",
+                                      "payload": {
+                                      "template_type": "generic",
+                                        "elements": [{
+                                        "title": "Welcome to Kitty",
+                                          "subtitle": "The best app for money sharing",
+                                          "image_url": "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/23658371_154645468621882_4383150760338193341_n.png?oh=f21774eb176fef440d61a6a20c577ba7&oe=5A9BF90F",
+                                          "buttons": [{
+                                            "type": "web_url",
+                                            "url": "http://kittymoneysplitter.herokuapp.com/extension/welcome",
+                                            "title": "Open Kitty"
+                                          }, {
+                                            "type": "postback",
+                                            "title": "#{ENV['DEVELOPER_TOKEN']} Meow",
+                                            "payload": "Payload for first element in a generic bubble",
+                                          }],
+                                        }]
+                                      }
+                                    }
                       }
                     }
         HTTP.post(url, json: my_reply)
       end
+      render plain: my_reply
     end
-    render plain: my_reply
   end
 
   def url
