@@ -35,7 +35,7 @@ class WebhooksController < ApplicationController
   end
 
   def url
-    "https://graph.facebook.com/v2.6/me/messages?access_token=EAAdHTu6J8uMBAAc19ijgenHlcZABGERZCLGUX6X3QzYe0ZA2C2wac0XcDv2IRXL525sLBsZARZAksKNZCQfc2ayZCib6ZAd7PTfnG5O4VJ7Xd4NRZAWX0HEhZBrTZCEHrZCzNCkdSD7mMuTT0iYdB7jrAdFOKzgW37YZCP7ZAUGV0IeJtZBvQZDZD"
+    "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV[ACCESS_TOKEN]}"
   end
 
 end
