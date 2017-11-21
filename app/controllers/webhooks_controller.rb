@@ -1,9 +1,9 @@
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  @dev = ENV['DEVELOPER_TOKEN']
+
   def messenger
-    p params
-    if params["hub.verify_token"] == ENV['messenger_verification_token']
+    # p params
+    if params["hub.verify_token"] == ENV['MESSENGER_VERIFICATION_TOKEN']
       render plain: params["hub.challenge"]
     else
       render plain: "error"
@@ -13,25 +13,33 @@ class WebhooksController < ApplicationController
   def receive_message
     therequest = request.body.read
     data = JSON.parse(therequest)
-    entries = data["entry"]
-    my_reply = nil
-    entries.each do |entry|
-      entry["messaging"].each do |messaging|
-        sender = messaging["sender"]["id"]
-        text = messaging["message"]["text"]
-        my_reply = {
-                      "messaging_type": "RESPONSE",
-                      "recipient": {
-                        "id": "#{sender}"
-                      },
-                      "message": {
-                      "text": "#{@dev} #{text}!!!"
-                      }
-                    }
-        HTTP.post(url, json: my_reply)
+
+    # just an error check
+    if data["object"] == "page"
+      entries = data["entry"]
+      my_reply = nil
+      entries.each do |entry|
+        entry["messaging"].each do |messaging|
+          if messaging["read"]
+            # The person has read Kitty's reply. We don't need to reply back.
+          else
+            sender = messaging["sender"]["id"]
+            text = messaging["message"]["text"]
+            my_reply = {
+                          "messaging_type": "RESPONSE",
+                          "recipient": {
+                            "id": "#{sender}"
+                          },
+                          "message": {
+                          "text": "#{ENV['DEVELOPER_TOKEN']} #{text}!!!"
+                          }
+                        }
+            HTTP.post(url, json: my_reply)
+          end
+        end
       end
+      render plain: my_reply
     end
-    render plain: my_reply
   end
 
   def url
