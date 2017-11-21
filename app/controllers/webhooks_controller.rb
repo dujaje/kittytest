@@ -1,6 +1,6 @@
 class WebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
-
+  @dev = ENV['DEVELOPER_TOKEN']
   def messenger
     p params
     if params["hub.verify_token"] == ENV['messenger_verification_token']
@@ -25,7 +25,7 @@ class WebhooksController < ApplicationController
                         "id": "#{sender}"
                       },
                       "message": {
-                      "text": "meow #{text}!!!"
+                      "text": "#{@dev} #{text}!!!"
                       }
                     }
         HTTP.post(url, json: my_reply)
