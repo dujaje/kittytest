@@ -3,7 +3,7 @@ class WebhooksController < ApplicationController
 
   def messenger
     # p params
-    if params["hub.verify_token"] == ENV['MESSENGER_VERIFICATION_TOKEN']
+    if params["hub.verify_token"] == ENV['messenger_verification_token']
       render plain: params["hub.challenge"]
     else
       render plain: "error"
