@@ -14,6 +14,8 @@ class WebhooksController < ApplicationController
     therequest = request.body.read
     data = JSON.parse(therequest)
     entries = data["entry"]
+    sender = nil
+    text = nil
     my_reply = nil
     entries.each do |entry|
       entry["messaging"].each do |messaging|
@@ -25,7 +27,26 @@ class WebhooksController < ApplicationController
                         "id": "#{sender}"
                       },
                       "message": {
-                      "text": "meow #{text}!!!"
+                      "attachment": {
+        "type": "template",
+        "payload": {
+        "template_type": "generic",
+          "elements": [{
+          "title": "Welcome to Kitty",
+            "subtitle": "The best app for money sharing",
+            "image_url": "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/23658371_154645468621882_4383150760338193341_n.png?oh=f21774eb176fef440d61a6a20c577ba7&oe=5A9BF90F",
+            "buttons": [{
+              "type": "web_url",
+              "url": "http://kittymoneysplitter.herokuapp.com/extension/welcome",
+              "title": "Open Kitty"
+            }, {
+              "type": "postback",
+              "title": "Meow",
+              "payload": "Payload for first element in a generic bubble",
+            }],
+          }]
+        }
+      }
                       }
                     }
         HTTP.post(url, json: my_reply)
