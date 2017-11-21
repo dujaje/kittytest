@@ -1,5 +1,6 @@
 class WebhooksController < ApplicationController
   protect_from_forgery with: :null_session
+
   def messenger
     verification_token = "mytoken"
     if params["hub.verify_token"] == verification_token
@@ -23,7 +24,7 @@ class WebhooksController < ApplicationController
                         "id": "#{sender}"
                       },
                       "message": {
-                        "text": "meow #{text}"
+                      "text": "meow #{text}"
                       }
                     }
         puts HTTP.post(url, json: my_reply)
