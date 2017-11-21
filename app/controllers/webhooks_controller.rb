@@ -3,8 +3,7 @@ class WebhooksController < ApplicationController
 
   def messenger
     p params
-    verification_token = "mytoken"
-    if params["hub.verify_token"] == verification_token
+    if params["hub.verify_token"] == ENV['messenger_verification_token']
       render plain: params["hub.challenge"]
     else
       render plain: "error"
@@ -12,7 +11,6 @@ class WebhooksController < ApplicationController
   end
 
   def receive_message
-    p params
     therequest = request.body.read
     data = JSON.parse(therequest)
     entries = data["entry"]
@@ -30,7 +28,7 @@ class WebhooksController < ApplicationController
                       "text": "meow #{text}!!!"
                       }
                     }
-        puts HTTP.post(url, json: my_reply)
+        HTTP.post(url, json: my_reply)
       end
     end
     render plain: my_reply
