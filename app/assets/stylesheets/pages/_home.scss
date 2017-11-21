@@ -1,1 +1,24 @@
-// Specific CSS for your home-page
+// Banner CSS
+.banner-home {
+  background-image: url(http://cdn.wall-pix.net/albums/entertainment-humour/00005301.jpg);
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+}
+
+// range right 350 - 400, top 200 - 250
+.banner-home-left {
+  position: relative;
+  right: 350px;
+  top: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-item: center;
+}
+
+// font size between 60 -70
+.banner-home-content h1, h2 {
+  font-size: 64px;
+  font-weight: lighter;
+  color: black;
+}

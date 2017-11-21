@@ -1,0 +1,18 @@
+
+<div>
+
+</div>
+<%= content_for(:after_js) do %>
+  <script>
+    document.addEventListener("scroll", function() {
+      const navbar = document.querySelector(".navbar-wagon")
+      if (window.scrollY > 50){
+        navbar.style.backgroundColor =  '#FFFFFF'
+        navbar.style.borderBottom = "1px solid rgba(80 ,227 ,194, 0.3)"
+      } else {
+        navbar.style.backgroundColor =  'transparent'
+        navbar.style.borderBottom = "1px solid rgba(80 ,227 ,194, 0.0)"
+      }
+    });
+  </script>
+<% end %>
