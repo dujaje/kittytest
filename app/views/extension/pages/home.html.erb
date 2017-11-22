@@ -5,18 +5,27 @@
   window.extAsyncInit = function() {
     document.body.append('hello')
     // console.log(MessengerExtensions)
-    MessengerExtensions.getSupportedFeatures(function success(result) {
-      document.body.append(result);
-    }, function error(err) {
-      document.body.append(err)
-    });
+    // MessengerExtensions.getSupportedFeatures(function success(result) {
+    //   document.body.append(result);
+    // }, function error(err) {
+    //   document.body.append(err)
+    // });
 
+    // MessengerExtensions.getContext('2048729172013795',
+    //   function success(thread_context){
+    //     document.body.append(thread_context)
+    //   },
+    //   function error(err){
+    //     document.body.append(err)
+    //   }
+    // );
     MessengerExtensions.getContext('2048729172013795',
-      function success(thread_context){
-        document.body.append(thread_context)
+      function success(result){
+        document.body.append(result.psid);
+        document.body.append("success", result);
       },
-      function error(err){
-        document.body.append(err)
+      function error(result){
+        document.body.append("error", result);
       }
     );
   };
