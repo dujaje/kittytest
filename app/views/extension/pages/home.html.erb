@@ -3,14 +3,21 @@
 
 <script>
   window.extAsyncInit = function() {
-    console.log("loaded!!!!!!!!!!!!!!!!!!!!!!!!!")
-  //   MessengerExtensions.getContext('2048729172013795',
-  //     function success(thread_context){
-  //       console.log("success")
-  //     },
-  //     function error(err){
-  //       console.log("error")
-  //     }
-  //   );
-  // };
+    document.body.append('hello')
+    // console.log(MessengerExtensions)
+    MessengerExtensions.getSupportedFeatures(function success(result) {
+      document.body.append(result);
+    }, function error(err) {
+      document.body.append(err)
+    });
+
+    MessengerExtensions.getContext('2048729172013795',
+      function success(thread_context){
+        document.body.append(thread_context)
+      },
+      function error(err){
+        document.body.append(err)
+      }
+    );
+  };
 </script>
