@@ -30,6 +30,7 @@ class WebhooksController < ApplicationController
           HTTP.post(url, json: my_reply)
         end
       end
+      puts my_reply
       render plain: my_reply
     end
   end
