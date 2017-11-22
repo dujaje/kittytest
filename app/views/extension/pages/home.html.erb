@@ -9,6 +9,9 @@
       array.push(result.tid);
       array.push(result.thread_type);
       document.body.append(array[0]);
+
+      // Make this a javascript object ready for tomorrow
+      // We will have an api call
     }
     MessengerExtensions.getContext('2048729172013795',
       getdetails,
@@ -16,4 +19,5 @@
         document.body.append("error", result);
       });
     };
+
 </script>
