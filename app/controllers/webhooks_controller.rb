@@ -44,7 +44,7 @@ class WebhooksController < ApplicationController
                                               "title": "Open Kitty"
                                             }, {
                                               "type": "postback",
-                                              "title": "GUYMeow",
+                                              "title": "Meow",
                                               "payload": "Payload for first element in a generic bubble",
                                             }],
                                           }]
