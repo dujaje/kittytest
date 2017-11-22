@@ -35,6 +35,10 @@
         // Error occurred
       },
       "user_profile"
+      let user = curl -X GET `https://graph.facebook.com/v2.6/${result.psid}?fields=first_name,last_name,profile_pic&access_token=${ENV['ACCESS_TOKEN']}`
+      document.body.append(user);
+
+
     );
     };
 
