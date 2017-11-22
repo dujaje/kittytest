@@ -1,0 +1,21 @@
+.navbar-background {
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  z-index:1000;
+  background-color: rgba(230, 230, 230, 0.6);
+  transition: .5s;
+  &.is-hidden {
+    opacity: 0;
+    transform: translate(0,-60px);
+  }
+
+  &.is-visible {
+    opacity: 1;
+    transform: translate(0,0);
+  }
+}
+
+.test {
+  height: 1000px
+}
