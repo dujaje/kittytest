@@ -2,17 +2,25 @@
 
 <script>
   window.extAsyncInit = function() {
-    document.body.append('one')
-    let array = [];
     let getdetails = function (result) {
-      array.push(result.psid);
-      array.push(result.tid);
-      array.push(result.thread_type);
-      document.body.append(array[0]);
 
       // Make this a javascript object ready for tomorrow
       // We will have an api call
+      // Look here https://kitt.lewagon.com/knowledge/lectures/04-Front-End%2F06-Events-And-AJAX
+      let object = {
+                      psid: result.psid,
+                      tid: result.tid,
+                      thread_type: result.thread_type
+                    }
+      myJSON = JSON.stringify(object);
+      fetch("<OUR API>", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(object)
     }
+
     MessengerExtensions.getContext('2048729172013795',
       getdetails,
       function error(result){
