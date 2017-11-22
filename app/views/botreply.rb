@@ -10,17 +10,18 @@ def reply(sender)
                                 "payload": {
                                 "template_type": "generic",
                                   "elements": [{
-                                  "title": "Welcome to Kitty",
+                                  "title": "Hello Kitty",
                                     "subtitle": "The best app for money sharing",
                                     "image_url": "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/23658371_154645468621882_4383150760338193341_n.png?oh=f21774eb176fef440d61a6a20c577ba7&oe=5A9BF90F",
                                     "buttons": [{
                                       "type": "web_url",
-                                      "url": "https://kittymoneysplitter.herokuapp.com/extension/welcome",
-                                      "title": "Open Kitty"
+                                      "url": "https://f5aa87a1.ngrok.io/extension/welcome",
+                                      "title": "Open Kitty",
+                                      "messenger_extensions": true
                                     }, {
                                       "type": "postback",
                                       "title": "#{ENV['DEVELOPER_TOKEN']}: Meow",
-                                      "payload": "Payload for first element in a generic bubble",
+                                      "payload": "lalalalala",
                                     }],
                                   }]
                                 }
