@@ -10,9 +10,68 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20171122143822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "expenses", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "user_id"
+    t.string "title"
+    t.integer "amount_cents", default: 0
+    t.string "split_type"
+    t.boolean "settled", default: false
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_expenses_on_group_id"
+    t.index ["user_id"], name: "index_expenses_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.integer "last_tid"
+    t.integer "global_tid"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_memberships_on_group_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "splits", force: :cascade do |t|
+    t.bigint "expense_id"
+    t.bigint "user_id"
+    t.integer "amount_cents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expense_id"], name: "index_splits_on_expense_id"
+    t.index ["user_id"], name: "index_splits_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.integer "last_psid"
+    t.integer "fb_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "profile_picture_url"
+    t.string "address"
+    t.integer "timezone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "expenses", "groups"
+  add_foreign_key "expenses", "users"
+  add_foreign_key "memberships", "groups"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "splits", "expenses"
+  add_foreign_key "splits", "users"
 end

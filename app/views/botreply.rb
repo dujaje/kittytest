@@ -19,7 +19,7 @@ def reply(sender)
                                       "title": "Open Kitty"
                                     }, {
                                       "type": "postback",
-                                      "title": "Guy: Meow",
+                                      "title": "#{ENV['DEVELOPER_TOKEN']}: Meow",
                                       "payload": "Payload for first element in a generic bubble",
                                     }],
                                   }]
