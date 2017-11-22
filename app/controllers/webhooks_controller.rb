@@ -19,6 +19,39 @@ class WebhooksController < ApplicationController
     my_reply = nil
     entries.each do |entry|
       entry["messaging"].each do |messaging|
+<<<<<<< HEAD
+        if messaging["read"]
+          # Don't do anything, they've read kittys msg
+        else
+          sender = messaging["sender"]["id"]
+          text = messaging["message"]["text"]
+          my_reply = {
+                        "messaging_type": "RESPONSE",
+                        "recipient": {
+                          "id": "#{sender}"
+                        },
+                        "message": {
+                        "attachment": {
+                                        "type": "template",
+                                        "payload": {
+                                        "template_type": "generic",
+                                          "elements": [{
+                                          "title": "Welcome to Kitty",
+                                            "subtitle": "The best app for money sharing",
+                                            "image_url": "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/23658371_154645468621882_4383150760338193341_n.png?oh=f21774eb176fef440d61a6a20c577ba7&oe=5A9BF90F",
+                                            "buttons": [{
+                                              "type": "web_url",
+                                              "url": "http://kittymoneysplitter.herokuapp.com/extension/welcome",
+
+                     "title": "Open Kitty"
+                                            }, {
+                                              "type": "postback",
+                                              "title": "#{ENV['DEVELOPER_TOKEN']} Meow",
+                                              "payload": "Payload for first element in a generic bubble",
+                                            }],
+                                          }]
+                                        }
+=======
         sender = messaging["sender"]["id"]
         text = messaging["message"]["text"]
         my_reply = {
@@ -46,11 +79,12 @@ class WebhooksController < ApplicationController
                                             "payload": "Payload for first element in a generic bubble",
                                           }],
                                         }]
+>>>>>>> 3ed1f78aaed8ab195abd385ec4020017b01f6450
                                       }
-                                    }
+                        }
                       }
-                    }
-        HTTP.post(url, json: my_reply)
+          HTTP.post(url, json: my_reply)
+        end
       end
       render plain: my_reply
     end
