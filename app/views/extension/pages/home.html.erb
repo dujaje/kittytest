@@ -3,7 +3,6 @@
 
 <script>
   window.extAsyncInit = function() {
-    document.body.append('hello')
     // console.log(MessengerExtensions)
     // MessengerExtensions.getSupportedFeatures(function success(result) {
     //   document.body.append(result);
@@ -19,14 +18,27 @@
     //     document.body.append(err)
     //   }
     // );
+
+    // document.body.append(thread_type())
+
+    // let context = []
+
     MessengerExtensions.getContext('2048729172013795',
       function success(result){
+        context.push(result.thread_type)
+        document.body.append(result.thread_type);
+        document.body.append("...")
+        const psid = result.thread_type
         document.body.append(result.psid);
-        document.body.append("success", result);
+        document.body.append("...")
+        const tid = result.tid
+        document.body.append(result.tid);
+        document.body.append("...")
       },
       function error(result){
         document.body.append("error", result);
-      }
-    );
-  };
+      });
+    };
+
+    // document.body.append(context[0])
 </script>
