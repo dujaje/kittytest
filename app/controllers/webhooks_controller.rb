@@ -39,7 +39,6 @@ class WebhooksController < ApplicationController
                                             "type": "web_url",
                                             "url": "https://2bbc8ecf.ngrok.io/extension/welcome",
                                             "title": "Open Kitty",
-                                            "webview_height_ratio": "full",
                                             "messenger_extensions": true
                                           }, {
                                             "type": "postback",
