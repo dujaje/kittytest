@@ -27,6 +27,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 10px;
 }
 .mini-margin {
   margin-bottom: 0px;
@@ -34,4 +35,7 @@ body {
 .no-top-marg {
   margin-top: 0px;
   padding-top: 0px;
+}
+.less-pad {
+  margin-bottom: 7px;
 }
