@@ -52,3 +52,47 @@
     );
     };
 </script>
+
+<% content_for(:after_js) do %>
+  <script>
+    document.querySelector(".send-btn").addEventListener("click", () => {
+      console.log("hi");
+      let message = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements": [{
+                          "title":"Jamie just started a Kitty for this group!",
+                          "subtitle": "Kitty: Money Sharing Made Simple",
+                          "default_action":{
+                            "type":"web_url",
+                            "url": "https://kittymoneysplitting.herokuapp.com/"
+                          },
+                          "buttons":[{
+                            "type":"web_url",
+                            "url":"https://f5aa87a1.ngrok.io/extension/group/1",
+                            "title":"Check Out Kitty"
+                          }]
+                        }]
+                      }
+                    }
+                  };
+
+      MessengerExtensions.beginShareFlow(function(share_response) {
+        // User dismissed without error, but did they share the message?
+        if(share_response.is_sent){
+          // The user actually did share.
+          // Perhaps close the window w/ requestCloseBrowser().
+        }
+      },
+      function(errorCode, errorMessage) {
+      // An error occurred in the process
+
+      },
+      message,
+      "current_thread");
+          });
+
+  </script>
+<% end %>
