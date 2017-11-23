@@ -1,6 +1,8 @@
 .welcome-text {
   color: $kittyblue;
   text-align: center;
+  padding: 0px;
+  margin: 0px;
 }
 body {
   background-color: #F7F7F7;
@@ -24,4 +26,11 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.mini-margin {
+  margin-bottom: 0px;
+}
+.no-top-marg {
+  margin-top: 0px;
+  padding-top: 0px;
 }
