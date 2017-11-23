@@ -21,11 +21,13 @@
 .banner-home-content h1, h2 {
   font-size: 64px;
   font-weight: lighter;
-  color: black;
+  color: rgb(235, 235, 235);
+  font-family: Avenir;
 }
 
 .parallax-foreground-content-upper {
-  height: 1000px;
+  height: 800px;
+  width: 100%;
   z-index: 900;
 }
 
@@ -36,8 +38,9 @@
 }
 
 .parallax-foreground-content-lower {
-  height: 270px;
+  height: 70px;
   z-index:900;
+  width: 100%;
 }
 
 .parallax-background-content-lower {
@@ -45,4 +48,5 @@
   height: 100vh;
   background-attachment: fixed;
   background-position: top;
+  width: 100%;
 }
