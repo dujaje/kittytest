@@ -1,0 +1,32 @@
+.navbar-menu-container {
+  height: 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  padding-top: 10px;
+}
+
+.navbar-menu-container img {
+  padding-left: 25px;
+ }
+
+ .navbar-content {
+  height: 100%;
+ }
+
+.navbar-menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar-menu-button {
+  height: 100%;
+  width: 60px;
+}
+
+.section a{
+    text-decoration: none;
+}
