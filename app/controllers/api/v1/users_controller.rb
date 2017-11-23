@@ -11,16 +11,29 @@ class Api::V1::UsersController < Api::V1::BaseController
       return render json: { error: "Not :)"}
     end
     puts "All ok"
-    head :no_content, status: :created
 
+    user = User.find_or_create_by(psid: get_params[:psid])
+    facebook_service = FacebookService.new
+    response = facebook_service.get_profile(user)
+    # puts response.body, response.code, response.message, response.headers.inspect
+    parsed_response = JSON.parse(response, symbolize_names: true)
 
-    if User.where(get_params[:psid]).empty?
-      # call fb api to get profile data
+    first_name = parsed_response[:first_name]
+    last_name = parsed_response[:last_name]
+    profile_picture = parsed_response[:profile_pic]
+    locale = parsed_response[:locale]
+    timezone = parsed_response[:timezone]
+    gender = parsed_response[:gender]
+
+    user.first_name = first_name
+    user.last_name = last_name
+    user.profile_picture_url = profile_picture
+    user.address = locale
+    user.timezone = timezone
+
+    user.save!
       # create user && save
-    else
-      User.where(get_params[:psid])
       # store the user as current
-    end
     # if tid exists
       # if membership exists
         # do shit
@@ -30,6 +43,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       # create group and add membership
 
     # Some redirects
+    head :no_content, status: :created
   end
 
   private
