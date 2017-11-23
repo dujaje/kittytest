@@ -15,3 +15,14 @@ body {
 .heavy {
   font-weight: bold;
 }
+.name-input {
+  width: 70%;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+}
+.central {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
