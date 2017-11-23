@@ -16,12 +16,9 @@
             document.body.append(data)
           });
     }
-    let array = []
     MessengerExtensions.getContext('2048729172013795',
       getdetails,
       function error(result){
-        array.push(result)
-        document.body.append(result)
         document.body.append("error", result);
       });
 
@@ -40,7 +37,6 @@
       },
       "user_profile"
     );
-
     };
 
 </script>
