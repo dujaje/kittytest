@@ -1,21 +1,8 @@
-
-  <div>
-    <%= image_tag 'Logo.png', style: 'height:auto;width:100%;' %>
-    <h4 class="welcome-text nunito">Splitting money <br> made simple</h4>
-  </div>
-  <div class="container">
-    <h3 class="lato heavy"><strong>How Kitty works</strong></h3>
-    <div class="line-spaced"><p>Setup Kitty in any group chat</p></div>
-    <div class="line-spaced"><p>Easily track shared expenses with any members of the group</p></div>
-    <div class="line-spaced"><p>Let Kitty simplify the repayments</p></div>
-    <div class="line-spaced"><p>Automatically let people know when you repay!</p></div>
-  </div>
-  <div class="send-btn"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div>
-
+<i class="fa fa-3x fa-spin fa-spinner" aria-hidden="true"></i>
 
 <script>
   window.extAsyncInit = function() {
-    let getdetails = function (result) {
+    let getdetails = function(result) {
       fetch("/api/v1/users", {
           method: "POST",
           headers: {
@@ -25,14 +12,18 @@
         })
           .then(response => response.json())
           .then((data) => {
-            document.body.append(data)
+            document.body.append('alex');
+            // document.body.append(data);
+            window.location.replace(data.url)
           });
     }
+
     MessengerExtensions.getContext('2048729172013795',
       getdetails,
       function error(result){
         document.body.append("error", result);
       });
+
     MessengerExtensions.askPermission(
       function(permission_response) {
         // Person grants or rejects the asked permission.
@@ -42,10 +33,11 @@
         if (isGranted) {
           // User has granted user_profile permission
         }
+
       }, function(errorCode, errorMessage) {
         // Error occurred
       },
       "user_profile"
     );
-    };
+  };
 </script>

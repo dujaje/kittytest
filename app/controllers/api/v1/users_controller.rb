@@ -12,7 +12,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
     puts "All ok"
 
+    # Finds or Creates a New User
     user = User.find_or_create_by(psid: get_params[:psid])
+
+    # If creating New User, Gets Information From Facebook
     facebook_service = FacebookService.new
     response = facebook_service.get_profile(user)
     # puts response.body, response.code, response.message, response.headers.inspect
@@ -30,10 +33,20 @@ class Api::V1::UsersController < Api::V1::BaseController
     user.profile_picture_url = profile_picture
     user.address = locale
     user.timezone = timezone
-
+    # Saves User with all data
     user.save!
-      # create user && save
-      # store the user as current
+    # Finds or Creates a New Group
+    group = Group.find_by(tid: get_params[:tid])
+    if group
+      url = Rails.application.routes.url_helpers.extension_group_url(group)
+    else
+      group = Group.create(tid: get_params[:tid])
+      url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
+    end
+
+    # Finds or Creates a Membership
+    Membership.find_or_create_by(group: group, user: user)
+
     # if tid exists
       # if membership exists
         # do shit
@@ -41,9 +54,9 @@ class Api::V1::UsersController < Api::V1::BaseController
         # add membership for that group
     # if tid !exist
       # create group and add membership
-
     # Some redirects
-    head :no_content, status: :created
+
+    render json: {url: url}, status: :created
   end
 
   private

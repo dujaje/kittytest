@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   post 'webhooks', to: 'webhooks#receive_message'
 
   namespace :extension do
-     get 'welcome', to: 'pages#home'
+    get 'welcome', to: 'pages#redirect'
+    get 'create_kitty', to: 'pages#create_kitty'
+    resources :groups, only: [:show]
   end
 
   namespace :api, defaults: { format: :json } do
