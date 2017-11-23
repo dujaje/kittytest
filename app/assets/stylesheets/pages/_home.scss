@@ -24,13 +24,25 @@
   color: black;
 }
 
-.parallax-foreground-content {
+.parallax-foreground-content-upper {
   height: 1000px;
   z-index: 900;
 }
 
-.parallax-background-content {
+.parallax-background-content-upper {
   background-image: url(http://hdwallpaper20.com/wp-content/uploads/2017/08/The-cat-itself-is-adorable-I-m-really-liking-the-blue-light-running-along-its%E2%80%A6-wallpaper-wp2009561.jpg);
   height: 100vh;
   background-attachment: fixed
+}
+
+.parallax-foreground-content-lower {
+  height: 270px;
+  z-index:900;
+}
+
+.parallax-background-content-lower {
+  background-image: url(https://img00.deviantart.net/7a08/i/2015/113/0/e/blue_cat_by_raxanimasi-d5ru065.jpg);
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: top;
 }
