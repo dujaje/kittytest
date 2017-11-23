@@ -1,7 +1,12 @@
 <div>
   <%#= image_tag 'Logo.png', style: 'height:auto;width:100%;' %>
   <%= link_to "Add Expense", "/add_expense.html.erb", class: "btn btn-default btn-primary add" %>
-  <div class="container">The group</div>
+  <div class="container">
+      <h4 class="lato heavy"><strong>The Group</strong></h3>
+  </div>
+  <div class="users">
+    <%=  @group %>
+  </div>
 </div>
 
 
