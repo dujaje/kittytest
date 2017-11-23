@@ -1,14 +1,13 @@
 class Extension::PagesController < ApplicationController
-  def home
+  def redirect
   end
 
-  def test
+  def create_kitty
     @user = current_user
     @group = current_group
 
     puts @user
     puts @group
-    binding.pry
   end
 
   private
