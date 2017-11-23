@@ -16,15 +16,15 @@ curl -X POST -H "Content-Type: application/json" -d '{
 # ADAPT this to whitelist domain. "add" != "remove"
 curl -X POST -H "Content-Type: application/json" -d '{
   "setting_type" : "domain_whitelisting",
-  "whitelisted_domains" : ["https://bd21f6f2.ngrok.io"],
-  "domain_action_type": "remove"
+  "whitelisted_domains" : ["https://a1d1e3f2.ngrok.io"],
+  "domain_action_type": "add"
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAdHTu6J8uMBAAc19ijgenHlcZABGERZCLGUX6X3QzYe0ZA2C2wac0XcDv2IRXL525sLBsZARZAksKNZCQfc2ayZCib6ZAd7PTfnG5O4VJ7Xd4NRZAWX0HEhZBrTZCEHrZCzNCkdSD7mMuTT0iYdB7jrAdFOKzgW37YZCP7ZAUGV0IeJtZBvQZDZD"
 
 
 # This initiates the home url
 curl -X POST -H "Content-Type: application/json" -d ' {
   "home_url" : {
-     "url": "https://f5aa87a1.ngrok.io/extension/welcome",
+     "url": "https://a1d1e3f2.ngrok.io/extension/welcome",
      "webview_height_ratio": "tall",
      "webview_share_button": "hide",
      "in_test":true
