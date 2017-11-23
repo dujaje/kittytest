@@ -38,7 +38,11 @@ class Api::V1::UsersController < Api::V1::BaseController
     # Finds or Creates a New Group
     group = Group.find_by(tid: get_params[:tid])
     if group
-      url = Rails.application.routes.url_helpers.extension_group_url(group)
+      if group.kitty_created
+        url = Rails.application.routes.url_helpers.extension_group_url(group)
+      else
+        url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
+      end
     else
       group = Group.create(tid: get_params[:tid])
       url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
