@@ -1,0 +1,22 @@
+.loading-logo {
+  margin-top: 500%;
+  transition: all 1s;
+  transform: rotate(1080deg);
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+img.loading-logo-img
+{
+    -webkit-animation-name:             rotate;
+    -webkit-animation-duration:         0.5s;
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+}
