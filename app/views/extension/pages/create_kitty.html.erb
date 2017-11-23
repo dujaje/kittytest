@@ -24,7 +24,6 @@
         })
           .then(response => response.json())
           .then((data) => {
-            document.body.append(data)
           });
     }
     MessengerExtensions.getContext('2048729172013795',
@@ -37,14 +36,12 @@
         // Person grants or rejects the asked permission.
         let permissions = permission_response.permissions; // list of all permissions granted
         let isGranted = permission_response.isGranted;
-        document.body.append(permissions);
         if (isGranted) {
           // User has granted user_profile permission
         }
       }, function(errorCode, errorMessage) {
         // Error occurred
       },
-      "user_profile"
     );
     };
 </script>
