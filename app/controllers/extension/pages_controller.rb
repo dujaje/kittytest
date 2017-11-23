@@ -8,8 +8,5 @@ class Extension::PagesController < ApplicationController
 
     puts @user
     puts @group
-    binding.pry
   end
-
-  private
 end
