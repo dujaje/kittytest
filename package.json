@@ -1,5 +1,7 @@
 {
   "name": "kittytest",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery-smooth-scroll": "^2.2.0"
+  }
 }

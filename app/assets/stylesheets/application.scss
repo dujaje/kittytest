@@ -12,4 +12,9 @@
 // Your CSS partials
 @import "layouts/index";
 @import "components/index";
+@import "components/send-button";
 @import "pages/index";
+
+
+// Our Extension Pages
+@import "extension/home"
