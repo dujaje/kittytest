@@ -4,16 +4,19 @@
   window.extAsyncInit = function() {
     let getdetails = function (result) {
 
-      // Make this a javascript object ready for tomorrow
-      // We will have an api call
-      // Look here https://kitt.lewagon.com/knowledge/lectures/04-Front-End%2F06-Events-And-AJAX
-      let object = { psid: result.psid,
-        tid: result.tid,
-        thread_type: result.thread_type }
-      myJSON = JSON.stringify(object);
-      document.body.append(myJSON)
-
+      fetch("/api/v1/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ user: result })
+        })
+          .then(response => response.json())
+          .then((data) => {
+            document.body.append(data)
+          });
     }
+
     MessengerExtensions.getContext('2048729172013795',
       getdetails,
       function error(result){
@@ -25,7 +28,6 @@
         // Person grants or rejects the asked permission.
         let permissions = permission_response.permissions; // list of all permissions granted
         let isGranted = permission_response.isGranted;
-        document.body.append(isGranted);
         document.body.append(permissions);
         if (isGranted) {
           // User has granted user_profile permission
