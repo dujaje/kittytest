@@ -1,0 +1,23 @@
+.send-btn {
+  box-shadow: 0 0 0 0 rgba(0,0,0,0.20);
+  background: $kittyblue;
+  border-radius: 4px;
+  font-family: Nunito;
+  font-size: 16px;
+  color: #FFFFFF;
+  line-height: 22px;
+  text-align: center;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0px;
+  width: 97%;
+  margin: 5px;
+}
+.paper-plane {
+  position: absolute;
+  left: 50px;
+}
