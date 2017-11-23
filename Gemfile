@@ -16,7 +16,6 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'jquery-rails'
-
 gem 'http'
 
 group :development, :test do
