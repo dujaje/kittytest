@@ -8,7 +8,7 @@
 }
 
 .navbar-menu-container img {
-  padding-left: 25px;
+  // padding-left: 0px;
  }
 
  .navbar-content {
@@ -29,4 +29,9 @@
 
 .section a{
     text-decoration: none;
+}
+
+.fb-signin-button {
+  border-radius: 3px;
+  background-color: #4868af;
 }

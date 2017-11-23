@@ -1,4 +1,12 @@
-<i class="fa fa-3x fa-spin fa-spinner" aria-hidden="true"></i>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="loading-logo">
+        <%= image_tag("kitty_logo_black.svg", size: '100', alt: "Edit", class: "loading-logo-img") %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   window.extAsyncInit = function() {
@@ -12,7 +20,7 @@
         })
           .then(response => response.json())
           .then((data) => {
-            document.body.append('alex');
+            // document.body.append('alex');
             // document.body.append(data);
             window.location.replace(data.url)
           });
@@ -29,7 +37,7 @@
         // Person grants or rejects the asked permission.
         let permissions = permission_response.permissions; // list of all permissions granted
         let isGranted = permission_response.isGranted;
-        document.body.append(permissions);
+        // document.body.append(permissions);
         if (isGranted) {
           // User has granted user_profile permission
         }

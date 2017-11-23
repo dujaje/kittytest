@@ -1,12 +1,24 @@
 <div class="navbar-menu-wrapper">
   <div class="navbar-menu-button">
     <a href="#home">
-      <%= image_tag("primary_logo_and_text.svg", size: '70', alt: "Edit") %>
+      <%= image_tag("kitty_logo_black.svg", size: '70', alt: "Edit") %>
     </a>
   </div>
   <div class="navbar-menu-container">
-    <div class="section">
-      <p><a href="#middle">Take me to the app!</a></p>
+    <div class="section fb-signin-button">
+      <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false">
+
+      </div>
+      <div id="fb-root">
+
+      </div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.11&appId=393446141075150';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     </div>
     <div class="section">
       <p><a href="#middle">Section 1</a></p>
