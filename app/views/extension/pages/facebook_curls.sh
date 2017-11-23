@@ -18,7 +18,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 # This initiates the home url
 curl -X POST -H "Content-Type: application/json" -d ' {
   "home_url" : {
-     "url": "https://41c2d0ff.ngrok.io/extension/welcome",
+     "url": "https://f5aa87a1.ngrok.io/extension/welcome",
      "webview_height_ratio": "tall",
      "webview_share_button": "hide",
      "in_test":true

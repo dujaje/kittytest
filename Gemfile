@@ -17,6 +17,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'http'
+gem 'httparty'
 
 group :development, :test do
   gem 'pry-byebug'
