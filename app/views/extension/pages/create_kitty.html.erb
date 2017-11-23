@@ -9,7 +9,7 @@
   <div class="line-spaced"><p>Let Kitty simplify the repayments</p></div>
   <div class="line-spaced"><p>Automatically let people know when you repay!</p></div>
 </div>
-<div class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></div>
+<button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></button>
 
 
 <script>
@@ -30,7 +30,7 @@
     MessengerExtensions.getContext('2048729172013795',
       getdetails,
       function error(result){
-        document.body.append("error", result);
+        // document.body.append("error", result);
       });
     MessengerExtensions.askPermission(
       function(permission_response) {
