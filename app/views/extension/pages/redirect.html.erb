@@ -1,9 +1,8 @@
-<h1>Welcome to Kitty</h1>
+<i class="fa fa-3x fa-spin fa-spinner" aria-hidden="true"></i>
 
 <script>
   window.extAsyncInit = function() {
-    let getdetails = function (result) {
-
+    let getdetails = function(result) {
       fetch("/api/v1/users", {
           method: "POST",
           headers: {
@@ -13,7 +12,9 @@
         })
           .then(response => response.json())
           .then((data) => {
-            document.body.append(data)
+            document.body.append('alex');
+            // document.body.append(data);
+            window.location.replace(data.url)
           });
     }
 
@@ -38,6 +39,5 @@
       },
       "user_profile"
     );
-    };
-
+  };
 </script>
