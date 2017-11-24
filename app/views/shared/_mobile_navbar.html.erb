@@ -1,0 +1,35 @@
+<div class="navbar-background is-visible" data-nav-status="toggle">
+  <div class="navbar-content">
+    <%= render 'shared/mobile_burger_menu' %>
+  </div>
+</div>
+<%= content_for(:after_js) do %>
+  <script>
+    $(document).ready(function(){
+      var previousScroll = 0;
+      $(window).scroll(function(){
+        var currentScroll = $(this).scrollTop();
+        /*
+          If the current scroll position is greater than 0 (the top) AND the current scroll position is less than the document height minus the window height (the bottom) run the navigation if/else statement.
+        */
+        if (currentScroll > 120 && currentScroll < $(document).height() - $(window).height()){
+          // If the current scroll is greater than the previous scroll (i.e we're scrolling down the page), hide the nav.
+          if (currentScroll > (previousScroll + 0)){
+            window.setTimeout(hideNav, 100);
+            //Else we are scrolling up (i.e the previous scroll is greater than the current scroll), so show the nav.
+          } else {
+            window.setTimeout(showNav, 100);
+          }
+          // Set the previous scroll value equal to the current scroll.
+          previousScroll = currentScroll;
+        }
+      });
+      function hideNav() {
+        $("[data-nav-status='toggle']").removeClass("is-visible").addClass("is-hidden");
+      }
+      function showNav() {
+        $("[data-nav-status='toggle']").removeClass("is-hidden").addClass("is-visible");
+      }
+    });
+  </script>
+<% end %>

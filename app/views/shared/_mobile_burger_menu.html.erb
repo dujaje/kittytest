@@ -1,10 +1,23 @@
-<div class="container" onclick="myFunction(this)">
-  <div class="bar1"></div>
-  <div class="bar2"></div>
-  <div class="bar3"></div>
+<div class="navbar-offset">
+
 </div>
-<script>
-function myFunction(x) {
-    x.classList.toggle("change");
-}
-</script>
+
+<div class="header">
+    <a href="#home">
+      <%= image_tag("kitty_logo_black.svg", size: '67', alt: "Edit") %>
+    </a>
+  <input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li>
+      <div class="section">
+        <p><a href="#what-is-kitty">What is Kitty</a></p>
+      </div>
+    </li>
+    <li>
+      <div class="section">
+        <p><a href="#FAQ">FAQs</a></p>
+      </div>
+    </li>
+  </ul>
+</div>
