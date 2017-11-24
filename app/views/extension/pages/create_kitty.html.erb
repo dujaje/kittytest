@@ -51,6 +51,7 @@
           // The user actually did share.
           // Perhaps close the window w/ requestCloseBrowser().
           <% @group.kitty_created = true %>
+          <% @group.save %>
           window.location.href="/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>"
         }
       },

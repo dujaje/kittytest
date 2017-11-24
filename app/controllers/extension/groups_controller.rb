@@ -1,5 +1,6 @@
 class Extension::GroupsController < ApplicationController
   def show
-    @group = Group.find(params[:id])
+    @user = current_user
+    @group = current_group
   end
 end
