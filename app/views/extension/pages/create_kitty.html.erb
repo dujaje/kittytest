@@ -37,7 +37,7 @@
                           },
                           "buttons":[{
                             "type":"web_url",
-                            "url":"https://f5aa87a1.ngrok.io/extension/group/<%= @group.id %>?user_id=<%= @user.id %>",
+                            "url":"https://f5aa87a1.ngrok.io/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>",
                             "title":"Check Out Kitty"
                           }]
                         }]
@@ -52,7 +52,7 @@
           // Perhaps close the window w/ requestCloseBrowser().
           <% @group.kitty_created = true %>
           <% @group.save %>
-          window.location.href="/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>"
+          window.location.href="/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>"
         }
       },
       function(errorCode, errorMessage) {
