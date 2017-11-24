@@ -3,10 +3,7 @@ class Extension::PagesController < ApplicationController
   end
 
   def create_kitty
-    @user = current_user
+    @user = session[:current_user]
     @group = current_group
-
-    puts @user
-    puts @group
   end
 end

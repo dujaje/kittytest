@@ -24,7 +24,7 @@
 
 <% content_for(:after_js) do %>
   <script>
-    console.log("<%= @user.first_name %>");
+    // console.log("<%= @user.first_name %>");
     document.querySelector(".send-btn").addEventListener("click", () => {
       console.log("<%= @user.first_name %>");
       let message = {
