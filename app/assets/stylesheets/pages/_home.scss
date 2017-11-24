@@ -4,18 +4,15 @@
   background-attachment: fixed;
   height: 100vh;
   width: 100%;
-  position: absolute;
-  background-position: left;
+  background-position: left center;
 }
 
 // range right 350 - 400, top 200 - 250
 .banner-home-left {
-  position: relative;
   right: 350px;
   top: 200px;
-  display: flex;
-  justify-content: space-around;
-  align-item: center;
+  text-align: left;
+  padding: 100px 0px 0px 105px;
 }
 
 // font size between 60 -70
@@ -27,7 +24,7 @@
 }
 
 .parallax-foreground-content-upper {
-  height: 100vh;
+  height: 0;
   width: 100%;
   z-index: 900;
 }

@@ -6,10 +6,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     sig = encoded_sig.tr('-_','+/').unpack('m')[0]
     expected_sig = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), ENV['APP_SECRET'], payload)
 
-    if sig != expected_sig
-      puts "ALL BAD"
-      return render json: { error: "Not :)"}
-    end
+    # if sig != expected_sig
+    #   puts "ALL BAD"
+    #   return render json: { error: "Not :)"}
+    # end
     puts "All ok"
 
     # Finds or Creates a New User
@@ -40,6 +40,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     # Finds or Creates a New Group
     group = Group.find_by(tid: get_params[:tid])
+
     if group
       if group.kitty_created
         url = Rails.application.routes.url_helpers.extension_group_url(group, user_id: user.id, group_id: group.id)
