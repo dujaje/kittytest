@@ -20,3 +20,11 @@ img.loading-logo-img
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
 }
+.loading-container {
+  background-color: $kittyblue;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
