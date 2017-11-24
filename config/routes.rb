@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :extension do
     get 'welcome', to: 'pages#redirect'
     get 'create_kitty', to: 'pages#create_kitty'
-    get 'group', to: 'pages#group'
+    # get 'group', to: 'pages#group'
     resources :groups, only: [:show]
   end
 
