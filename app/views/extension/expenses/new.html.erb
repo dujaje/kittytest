@@ -29,3 +29,62 @@
 <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div></button>
 
 
+
+<h3>Group ID: <%= @group.id %></h3>
+<h3>User ID: <%= @user.id %></h3>
+
+<div class="spacer"></div>
+<button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div></button>
+
+
+<!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
+<% content_for(:after_js) do %>
+  <script>
+    console.log("<%= @user.first_name %>");
+    document.querySelector(".send-btn").addEventListener("click", () => {
+      console.log("<%= @user.first_name %>");
+      let message = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements": [{
+                          "title":"<%= @user.first_name %> just added an expense to your Kitty!",
+                          "subtitle": "Kitty: Money Sharing Made Simple",
+                          "default_action":{
+                            "type":"web_url",
+                            "url": "https://kittymoneysplitting.herokuapp.com/"
+                          },
+                          "buttons":[{
+                            "type":"web_url",
+                            "url":"https://f5aa87a1.ngrok.io/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>",
+                            "title":"Check Out Kitty"
+                          }]
+                        }]
+                      }
+                    }
+                  };
+
+      MessengerExtensions.beginShareFlow(function(share_response) {
+        // User dismissed without error, but did they share the message?
+        if(share_response.is_sent){
+          // The user actually did share.
+          // Perhaps close the window w/ requestCloseBrowser().
+          MessengerExtensions.requestCloseBrowser(function success() {
+            // webview closed
+          }, function error(err) {
+            // an error occurred
+          });
+        }
+      },
+      function(errorCode, errorMessage) {
+      // An error occurred in the process
+
+      },
+      message,
+      "current_thread");
+          });
+
+  </script>
+<% end %>
+
