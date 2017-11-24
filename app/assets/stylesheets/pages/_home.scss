@@ -5,6 +5,7 @@
   height: 100vh;
   width: 100%;
   position: absolute;
+  background-position: left;
 }
 
 // range right 350 - 400, top 200 - 250
@@ -34,11 +35,11 @@
 .parallax-background-content-upper {
   background-image: url(http://hdwallpaper20.com/wp-content/uploads/2017/08/The-cat-itself-is-adorable-I-m-really-liking-the-blue-light-running-along-its%E2%80%A6-wallpaper-wp2009561.jpg);
   height: 100vh;
-  background-attachment: fixed
+  background-attachment: fixed;
 }
 
 .parallax-foreground-content-lower {
-  height: 70px;
+  height: 55px;
   z-index:900;
   width: 100%;
 }
