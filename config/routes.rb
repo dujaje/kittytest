@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'pages#home'
+  get 'redirect', to: 'pages#mobile_home', as: 'mobile_redirect'
 
   get 'webhooks', to: 'webhooks#messenger'
   post 'webhooks', to: 'webhooks#receive_message'
