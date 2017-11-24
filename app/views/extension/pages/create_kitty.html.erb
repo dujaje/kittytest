@@ -43,7 +43,7 @@
                           },
                           "buttons":[{
                             "type":"web_url",
-                            "url":"https://f5aa87a1.ngrok.io/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>",
+                            "url":"<%= ENV['NGROK'] %>/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>",
                             "title":"Check Out Kitty"
                           }]
                         }]
