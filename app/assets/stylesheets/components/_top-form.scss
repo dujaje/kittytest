@@ -1,0 +1,23 @@
+.top-form {
+  background-color: $kittyblue;
+  width: 100vw;
+  height: 40px;
+}
+.kittyblue {
+  background-color: $kittyblue;
+  color: black;
+  // text-decoration: underline;
+}
+input::placeholder {
+  color: black !important;
+  font-style: italic;
+  font-family: Lato;
+  opacity: 0.6;
+  // text-decoration: underline;
+}
+
+input {
+  border: none !important;
+  box-shadow: inset 0 1px 1px $kittyblue;
+}
+

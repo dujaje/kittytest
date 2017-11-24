@@ -1,4 +1,31 @@
-<h1>A New Expense</h1>
+<div class="blue-back">
+  <% if @group.nil? %>
+    <h4 class="lato white heavy">Add an expense to your group:</h4 class="lato white heavy">
+  <% else %>
+    <h4 class="lato white heavy">Add an expense to <%= @group.name %>:</h4 class="lato white heavy">
+  <% end %>
+</div>
+<div class="container">
+  <h4 class="lato heavy">Name your expense:</h4>
+</div>
+<%= simple_form_for [:extension, @expense] do |f| %>
+  <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Lunch at Dishoom" %>
+<% end -%>
+<div class="container">
+  <h4 class="lato heavy">How Much?</h4>
+</div>
+<%= simple_form_for [:extension, @expense] do |f| %>
+  <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false %>
+<% end -%>
+<div class="container">
+  <h4 class="lato heavy">With Who?</h4>
+</div>
+ <div class="container">
+  <h4 class="lato heavy">More Information:</h4>
+</div>
+<%= simple_form_for [:extension, @expense] do |f| %>
+  <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
+<% end -%>
+<button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div></button>
 
-<h3>Group ID: <%= @group.id %></h3>
-<h3>User ID: <%= @user.id %></h3>
+
