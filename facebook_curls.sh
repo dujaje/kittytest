@@ -21,16 +21,26 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAdHTu6J8uMBAAc19ijgenHlcZABGERZCLGUX6X3QzYe0ZA2C2wac0XcDv2IRXL525sLBsZARZAksKNZCQfc2ayZCib6ZAd7PTfnG5O4VJ7Xd4NRZAWX0HEhZBrTZCEHrZCzNCkdSD7mMuTT0iYdB7jrAdFOKzgW37YZCP7ZAUGV0IeJtZBvQZDZD"
 
 
-# This initiates the home url
+# This initiates the home url for Kitty
 curl -X POST -H "Content-Type: application/json" -d ' {
   "home_url" : {
-     "url": "https://a1d1e3f2.ngrok.io/extension/welcome",
+     "url": "https://f5aa87a1.ngrok.io/extension/welcome",
      "webview_height_ratio": "tall",
      "webview_share_button": "hide",
      "in_test":true
   }
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAdHTu6J8uMBAAc19ijgenHlcZABGERZCLGUX6X3QzYe0ZA2C2wac0XcDv2IRXL525sLBsZARZAksKNZCQfc2ayZCib6ZAd7PTfnG5O4VJ7Xd4NRZAWX0HEhZBrTZCEHrZCzNCkdSD7mMuTT0iYdB7jrAdFOKzgW37YZCP7ZAUGV0IeJtZBvQZDZD"
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAdHTu6J8uMBAOkuEcuBnN0yUEDcJPecXxvzEpDkdcUVkEkbhcBg8dOnXRJeZBWbXEeY69n9xNFeCw6VjC5eEig4gSkyYZBp3cPqfOyLbUDjWcFxQqG8P6wcFWwbZAdtJfqKZAWH7MX5uCLsXJzPJ4pgzquU0tsO19cQMKveUQZDZD"
 
+
+# This initiates the home url for a test of Kitty
+curl -X POST -H "Content-Type: application/json" -d ' {
+  "home_url" : {
+     "url": "<YOUR NGROK>/extension/welcome",
+     "webview_height_ratio": "tall",
+     "webview_share_button": "hide",
+     "in_test":true
+  }
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=<YOUR TEST ACCESS TOKEN>"
 
 
 
