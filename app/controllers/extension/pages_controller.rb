@@ -3,8 +3,8 @@ class Extension::PagesController < ApplicationController
   end
 
   def create_kitty
-    @user = current_user
-    @group = current_group
+    @user = User.find(params[:user_id])
+    @group = Group.find(params[:group_id])
 
     puts @user
     puts @group
