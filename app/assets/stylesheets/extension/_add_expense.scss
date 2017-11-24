@@ -9,3 +9,26 @@
 .users{
   display: flex;
 }
+
+.cross {
+  font-size: 20px !important;
+}
+.flex {
+  padding: 0px 10px;
+  display: flex;
+  align-items: center;
+}
+.padright {
+  padding-right: 20px;
+}
+.lighter {
+  opacity: 0.6;
+}
+.blue-back {
+  background-color: $kittyblue;
+  padding: 0px 10px;
+}
+.white {
+  color: white;
+  font-weight: bold;
+}
