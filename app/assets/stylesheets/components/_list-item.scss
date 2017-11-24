@@ -1,0 +1,31 @@
+.list-item-tall {
+  height: 64px;
+  display: flex;
+  padding-left: 15px;
+  align-items: center;
+}
+
+.divider {
+  flex-grow: 1;
+  display: flex;
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+}
+
+.list-item-divider-content {
+  flex-grow: 1;
+  margin: 5px 0;
+}
+
+.list-item-settle-btn {
+
+}
+
+.profile-img-container {
+  width: 75px;
+  padding: 5px;
+}
+
+.list-item-text {
+  margin-bottom: 0;
+  padding: 0;
+}

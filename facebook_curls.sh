@@ -29,7 +29,7 @@ curl -X POST -H "Content-Type: application/json" -d ' {
      "webview_share_button": "hide",
      "in_test":true
   }
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAdHTu6J8uMBAOkuEcuBnN0yUEDcJPecXxvzEpDkdcUVkEkbhcBg8dOnXRJeZBWbXEeY69n9xNFeCw6VjC5eEig4gSkyYZBp3cPqfOyLbUDjWcFxQqG8P6wcFWwbZAdtJfqKZAWH7MX5uCLsXJzPJ4pgzquU0tsO19cQMKveUQZDZD"
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAdHTu6J8uMBALh3U8zZC3VKuWgVjJDds9EcKjoyPrAfiJ3wMXv3qLVNnzxJC78qgluNWEr1j73t4fZCtlNzSlbEcLZCFwpyz62gbgvh7O3h12YhLuXToUUcQJSzf4YI11Mj6hekPVggVJs5ODAOPDbUleGq6pCe9YvHGpD9wZDZD"
 
 
 # This initiates the home url for a test of Kitty
