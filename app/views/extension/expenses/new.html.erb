@@ -1,5 +1,5 @@
 <div class="blue-back">
-  <% if @group.nil? %>
+  <% if @group.name.nil? %>
     <h4 class="lato white heavy">Add an expense to your group:</h4 class="lato white heavy">
   <% else %>
     <h4 class="lato white heavy">Add an expense to <%= @group.name %>:</h4 class="lato white heavy">
