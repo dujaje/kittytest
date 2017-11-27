@@ -15,10 +15,23 @@
   </div>
 </div>
 
-  <% @group.users.each do |member| %>
-    <div class="list-item-tall">
-      <div class="profile-img-container">
-        <%= image_tag member.profile_picture_url, class: "avatar-list" %>
+<% @group.users.each do |member| %>
+  <% if member == @user %>
+    <% next %>
+  <% end %>
+  <div class="list-item-tall">
+    <div class="profile-img-container">
+      <%= image_tag member.profile_picture_url, class: "avatar-list" %>
+    </div>
+    <div class="divider">
+      <div class="list-item-divider-content">
+        <p class="list-item-text"><strong><%= member.first_name %> <%= member.last_name %></strong></p>
+        <!-- need to add some owes/owed logic into this if statement later-->
+        <% if true %>
+          <p class="list-item-text" >You owe <%= member.first_name %>:</p>
+        <% else %>
+          <p class="list-item-text"><%= member.first_name %> owes you:</p>
+        <% end %>
       </div>
       <div class="divider">
         <div class="list-item-divider-content">
@@ -37,7 +50,9 @@
         </div>
       </div>
     </div>
-  <% end %>
+  </div>
+<% end %>
+
 <% if @group.expenses.empty? %>
   <div class="mobile-container">
     <div class="title-section">
