@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get 'welcome', to: 'pages#redirect'
     get 'create_kitty', to: 'pages#create_kitty'
     # get 'group', to: 'pages#group'
-    resources :groups, only: [:show]
+    resources :groups, only: [:show, :update]
     resources :expenses, only: [:new, :create, :show]
     resources :users, only: [:show]
   end

@@ -2,16 +2,6 @@
   <%= image_tag 'Logo.png', style: 'height:auto;width:100%;' %>
   <h4 class="welcome-text nunito">Splitting money <br> made simple</h4>
 </div>
-<div class="central mini-margin">
-    <h6 class="heavy">Name your kitty:</h6>
-</div>
-<div class="central">
-  <% if @user.nil? %>
-    <input type="text" placeholder="i.e. Lenny and friends' Kitty" class="lato name-input form-control">
-  <% else %>
-    <input type="text" placeholder="i.e. <%= @user.first_name %> and friends' Kitty" class="lato name-input form-control">
-  <% end %>
-</div>
 <div class="container no-top-marg">
   <h3 class="lato heavy"><strong>How Kitty works:</strong></h3>
   <div class="line-spaced"><p class="less-pad">Setup Kitty in any group chat</p></div>
@@ -19,9 +9,15 @@
   <div class="line-spaced"><p class="less-pad">Let Kitty simplify the repayments</p></div>
   <div class="line-spaced"><p class="less-pad">Automatically let people know when you repay!</p></div>
 </div>
-<div class="spacer"></div>
-<button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></button>
-
+<div class="central mini-margin">
+    <h6 class="heavy">Name your kitty:</h6>
+</div>
+<%= simple_form_for [:extension, @group] do |f| %>
+  <div class="r-l-pad"><%= f.input :name, :label => false, :placeholder => "i.e. #{@user.first_name} and friends' Kitty", :class => "lato name-input form-control" %></div>
+  <%= f.input :user_id, as: :hidden, input_html: { value: @user.id } %>
+  <%= f.input :group_id, as: :hidden, input_html: { value: @group.id } %>
+  <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></button>
+<% end %>
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP, TURN KITTY_CREATED=TRUE AND REDIRECT -->
 <% content_for(:after_js) do %>
@@ -43,8 +39,9 @@
                           },
                           "buttons":[{
                             "type":"web_url",
-                            "url":"<%= ENV['NGROK'] %>/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>",
-                            "title":"Check Out Kitty"
+                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                            "title":"Check Out Kitty",
+                            "messenger_extensions": true
                           }]
                         }]
                       }
@@ -58,7 +55,7 @@
           // Perhaps close the window w/ requestCloseBrowser().
           <% @group.kitty_created = true %>
           <% @group.save %>
-          window.location.href="/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>"
+          // window.location.href="/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>"
         }
       },
       function(errorCode, errorMessage) {
