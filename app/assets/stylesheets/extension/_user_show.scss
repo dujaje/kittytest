@@ -1,0 +1,31 @@
+.name-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 2px;
+  background-color: rgba(235, 235, 235, 1);
+  width: 100%;
+  margin: 0px;
+  margin-bottom: 13px;
+  padding: 10px;
+  line-height: 145%;
+}
+
+h1 {
+  background-color: $kittyblue;
+  padding: 10px;
+  color:white;
+}
+
+.group-content{
+  align-items: center;
+}
+
+.dynamic {
+  text-align: right;
+}
+
+.static {
+  text-align: left;
+}
