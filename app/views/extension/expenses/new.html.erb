@@ -55,9 +55,9 @@
   </div>
   <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
 
-  <%= f.hidden_field, :involved_group, value: "", id: "involved_group_field" %>
-  <%= f.hidden_field, :user_id, value: @user.id %>
-  <%= f.hidden_field, :group_id, value: @group.id %>
+  <%#= f.hidden_field :involved_group, value: "", id: "involved_group_field" %>
+  <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.hidden_field :group_id, value: @group.id %>
 
 
   <%= button_tag type: 'submit', class: "send-btn" do %>
