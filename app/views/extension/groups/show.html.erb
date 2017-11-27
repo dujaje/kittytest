@@ -9,9 +9,9 @@
 <div class="mobile-container">
   <div class="title-section">
     <h3 class="lato heavy">Members</h3>
-    <%= link_to "#", class: "fb-blue" do %>
-      Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" >
-    <% end %>
+    <%# link_to "#", class: "fb-blue" do %>
+      <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
+    <%# end %>
   </div>
 </div>
 
@@ -33,9 +33,10 @@
           <p class="list-item-text"><%= member.first_name %> owes you:</p>
         <% end %>
       </div>
+
       <div class="list-item-settle-btn">
         <%= link_to new_extension_expense_path(user_id: @user.id, group_id: @group.id) do %>
-          <button class="settle-btn"><div class="settle-inner send-inner">Settle <img src="https://png.icons8.com/paper-plane/ios11/22/ffffff"  ></div></button>
+          <button class="settle-btn"><div class="settle-inner send-inner">Settle <img src="https://png.icons8.com/paper-plane/ios11/22/ffffff"></div></button>
         <% end %>
       </div>
     </div>
@@ -71,7 +72,7 @@
         </div>
         <div class="list-item-settle-btn">
           <%= link_to new_extension_expense_path(user_id: @user.id, group_id: @group.id) do %>
-            <button class="settle-btn"><div class="settle-inner send-inner">Settle <img src="https://png.icons8.com/paper-plane/ios11/22/ffffff"  ></div></button>
+            <button class="settle-btn"><div class="settle-inner send-inner">Settle <img src="https://png.icons8.com/paper-plane/ios11/22/ffffff"></div></button>
           <% end %>
         </div>
       </div>
