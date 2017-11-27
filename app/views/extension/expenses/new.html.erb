@@ -28,14 +28,14 @@
 <% end -%>
 <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div></button>
 
+<!--
 
-
-<h3>Group ID: <%= @group.id %></h3>
-<h3>User ID: <%= @user.id %></h3>
+<h3>Group ID: <%#= @group.id %></h3>
+<h3>User ID: <%#= @user.id %></h3>
 
 <div class="spacer"></div>
 <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div></button>
-
+ -->
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
@@ -57,8 +57,9 @@
                           },
                           "buttons":[{
                             "type":"web_url",
-                            "url":"<%= ENV['NGROK'] %>/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>",
-                            "title":"Check Out Kitty"
+                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                            "title":"Check Out Kitty",
+                            "messenger_extensions": true
                           }]
                         }]
                       }
