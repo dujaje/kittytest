@@ -1,7 +1,16 @@
-<% @title = @group.name %>
+<% if @group.name %>
+  <% @title = @group.name %>
+<% else %>
+  <% @title = Your Kitty %>
+<% end %>
+
 <div class="blue-back">
   <!-- need to add some owes/owed logic into this if statement later-->
-  <h4 class="white"><%= @group.name.capitalize %></h4>
+  <% if @group.name %>
+    <h4 class="white"><%= @group.name.capitalize %></h4>
+  <% else %>
+    <h4 class="white">Your Kitty</h4>
+    <% end %>
   <% if true %>
     <h4 class="lato white heavy">Overall, you owe:</h4>
   <% else %>
