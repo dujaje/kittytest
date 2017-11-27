@@ -1,1 +1,17 @@
 <h1>THIS IS THE USER SHOW PAGE</h1>
+<div class="group-content-container">
+  <div class="group-content">
+    <% @user.memberships.each do |g| %>
+    <div class="group_id-section">
+      <%= g.group_id %>
+      <%= g.user_id %>
+      <%= g.memberships %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="user-content-container">
+  <div class="user-content">
+
+  </div>
+</div>
