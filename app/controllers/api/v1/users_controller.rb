@@ -28,7 +28,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     user.timezone = parsed_response[:timezone]
     # Saves User with all data
     user.save!
-
     # Finds or Creates a New Group
     group = Group.find_by(tid: get_params[:tid])
 
