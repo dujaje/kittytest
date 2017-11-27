@@ -6,8 +6,26 @@ class Extension::ExpensesController < ApplicationController
   end
 
   def create
+    @user_id = getparams[:user_id]
+    @group_id = getparams[:group_id]
+    @title = getparams[:title]
+    @amount_cents = getparams[:amount_cents]
+    @description = getparams[:description]
+    @expense = Expense.create!(
+      title: @title,
+      description: @description,
+      amount_cents: @amount_cents,
+      user_id: @user_id,
+      group_id: @group_id)
+    puts @expense
   end
 
   def show
+  end
+
+  private
+
+  def getparams
+    params.require(:expense).permit(:title, :amount_cents, :description, :user_id, :group_id)
   end
 end

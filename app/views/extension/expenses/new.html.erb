@@ -10,13 +10,10 @@
 </div>
 <%= simple_form_for [:extension, @expense] do |f| %>
   <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Lunch at Dishoom" %>
-<% end -%>
 <div class="container">
   <h4 class="lato heavy">How Much?</h4>
 </div>
-<%= simple_form_for [:extension, @expense] do |f| %>
-  <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false %>
-<% end -%>
+  <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
 <div class="container">
   <h4 class="lato heavy">With Who?</h4>
 </div>
@@ -60,18 +57,20 @@
  <div class="container">
   <h4 class="lato heavy">More Information:</h4>
 </div>
-<%= simple_form_for [:extension, @expense] do |f| %>
   <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
-<% end -%>
-<button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div></button>
+  <%= @user.first_name %>
+  <%= f.input :user_id, as: :hidden,  input_html: { value: @user.id} %>
+  <%= f.input :group_id, as: :hidden, input_html: { value: @group.id} %>
 
-<!--
+
+  <%= button_tag type: 'submit', class: "send-btn" do %>
+    <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
+  <% end %>
+<% end %>
 
 <h3>Group ID: <%#= @group.id %></h3>
 <h3>User ID: <%#= @user.id %></h3>
 
-<div class="spacer"></div>
-<button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div></button>
  -->
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
@@ -86,7 +85,7 @@
 
 
     document.querySelector(".send-btn").addEventListener("click", () => {
-      console.log("<%= @user.first_name %>");
+      // console.log("<%= @user.first_name %>");
       let message = {
                     "attachment":{
                       "type":"template",
