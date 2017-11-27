@@ -57,7 +57,16 @@
     </div>
   </div>
   <% @group.expenses.each do |expense| %>
-    <h3>expense.title ---- expense.location</h3>
+    <div class="list-item-short">
+      <div class="divider">
+        <div class="list-item-divider-content">
+          <p><%= expense.title %></p>
+        </div>
+        <div class="list-item-arrow-btn">
+          <p>info <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+        </div>
+      </div>
+    </div>
   <% end %>
 <% end %>
 

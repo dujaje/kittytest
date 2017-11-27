@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+.list-item-short {
+  height: 48px;
+  display: flex;
+  padding-left: 15px;
+  align-items: baseline;
+}
+
 .divider {
   flex-grow: 1;
   display: flex;
@@ -18,6 +25,11 @@
 
 .list-item-settle-btn {
 
+}
+
+.list-item-arrow-btn {
+  margin-right: 25px;
+  color: rgba(0,0,0,0.4)
 }
 
 .profile-img-container {
