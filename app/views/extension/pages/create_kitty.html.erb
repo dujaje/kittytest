@@ -6,24 +6,12 @@
     <h6 class="heavy">Name your kitty:</h6>
 </div>
 <div class="central">
-  <%# if @user.nil? %>
-    <%# simple_form_for [:extension, @group] do |f| %>
-      <%# f.input :name, :placeholder => "i.e. Lenny and friends' Kitty", :class => "lato name-input form-control" %>
-      <%# f.hidden_field :group_id, value: "@group.id"%>
-      <%# f.hidden_field :user_id, value: "@user.id "%>
-      <%# f.button :submit , :action => "/extension/groups/update"%>
-    <%# end %>
-  <%# else %>
     <%= simple_form_for [:extension, @group] do |f| %>
       <%= f.input :name, :placeholder => "i.e. #{@user.first_name} and friends' Kitty", :class => "lato name-input form-control" %>
       <%= f.input :user_id, as: :hidden, input_html: { value: @user.id } %>
       <%= f.input :group_id, as: :hidden, input_html: { value: @group.id } %>
-      <%= f.button :submit , :action => "/extension/groups/update"%>
+      <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></button>
     <% end %>
-  <%# end %>
-
-   <!--  <input type="text" name="name" placeholder="i.e. Lenny and friends' Kitty" class="lato name-input form-control">
-    <input type="text" name="name" placeholder="i.e. <%= @user.first_name %> and friends' Kitty" class="lato name-input form-control"> -->
 </div>
 <div class="container no-top-marg">
   <h3 class="lato heavy"><strong>How Kitty works:</strong></h3>
