@@ -1,1 +1,28 @@
-<h1>THIS IS THE USER SHOW PAGE</h1>
+<h1>Howdy <%= @user.first_name.capitalize %>! These are your groups:</h1>
+<div class="group-content-container">
+  <div class="group-content">
+    <% @user.groups.each do |g| %>
+    <div class="name-section">
+        <div class="static">
+          Group name:
+          <br>
+          Number of participants:
+          <br>
+          Group started:
+        </div>
+        <div class="dynamic">
+           <%= g.name.capitalize %>
+           <br>
+           <%= g.users.count %>
+           <br>
+           <%= g.created_at.strftime("%B %d, %Y") %>
+        </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<div class="user-content-container">
+  <div class="user-content">
+
+  </div>
+</div>
