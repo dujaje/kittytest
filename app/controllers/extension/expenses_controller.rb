@@ -35,9 +35,10 @@ class Extension::ExpensesController < ApplicationController
       split = Split.new(expense_id: expense, user_id: member, amount_cents: an_equal_split)
       split.save
     end
-    
+  end
+
   def getparams
     params.require(:expense).permit(:title, :amount_cents, :description, :user_id, :group_id)
   end
-    
+
 end

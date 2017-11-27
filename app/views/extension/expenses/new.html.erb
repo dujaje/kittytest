@@ -5,6 +5,7 @@
     <h4 class="lato white heavy">Add an expense to <%= @group.name %>:</h4 class="lato white heavy">
   <% end %>
 </div>
+
 <div class="container">
   <h4 class="lato heavy">Name your expense:</h4>
 </div>
@@ -22,7 +23,7 @@
 <div class="row text-center">
   <div class="col-xs-4">
     <div class="user-selector-area text-center current-user">
-      <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted" %>
+      <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: @user.id } %>
       <p><%= @user.first_name %></p>
     </div>
   </div>
@@ -32,7 +33,7 @@
     <% end %>
     <div class="col-xs-3">
       <div class="user-selector-area text-center">
-        <%= image_tag member.profile_picture_url, class: "avatar-scroll" %>
+        <%= image_tag member.profile_picture_url, class: "avatar-scroll", data: { id: member.id } %>
         <p><%= member.first_name %></p>
       </div>
     </div>
@@ -58,9 +59,9 @@
   <h4 class="lato heavy">More Information:</h4>
 </div>
   <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
-  <%= @user.first_name %>
-  <%= f.input :user_id, as: :hidden,  input_html: { value: @user.id} %>
+  <%= f.input :user_id, as: :hidden, input_html: { value: @user.id } %>
   <%= f.input :group_id, as: :hidden, input_html: { value: @group.id} %>
+  <%= f.input :involved_group, as: :hidden, input_html: {value: "", id: "involved_group_field"} %>
 
 
   <%= button_tag type: 'submit', class: "send-btn" do %>
@@ -68,10 +69,8 @@
   <% end %>
 <% end %>
 
-<h3>Group ID: <%#= @group.id %></h3>
-<h3>User ID: <%#= @user.id %></h3>
-
- -->
+<!-- <h3>Group ID: <%#= @group.id %></h3>
+<h3>User ID: <%#= @user.id %></h3> -->
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
@@ -80,6 +79,13 @@
     avatars.forEach((avatar) => {
       avatar.addEventListener("click", () => {
         avatar.classList.toggle("avatar-highlighted");
+        let membersArray = []
+        avatars.forEach((avatar) => {
+          if (avatar.classList.contains("avatar-highlighted")) {
+            membersArray.push(avatar.dataset.id);
+          }
+        })
+        document.getElementById("involved_group_field").value = `${membersArray}`
       })
     })
 
