@@ -84,3 +84,51 @@
     <button class="send-btn"><div class="send-inner">Add an expense</div></button>
   <% end %>
 </div>
+<% content_for(:after_js) do %>
+  <script>
+    document.querySelector(".send-btn").addEventListener("click", () => {
+      let message = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements": [{
+                          "title":"<%= @user.first_name %> just added an expense to your Kitty!",
+                          "subtitle": "Kitty: Money Sharing Made Simple",
+                          "default_action":{
+                            "type":"web_url",
+                            "url": "https://kittymoneysplitting.herokuapp.com/"
+                          },
+                          "buttons":[{
+                            "type":"web_url",
+                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                            "title":"Check Out Kitty",
+                            "messenger_extensions": true
+                          }]
+                        }]
+                      }
+                    }
+                  };
+
+      MessengerExtensions.beginShareFlow(function(share_response) {
+        // User dismissed without error, but did they share the message?
+        if(share_response.is_sent){
+          // The user actually did share.
+          // Perhaps close the window w/ requestCloseBrowser().
+          MessengerExtensions.requestCloseBrowser(function success() {
+            // webview closed
+          }, function error(err) {
+            // an error occurred
+          });
+        }
+      },
+      function(errorCode, errorMessage) {
+      // An error occurred in the process
+
+      },
+      message,
+      "current_thread");
+          });
+
+  </script>
+<% end %>
