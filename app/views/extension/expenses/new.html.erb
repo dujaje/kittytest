@@ -26,7 +26,7 @@
   <div class="row text-center">
     <div class="col-xs-4">
       <div class="user-selector-area text-center current-user">
-        <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted" %>
+        <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: @user.id } %>
         <p><%= @user.first_name %></p>
       </div>
     </div>
@@ -36,7 +36,7 @@
       <% end %>
       <div class="col-xs-3">
         <div class="user-selector-area text-center">
-          <%= image_tag member.profile_picture_url, class: "avatar-scroll" %>
+          <%= image_tag member.profile_picture_url, class: "avatar-scroll", data: { id: member.id } %>
           <p><%= member.first_name %></p>
         </div>
       </div>
@@ -55,7 +55,8 @@
   </div>
   <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
 
-  <%#= f.hidden_field :involved_group, value: "", id: "involved_group_field" %>
+
+  <%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
   <%= f.hidden_field :user_id, value: @user.id %>
   <%= f.hidden_field :group_id, value: @group.id %>
 
@@ -79,6 +80,7 @@
           }
         })
         document.getElementById("involved_group_field").value = `${membersArray}`
+        console.log(document.getElementById("involved_group_field").value)
       })
     })
 
