@@ -10,68 +10,55 @@
 </div>
 <%= simple_form_for [:extension, @expense] do |f| %>
   <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Lunch at Dishoom" %>
-<div class="container">
-  <h4 class="lato heavy">How Much?</h4>
-</div>
-  <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
-<div class="container">
-  <h4 class="lato heavy">With Who?</h4>
-</div>
-
-<div class="testimonial-group side-scroller-base">
-<div class="row text-center">
-  <div class="col-xs-4">
-    <div class="user-selector-area text-center current-user">
-      <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted" %>
-      <p><%= @user.first_name %></p>
-    </div>
+  <div class="container">
+    <h4 class="lato heavy">How Much?</h4>
   </div>
-  <% @group.users.each do |member| %>
-    <% if member == @user %>
-      <% next %>
-    <% end %>
-    <div class="col-xs-3">
-      <div class="user-selector-area text-center">
-        <%= image_tag member.profile_picture_url, class: "avatar-scroll" %>
-        <p><%= member.first_name %></p>
+  <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
+
+  <div class="container">
+    <h4 class="lato heavy">With Who?</h4>
+  </div>
+
+  <!-- Rest of form below side-scroller -->
+  <div class="testimonial-group side-scroller-base">
+  <div class="row text-center">
+    <div class="col-xs-4">
+      <div class="user-selector-area text-center current-user">
+        <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted" %>
+        <p><%= @user.first_name %></p>
       </div>
     </div>
-  <% end %>
-<!--   <div class="col-xs-3">1</div>
-  <div class="col-xs-3">2</div> -->
-  <!--<div class="col-xs-3">3</div>
-  <div class="col-xs-3">4</div>
-  <div class="col-xs-3">5</div>
-  <div class="col-xs-3">6</div>
-  <div class="col-xs-3">7</div>
-  <div class="col-xs-3">8</div> -->
+    <% @group.users.each do |member| %>
+      <% if member == @user %>
+        <% next %>
+      <% end %>
+      <div class="col-xs-3">
+        <div class="user-selector-area text-center">
+          <%= image_tag member.profile_picture_url, class: "avatar-scroll" %>
+          <p><%= member.first_name %></p>
+        </div>
+      </div>
+    <% end %>
+    </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="side-scroller-description side-scroller-base">
-    <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
+  <div class="container">
+    <div class="side-scroller-description side-scroller-base">
+      <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
+    </div>
   </div>
-</div>
 
- <div class="container">
-  <h4 class="lato heavy">More Information:</h4>
-</div>
+  <div class="container">
+    <h4 class="lato heavy">More Information:</h4>
+  </div>
   <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
-  <%= @user.first_name %>
-  <%= f.input :user_id, as: :hidden,  input_html: { value: @user.id} %>
-  <%= f.input :group_id, as: :hidden, input_html: { value: @group.id} %>
-
+  <%= f.hidden_field, :user_id, value: @user.id %>
+  <%= f.hidden_field, :group_id, value: @group.id %>
 
   <%= button_tag type: 'submit', class: "send-btn" do %>
     <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
   <% end %>
 <% end %>
-
-<h3>Group ID: <%#= @group.id %></h3>
-<h3>User ID: <%#= @user.id %></h3>
-
- -->
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
