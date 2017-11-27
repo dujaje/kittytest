@@ -42,7 +42,6 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     # Finds or Creates a New Group
     group = Group.find_by(tid: get_params[:tid])
-    group.thread_type = get_params[:thread_type]
 
     if group
       if group.kitty_created
