@@ -23,6 +23,8 @@ class Extension::ExpensesController < ApplicationController
   end
 
   def show
+    @user_id =
+    @group_id
   end
 
   private
