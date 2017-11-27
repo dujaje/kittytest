@@ -38,7 +38,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     # Saves User with all data
     user.save!
 
-    session[:current_user] = user
 
     # Finds or Creates a New Group
     group = Group.find_by(tid: get_params[:tid])
