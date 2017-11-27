@@ -21,6 +21,8 @@ class Extension::ExpensesController < ApplicationController
   end
 
   def show
+    @user_id =
+    @group_id
   end
 
   private
@@ -29,11 +31,9 @@ class Extension::ExpensesController < ApplicationController
     number_involved = involved_group.length
     an_equal_split = expense.amount_cents.to_i / number_involved
     involved_group.each do |member|
-      if member == creator
-        next
+      if member != creator
+        Split.create!(expense_id: expense.id, user_id: member.id, amount_cents: an_equal_split)
       end
-      split = Split.new(expense_id: expense, user_id: member, amount_cents: an_equal_split)
-      split.save
     end
   end
 
