@@ -23,16 +23,25 @@
 
 <div class="testimonial-group">
 <div class="row text-center">
+  <div class="col-xs-4">
+    <div class="user-selector-area text-center current-user">
+      <%= image_tag @user.profile_picture_url, class: "avatar-scroll" %>
+      <p><%= @user.first_name %></p>
+    </div>
+  </div>
   <% @group.users.each do |member| %>
-    <div class="col-xs-4">
-      <div class="user-selector-area text-center current-user">
+    <% if member == @user %>
+      <% next %>
+    <% end %>
+    <div class="col-xs-3">
+      <div class="user-selector-area text-center">
         <%= image_tag member.profile_picture_url, class: "avatar-scroll" %>
         <p><%= member.first_name %></p>
       </div>
     </div>
   <% end %>
-  <div class="col-xs-3">1</div>
-  <div class="col-xs-3">2</div>
+<!--   <div class="col-xs-3">1</div>
+  <div class="col-xs-3">2</div> -->
   <!--<div class="col-xs-3">3</div>
   <div class="col-xs-3">4</div>
   <div class="col-xs-3">5</div>
