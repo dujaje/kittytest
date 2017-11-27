@@ -43,7 +43,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
     end
 
-    if group.thread_type == "USER_TO_PAGE"
+    if get_params[:thread_type] == "USER_TO_PAGE"
       url = Rails.application.routes.url_helpers.extension_user_url(user)
     else
       # Finds or Creates a Membership
