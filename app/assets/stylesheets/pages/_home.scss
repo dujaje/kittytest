@@ -33,6 +33,7 @@
   background-image: url(http://hdwallpaper20.com/wp-content/uploads/2017/08/The-cat-itself-is-adorable-I-m-really-liking-the-blue-light-running-along-its%E2%80%A6-wallpaper-wp2009561.jpg);
   height: 100vh;
   background-attachment: fixed;
+  filter: brightness(85%);
 }
 
 .parallax-foreground-content-lower {
@@ -58,8 +59,13 @@
   padding: 100px 0px 0px 105px;
 }
 
-.content-section h2{
-  color: white;
+.content-section h2, li{
+  color: darkblue;
+}
+
+.content-section li{
+  color: rgb(204,204,0);
+  font-weight: bolder;
 }
 
 .what-is-kitty-section {
