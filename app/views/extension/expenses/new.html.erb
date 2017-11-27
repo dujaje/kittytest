@@ -1,25 +1,18 @@
-<% @title = "Add an expense" %>
-<div class="blue-back">
-  <% if @group.name.nil? %>
-    <h4 class="lato white heavy">Add an expense to your group:</h4 class="lato white heavy">
-  <% else %>
-    <h4 class="lato white heavy">Add an expense to <%= @group.name %>:</h4 class="lato white heavy">
-  <% end %>
-</div>
 
-<div class="container">
+<div class="mobile-container text-left">
   <h4 class="lato heavy">Name your expense:</h4>
-</div>
 <%= simple_form_for [:extension, @expense] do |f| %>
   <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Lunch at Dishoom" %>
-  <div class="container">
-    <h4 class="lato heavy">How Much?</h4>
-  </div>
-  <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
+</div>
+
+<div class="mobile-container text-left">
+  <h4 class="lato heavy">How much did you pay?</h4>
+<%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
+</div>
 
 
-  <div class="container">
-    <h4 class="lato heavy">With Who?</h4>
+  <div class="mobile-container text-left">
+    <h4 class="lato heavy">Tap to split between...</h4>
   </div>
 
   <!-- Rest of form below side-scroller -->
@@ -45,13 +38,13 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="mobile-container text-left">
     <div class="side-scroller-description side-scroller-base">
       <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
     </div>
   </div>
 
-  <div class="container">
+  <div class="mobile-container text-left">
     <h4 class="lato heavy">More Information:</h4>
   </div>
   <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
@@ -61,11 +54,14 @@
   <%= f.hidden_field :user_id, value: @user.id %>
   <%= f.hidden_field :group_id, value: @group.id %>
 
-
-  <%= button_tag type: 'submit', class: "send-btn" do %>
-    <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
-  <% end %>
+  <div class="fixed-btn-section">
+    <%= button_tag type: 'submit', class: "send-btn" do %>
+      <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
+    <% end %>
+  </div>
 <% end %>
+
+<div class="button-spacer"></div>
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
