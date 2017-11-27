@@ -17,7 +17,7 @@ class Extension::ExpensesController < ApplicationController
       amount_cents: @amount_cents,
       user_id: @user_id,
       group_id: @group_id)
-    puts @expense
+    redirect_to extension_group_path(@group_id, user_id: @user_id, group_id: @group_id)
   end
 
   def show

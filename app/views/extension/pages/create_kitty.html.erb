@@ -6,11 +6,24 @@
     <h6 class="heavy">Name your kitty:</h6>
 </div>
 <div class="central">
-  <% if @user.nil? %>
-    <input type="text" placeholder="i.e. Lenny and friends' Kitty" class="lato name-input form-control">
-  <% else %>
-    <input type="text" placeholder="i.e. <%= @user.first_name %> and friends' Kitty" class="lato name-input form-control">
-  <% end %>
+  <%# if @user.nil? %>
+    <%# simple_form_for [:extension, @group] do |f| %>
+      <%# f.input :name, :placeholder => "i.e. Lenny and friends' Kitty", :class => "lato name-input form-control" %>
+      <%# f.hidden_field :group_id, value: "@group.id"%>
+      <%# f.hidden_field :user_id, value: "@user.id "%>
+      <%# f.button :submit , :action => "/extension/groups/update"%>
+    <%# end %>
+  <%# else %>
+    <%= simple_form_for [:extension, @group] do |f| %>
+      <%= f.input :name, :placeholder => "i.e. #{@user.first_name} and friends' Kitty", :class => "lato name-input form-control" %>
+      <%= f.input :user_id, as: :hidden, input_html: { value: @user.id } %>
+      <%= f.input :group_id, as: :hidden, input_html: { value: @group.id } %>
+      <%= f.button :submit , :action => "/extension/groups/update"%>
+    <% end %>
+  <%# end %>
+
+   <!--  <input type="text" name="name" placeholder="i.e. Lenny and friends' Kitty" class="lato name-input form-control">
+    <input type="text" name="name" placeholder="i.e. <%= @user.first_name %> and friends' Kitty" class="lato name-input form-control"> -->
 </div>
 <div class="container no-top-marg">
   <h3 class="lato heavy"><strong>How Kitty works:</strong></h3>
@@ -58,7 +71,7 @@
           // Perhaps close the window w/ requestCloseBrowser().
           <% @group.kitty_created = true %>
           <% @group.save %>
-          window.location.href="/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>"
+          // window.location.href="/extension/groups/<%= @group.id %>?user_id=<%= @user.id %>&group_id=<%= @group.id %>"
         }
       },
       function(errorCode, errorMessage) {
