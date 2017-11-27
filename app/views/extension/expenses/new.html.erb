@@ -21,11 +21,11 @@
   <h4 class="lato heavy">With Who?</h4>
 </div>
 
-<div class="testimonial-group">
+<div class="testimonial-group side-scroller-base">
 <div class="row text-center">
   <div class="col-xs-4">
     <div class="user-selector-area text-center current-user">
-      <%= image_tag @user.profile_picture_url, class: "avatar-scroll" %>
+      <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted" %>
       <p><%= @user.first_name %></p>
     </div>
   </div>
@@ -50,6 +50,13 @@
   <div class="col-xs-3">8</div> -->
   </div>
 </div>
+
+<div class="container">
+  <div class="side-scroller-description side-scroller-base">
+    <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
+  </div>
+</div>
+
  <div class="container">
   <h4 class="lato heavy">More Information:</h4>
 </div>
@@ -70,7 +77,14 @@
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
   <script>
-    console.log("<%= @user.first_name %>");
+    let avatars = document.querySelectorAll(".avatar-scroll")
+    avatars.forEach((avatar) => {
+      avatar.addEventListener("click", () => {
+        avatar.classList.toggle("avatar-highlighted");
+      })
+    })
+
+
     document.querySelector(".send-btn").addEventListener("click", () => {
       console.log("<%= @user.first_name %>");
       let message = {
