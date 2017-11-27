@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     # get 'group', to: 'pages#group'
     resources :groups, only: [:show]
     resources :expenses, only: [:new, :create, :show]
+    resources :users, only: [:show]
   end
 
   namespace :api, defaults: { format: :json } do

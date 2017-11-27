@@ -12,6 +12,8 @@ class Api::V1::UsersController < Api::V1::BaseController
     # end
     puts "All ok"
 
+    puts get_params[:thread_type]
+
     # Finds or Creates a New User
     user = User.find_or_create_by(psid: get_params[:psid])
 
@@ -49,12 +51,17 @@ class Api::V1::UsersController < Api::V1::BaseController
       end
     else
       group = Group.create(tid: get_params[:tid])
+      group.thread_type = get_params[:thread_type]
       url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
     end
 
-    # Finds or Creates a Membership
-    Membership.find_or_create_by(group: group, user: user)
-
+    puts group.thread_type
+    if group.thread_type == "USER_TO_PAGE"
+      url = Rails.application.routes.url_helpers.extension_user_url(user)
+    else
+      # Finds or Creates a Membership
+      Membership.find_or_create_by(group: group, user: user)
+    end
     # if tid exists
       # if membership exists
         # do shit
