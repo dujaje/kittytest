@@ -17,7 +17,7 @@ class Extension::ExpensesController < ApplicationController
       amount_cents: @amount_cents,
       user_id: @user_id,
       group_id: @group_id)
-    puts @expense
+    redirect_to extension_group_path(@group_id, user_id: @user_id, group_id: @group_id)
   end
 
   def show
@@ -35,9 +35,10 @@ class Extension::ExpensesController < ApplicationController
       split = Split.new(expense_id: expense, user_id: member, amount_cents: an_equal_split)
       split.save
     end
-    
+  end
+
   def getparams
     params.require(:expense).permit(:title, :amount_cents, :description, :user_id, :group_id)
   end
-    
+
 end
