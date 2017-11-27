@@ -5,6 +5,7 @@
     <h4 class="lato white heavy">Add an expense to <%= @group.name %>:</h4 class="lato white heavy">
   <% end %>
 </div>
+
 <div class="container">
   <h4 class="lato heavy">Name your expense:</h4>
 </div>
@@ -14,6 +15,7 @@
     <h4 class="lato heavy">How Much?</h4>
   </div>
   <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
+
 
   <div class="container">
     <h4 class="lato heavy">With Who?</h4>
@@ -52,8 +54,11 @@
     <h4 class="lato heavy">More Information:</h4>
   </div>
   <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
+
+  <%= f.hidden_field, :involved_group, value: "", id: "involved_group_field" %>
   <%= f.hidden_field, :user_id, value: @user.id %>
   <%= f.hidden_field, :group_id, value: @group.id %>
+
 
   <%= button_tag type: 'submit', class: "send-btn" do %>
     <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
@@ -67,6 +72,13 @@
     avatars.forEach((avatar) => {
       avatar.addEventListener("click", () => {
         avatar.classList.toggle("avatar-highlighted");
+        let membersArray = []
+        avatars.forEach((avatar) => {
+          if (avatar.classList.contains("avatar-highlighted")) {
+            membersArray.push(avatar.dataset.id);
+          }
+        })
+        document.getElementById("involved_group_field").value = `${membersArray}`
       })
     })
 
