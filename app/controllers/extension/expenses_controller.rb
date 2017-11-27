@@ -25,7 +25,19 @@ class Extension::ExpensesController < ApplicationController
 
   private
 
+  def equal_splitter(expense, involved_group)
+    number_involved = involved_group.length
+    an_equal_split = expense.amount_cents.to_i / number_involved
+    involved_group.each do |member|
+      if member == creator
+        next
+      end
+      split = Split.new(expense_id: expense, user_id: member, amount_cents: an_equal_split)
+      split.save
+    end
+    
   def getparams
     params.require(:expense).permit(:title, :amount_cents, :description, :user_id, :group_id)
   end
+    
 end
