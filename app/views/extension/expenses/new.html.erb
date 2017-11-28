@@ -7,126 +7,126 @@
 
 <div class="mobile-container text-left">
   <h4 class="lato heavy">How much did you pay?</h4>
-<%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
+<%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "£ 0.00" %>
 </div>
 
 
-  <div class="mobile-container text-left">
-    <h4 class="lato heavy">Tap to split between...</h4>
-  </div>
+<div class="mobile-container text-left">
+  <h4 class="lato heavy">Tap to split between...</h4>
+</div>
 
-  <!-- Rest of form below side-scroller -->
-  <div class="testimonial-group side-scroller-base">
-  <div class="row text-center">
-    <div class="col-xs-4">
-      <div class="user-selector-area text-center current-user">
-        <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: @user.id } %>
-        <p><%= @user.first_name %></p>
+<!-- Rest of form below side-scroller -->
+<div class="testimonial-group side-scroller-base">
+<div class="row text-center">
+  <div class="col-xs-4">
+    <div class="user-selector-area text-center current-user">
+      <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: @user.id } %>
+      <p><%= @user.first_name %></p>
+    </div>
+  </div>
+  <% @group.users.each do |member| %>
+    <% if member == @user %>
+      <% next %>
+    <% end %>
+    <div class="col-xs-3">
+      <div class="user-selector-area text-center">
+        <%= image_tag member.profile_picture_url, class: "avatar-scroll", data: { id: member.id } %>
+        <p><%= member.first_name %></p>
       </div>
     </div>
-    <% @group.users.each do |member| %>
-      <% if member == @user %>
-        <% next %>
-      <% end %>
-      <div class="col-xs-3">
-        <div class="user-selector-area text-center">
-          <%= image_tag member.profile_picture_url, class: "avatar-scroll", data: { id: member.id } %>
-          <p><%= member.first_name %></p>
-        </div>
-      </div>
-    <% end %>
-    </div>
+  <% end %>
   </div>
+</div>
 
-  <div class="mobile-container text-left">
-    <div class="side-scroller-description side-scroller-base">
-      <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
-    </div>
+<div class="mobile-container text-left">
+  <div class="side-scroller-description side-scroller-base">
+    <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
   </div>
+</div>
 
-  <div class="mobile-container text-left">
-    <h4 class="lato heavy">More Information:</h4>
-  </div>
-  <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
+<div class="mobile-container text-left">
+  <h4 class="lato heavy">More Information:</h4>
+</div>
+<%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
 
 
-  <%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
-  <%= f.hidden_field :user_id, value: @user.id %>
-  <%= f.hidden_field :group_id, value: @group.id %>
+<%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
+<%= f.hidden_field :user_id, value: @user.id %>
+<%= f.hidden_field :group_id, value: @group.id %>
 
-  <div class="fixed-btn-section">
-    <%= button_tag type: 'submit', class: "send-btn" do %>
-      <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
-    <% end %>
-  </div>
+<div class="fixed-btn-section">
+  <%= button_tag type: 'submit', class: "send-btn" do %>
+    <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
+  <% end %>
+</div>
 <% end %>
 
 <div class="button-spacer"></div>
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
-  <script>
-    let avatars = document.querySelectorAll(".avatar-scroll")
-    avatars.forEach((avatar) => {
-      avatar.addEventListener("click", () => {
-        avatar.classList.toggle("avatar-highlighted");
-        let membersArray = []
-        avatars.forEach((avatar) => {
-          if (avatar.classList.contains("avatar-highlighted")) {
-            membersArray.push(avatar.dataset.id);
-          }
-        })
-        document.getElementById("involved_group_field").value = `${membersArray}`
-        console.log(document.getElementById("involved_group_field").value)
-      })
-    })
-
-
-    document.querySelector(".send-btn").addEventListener("click", () => {
-      // console.log("<%= @user.first_name %>");
-      let message = {
-                    "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"generic",
-                        "elements": [{
-                          "title":"<%= @user.first_name %> just added an expense to your Kitty!",
-                          "subtitle": "Kitty: Money Sharing Made Simple",
-                          "default_action":{
-                            "type":"web_url",
-                            "url": "https://kittymoneysplitting.herokuapp.com/"
-                          },
-                          "buttons":[{
-                            "type":"web_url",
-                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
-                            "title":"Check Out Kitty",
-                            "messenger_extensions": true
-                          }]
-                        }]
-                      }
-                    }
-                  };
-
-      MessengerExtensions.beginShareFlow(function(share_response) {
-        // User dismissed without error, but did they share the message?
-        if(share_response.is_sent){
-          // The user actually did share.
-          // Perhaps close the window w/ requestCloseBrowser().
-          MessengerExtensions.requestCloseBrowser(function success() {
-            // webview closed
-          }, function error(err) {
-            // an error occurred
-          });
+<script>
+  let avatars = document.querySelectorAll(".avatar-scroll")
+  avatars.forEach((avatar) => {
+    avatar.addEventListener("click", () => {
+      avatar.classList.toggle("avatar-highlighted");
+      let membersArray = []
+      avatars.forEach((avatar) => {
+        if (avatar.classList.contains("avatar-highlighted")) {
+          membersArray.push(avatar.dataset.id);
         }
-      },
-      function(errorCode, errorMessage) {
-      // An error occurred in the process
+      })
+      document.getElementById("involved_group_field").value = `${membersArray}`
+      console.log(document.getElementById("involved_group_field").value)
+    })
+  })
 
-      },
-      message,
-      "current_thread");
-          });
 
-  </script>
+  document.querySelector(".send-btn").addEventListener("click", () => {
+    // console.log("<%= @user.first_name %>");
+    let message = {
+                  "attachment":{
+                    "type":"template",
+                    "payload":{
+                      "template_type":"generic",
+                      "elements": [{
+                        "title":"<%= @user.first_name %> just added an expense to your Kitty!",
+                        "subtitle": "Kitty: Money Sharing Made Simple",
+                        "default_action":{
+                          "type":"web_url",
+                          "url": "https://kittymoneysplitting.herokuapp.com/"
+                        },
+                        "buttons":[{
+                          "type":"web_url",
+                          "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                          "title":"Check Out Kitty",
+                          "messenger_extensions": true
+                        }]
+                      }]
+                    }
+                  }
+                };
+
+    MessengerExtensions.beginShareFlow(function(share_response) {
+      // User dismissed without error, but did they share the message?
+      if(share_response.is_sent){
+        // The user actually did share.
+        // Perhaps close the window w/ requestCloseBrowser().
+        MessengerExtensions.requestCloseBrowser(function success() {
+          // webview closed
+        }, function error(err) {
+          // an error occurred
+        });
+      }
+    },
+    function(errorCode, errorMessage) {
+    // An error occurred in the process
+
+    },
+    message,
+    "current_thread");
+        });
+
+</script>
 <% end %>
 
