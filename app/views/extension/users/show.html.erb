@@ -3,29 +3,35 @@
 <div class="group-content-container">
   <div class="group-content">
     <% @user.groups.each do |g| %>
-    <div class="name-section">
-      <div class="column">
-        <div class="column-item">
-          <%= g.name.capitalize %>
-        </div>
-        <div class="column-item">
-          <% if g.users.count <= 6 %>
-            <% g.users.each do |user| %>
-              <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "32x32", class: "user-img" %>
+    <div class="group-card">
+      <div class="group-dynamic-data">
+        <div class="column">
+          <div class="group-name-time column-item">
+            <span id="group-name">
+              <%= g.name.capitalize %>
+            </span>
+            <span id="group-creation-time">
+              <%= g.created_at.strftime("%b %d, %Y") %>
+            </span>
+          </div>
+          <div class="column-item">
+            <span id="group-member-img">
+              <% if g.users.count <= 6 %>
+              <% g.users.each do |user| %>
+                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "32x32", class: "user-img avatar-list" %>
+              <% end %>
+            <% else %>
+              <% g.users.truncate(6).each do |user| %>
+                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "32x32", class: "user-img avatar-list" %>
+              <% end %>
             <% end %>
-          <% else %>
-            <% g.users.truncate(6).each do |user| %>
-              <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "32x32", class: "user-img" %>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="column-item">
-          <%= g.created_at.strftime("%b %d, %Y") %>
+            </span>
+            <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
+          </div>
         </div>
       </div>
-      <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
       <div class="button-placement">
-        <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="32" width="32">Go to group</div></button>
+        <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="24" width="24"><div id="mag-glass-spacer"></div><span id="mag-glass-font">Go to group</span></div></button>
         <% end %>
       </div>
     </div>
