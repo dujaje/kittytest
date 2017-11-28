@@ -1,15 +1,40 @@
-<% @title = @expense.title %>
-<div class="mobile-container text-left">
-  <h4 class="lato heavy"><%= @expense.title %></h4>
+<% @title = "Expense Breakdown" %>
+<div class="blue-back text-center">
+  <h4 class="lato white heavy"><%= @expense.title %></h4>
 </div>
+<% unless @expense.description == "" %>
+  <div class="mobile-container text-center">
+    <h6 class="lato">"<%= @expense.description %>"</h6>
+  </div>
+<% end %>
 
 <div class="mobile-container text-left">
-  <h4 class="lato heavy">You split:</h4>
-  <h3 class="heavy">£ <%= (@expense.amount_cents / 100) %></h3>
+  <h4 class="lato heavy">Created by: <%= @expense.user.first_name %> <%= @expense.user.last_name %></h4>
 </div>
-
+<div class="mobile-container text-left">
+  <h4 class="lato heavy">They paid: £ <%= (@expense.amount_cents.to_f / 100) %></h4>
+</div>
+<div class="mobile-container text-left">
+  <h6 class="lato heavy">On: <%= @expense.created_at.strftime("%b %d, %Y") %></h6>
+</div>
+<% unless @expense.location.nil? %>
+  <div class="mobile-container text-left">
+    <h6 class="lato black heavy">At: <%= @expense.location %></h6>
+  </div>
+<% end %>
+<div class="spacing-bar" ></div>
 
 <% @expense.splits.each do |split| %>
-  <%= image_tag split.user.profile_picture_url %>
+  <div class="list-item-tall">
+    <div class="profile-img-container">
+      <%= image_tag split.user.profile_picture_url, class: "avatar-list" %>
+    </div>
+    <div class="divider">
+      <div class="list-item-divider-content">
+        <p class="list-item-text"><strong><%= split.user.first_name %> <%= split.user.last_name %></strong></p>
+        <p class="list-item-text" >Owed <%= @expense.user.first_name %>: £<%= (split.amount_cents.to_f / 100).to_f %></p>
+      </div>
+    </div>
+  </div>
 <% end %>
 

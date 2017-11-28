@@ -12,6 +12,7 @@ class Extension::ExpensesController < ApplicationController
     @amount_cents = getparams[:amount_cents].to_i * 100
     @description = getparams[:description]
     @involved_group_string = getparams[:involved_group]
+    @location = getparams[:location]
     puts getparams[:involved_group]
     puts @involved_group_string
     @expense = Expense.create!(
@@ -19,7 +20,8 @@ class Extension::ExpensesController < ApplicationController
       description: @description,
       amount_cents: @amount_cents,
       user_id: @user_id,
-      group_id: @group_id)
+      group_id: @group_id,
+      location: @location)
     equal_splitter(@expense, @involved_group_string)
     redirect_to extension_group_path(@group_id, user_id: @user_id, group_id: @group_id)
   end
