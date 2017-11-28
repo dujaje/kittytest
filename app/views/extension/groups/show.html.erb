@@ -4,18 +4,60 @@
   <% @title = "Your Kitty" %>
 <% end %>
 
-<!-- We dont want anything to show if you are the only one in the group -->
 <% if @group.users.length == 1 && @group.users[0] == @user %>
   <p>No else has joined the group chat yet...</p>
 <% else %>
-  <div class="blue-back">
-    <!-- need to add some owes/owed logic into this if statement later-->
 
-    <% if true %>
-      <h4 class="lato white heavy">Overall, you owe:</h4>
-    <% else %>
-      <h4 class="lato white heavy">Overall, you are owed:</h4>
-    <% end %>
+<div class="blue-back">
+  <!-- need to add some owes/owed logic into this if statement later-->
+  <% if @user_outstanding_with_group.to_f == 0 %>
+    <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+</h4>
+  <% elsif @user_outstanding_with_group.to_f < 0 %>
+    <h4 class="lato white heavy">Overall, you owe: £<%= @user_outstanding_with_group.to_f / 100 %></h4>
+  <% else %>
+    <h4 class="lato white heavy">Overall, you are owed:</h4>
+  <% end %>
+</div>
+<div class="mobile-container">
+  <div class="title-section">
+    <h3 class="lato heavy">Members</h3>
+    <%# link_to "#", class: "fb-blue" do %>
+      <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
+    <%# end %>
+  </div>
+</div>
+
+<% @group.users.each do |member| %>
+  <% if member == @user %>
+    <% next %>
+  <% end %>
+  <div class="list-item-tall">
+    <div class="profile-img-container">
+      <%= image_tag member.profile_picture_url, class: "avatar-list" %>
+    </div>
+    <div class="divider">
+      <div class="list-item-divider-content">
+        <p class="list-item-text"><strong><%= member.first_name %> <%= member.last_name %></strong></p>
+        <!-- need to add some owes/owed logic into this if statement later-->
+        <% if @user.outstanding_with_person(member) == 0 %>
+          <p class="list-item-text" >You're all square</p>
+        <% elsif @user.outstanding_with_person(member) < 0 %>
+          <p class="list-item-text" >You owe <%= member.first_name %>: £<%= @user.outstanding_with_person(member).to_f * -1 / 100 %></p>
+        <% else %>
+          <p class="list-item-text"><%= member.first_name %> owes you: £<%= @user.outstanding_with_person(member).to_f / 100 %></p>
+        <% end %>
+      </div>
+
+      <% if @user.outstanding_with_person(member) < 0 %>
+        <div class="list-item-settle-btn">
+          <%= link_to new_extension_expense_path(user_id: @user.id, group_id: @group.id) do %>
+            <button class="settle-btn"><div class="settle-inner send-inner">Settle <img src="https://png.icons8.com/paper-plane/ios11/22/ffffff"></div></button>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
   <div class="mobile-container">
     <div class="title-section">
@@ -88,4 +130,6 @@
     <% end %>
   </div>
 <% end %>
+
+<div class="button-spacer"></div>
 
