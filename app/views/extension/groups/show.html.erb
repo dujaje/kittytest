@@ -5,20 +5,23 @@
 <% end %>
 
 <% if @group.users.length == 1 && @group.users[0] == @user %>
-  <p>No else has joined the group chat yet...</p>
+  <div class="blue-back">
+    <h4 class="lato white heavy"> <%= @group.name %> </h4>
+  </div>
+  <h3 class="lato heavy">No else has joined the group chat yet...</h3>
 <% else %>
 
   <div class="blue-back">
     <!-- need to add some owes/owed logic into this if statement later-->
     <% if @user_outstanding_with_group.to_f == 0 %>
-      <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-  </h4>
+      <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
     <% elsif @user_outstanding_with_group.to_f < 0 %>
-      <h4 class="lato white heavy">Overall, you owe: £<%= @user_outstanding_with_group.to_f / 100 %></h4>
+      <h4 class="lato white heavy">Overall, you owe: £<%= @user_outstanding_with_group.to_f * -1 / 100 %></h4>
     <% else %>
-      <h4 class="lato white heavy">Overall, you are owed:</h4>
+      <h4 class="lato white heavy">Overall, you are owed: £<%= @user_outstanding_with_group.to_f / 100 %></h4>
     <% end %>
   </div>
+
   <div class="mobile-container">
     <div class="title-section">
       <h3 class="lato heavy">Members</h3>
@@ -29,9 +32,11 @@
   </div>
 
   <% @group.users.each do |member| %>
+
     <% if member == @user %>
       <% next %>
     <% end %>
+
     <div class="list-item-tall">
       <div class="profile-img-container">
         <%= image_tag member.profile_picture_url, class: "avatar-list" %>
@@ -57,79 +62,47 @@
           </div>
         <% end %>
       </div>
-
     </div>
+  <% end %>
+
+  <% if @group.expenses.empty? %>
+
     <div class="mobile-container">
       <div class="title-section">
-        <h3 class="lato heavy">Members</h3>
-        <%# link_to "#", class: "fb-blue" do %>
-          <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
-        <%# end %>
+        <h3 class="lato heavy">No Expenses Yet</h3>
       </div>
     </div>
 
-    <% @group.users.each do |member| %>
-      <% if member == @user %>
-        <% next %>
-      <% end %>
-      <div class="list-item-tall">
-        <div class="profile-img-container">
-          <%= image_tag member.profile_picture_url, class: "avatar-list" %>
-        </div>
+  <% else %>
+
+    <div class="mobile-container">
+      <div class="title-section">
+        <h3 class="lato heavy">Expenses</h3>
+      </div>
+    </div>
+    <% @group.expenses.each do |expense| %>
+      <div class="list-item-short">
         <div class="divider">
-          <div class="list-item-divider-content">
-            <p class="list-item-text"><strong><%= member.first_name %> <%= member.last_name %></strong></p>
-            <!-- need to add some owes/owed logic into this if statement later-->
-            <% if true %>
-              <p class="list-item-text" >You owe <%= member.first_name %>:</p>
-            <% else %>
-              <p class="list-item-text"><%= member.first_name %> owes you:</p>
-            <% end %>
+          <div class="list-item-divider-content .align-baseline">
+            <p><%= expense.title %></p>
           </div>
-
-          <div class="list-item-settle-btn">
-            <%= link_to new_extension_expense_path(user_id: @user.id, group_id: @group.id) do %>
-              <button class="settle-btn"><div class="settle-inner send-inner">Settle <img src="https://png.icons8.com/paper-plane/ios11/22/ffffff"></div></button>
+          <div class="list-item-arrow-btn .align-baseline">
+            <%= link_to extension_expense_path(expense) do %>
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
             <% end %>
           </div>
         </div>
       </div>
     <% end %>
 
-    <% if @group.expenses.empty? %>
-      <div class="mobile-container">
-        <div class="title-section">
-          <h3 class="lato heavy">No Expenses Yet</h3>
-        </div>
-      </div>
-    <% else %>
-      <div class="mobile-container">
-        <div class="title-section">
-          <h3 class="lato heavy">Expenses</h3>
-        </div>
-      </div>
-      <% @group.expenses.each do |expense| %>
-        <div class="list-item-short">
-          <div class="divider">
-            <div class="list-item-divider-content">
-              <p><%= expense.title %></p>
-            </div>
-            <div class="list-item-arrow-btn">
-              <%= link_to extension_expense_path(expense) do %>
-                <p>info <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+  <% end %>
 
     <div class="fixed-btn-section">
       <%= link_to new_extension_expense_path(user_id: @user.id, group_id: @group.id) do %>
         <button class="send-btn"><div class="send-inner">Add an expense</div></button>
       <% end %>
     </div>
-  <% end %>
+
 <% end %>
 
 <div class="button-spacer"></div>
