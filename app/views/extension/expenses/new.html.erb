@@ -17,34 +17,35 @@
     <h4 class="lato heavy">Tap to split between...</h4>
   </div>
 
-  <!-- Rest of form below side-scroller -->
-  <div class="testimonial-group side-scroller-base">
-  <div class="row text-center">
-    <div class="col-xs-4">
-      <div class="user-selector-area text-center current-user">
-        <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: @user.id } %>
-        <p><%= @user.first_name %></p>
-      </div>
+  <div class="mobile-container text-left">
+    <div class="side-scroller-description side-scroller-base text-center">
+      <p>Go on then, who bought something?</p>
     </div>
-    <% @group.users.each do |member| %>
-      <% if member == @user %>
-        <% next %>
-      <% end %>
-      <div class="col-xs-3">
-        <div class="user-selector-area text-center">
-          <%= image_tag member.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: member.id } %>
-          <p><%= member.first_name %></p>
+
+    <!-- Rest of form below side-scroller -->
+    <div class="testimonial-group side-scroller-base">
+    <div class="row text-center">
+      <div class="col-xs-3 user-self">
+        <div class="user-selector-area text-center current-user">
+          <%= image_tag @user.profile_picture_url, class: "avatar-scroll", data: { id: @user.id } %>
+          <p><%= @user.first_name %> (Me)</p>
         </div>
       </div>
-    <% end %>
+      <% @group.users.each do |member| %>
+        <% if member == @user %>
+          <% next %>
+        <% end %>
+        <div class="col-xs-3">
+          <div class="user-selector-area text-center">
+            <%= image_tag member.profile_picture_url, class: "avatar-scroll", data: { id: member.id } %>
+            <p><%= member.first_name %></p>
+          </div>
+        </div>
+      <% end %>
+      </div>
     </div>
   </div>
 
-  <div class="mobile-container text-left">
-    <div class="side-scroller-description side-scroller-base text-center">
-      <p><strong>Split equally</strong> between <strong>all members</strong> of the group</p>
-    </div>
-  </div>
 
 <div class="mobile-container text-left">
   <h4 class="lato heavy">Where was this?</h4>
@@ -57,7 +58,7 @@
   </div>
 
 
-  <%= f.input :involved_group, as: :hidden, input_html: { value: "1,2,3", id: "involved_group_field" } %>
+  <%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
   <%= f.hidden_field :user_id, value: @user.id %>
   <%= f.hidden_field :group_id, value: @group.id %>
   </div>
@@ -112,7 +113,7 @@
         else if (membersArray.length > 1) {
           const others_amount = membersArray.length
           description.innerHTML = "";
-          description.insertAdjacentHTML('afterbegin',`<p><strong>You are owed everything</strong> by <strong>${others_amount} others</strong> equally</p>`);
+          description.insertAdjacentHTML('afterbegin',`<p><strong>You are owed everything</strong> by <strong>${others_amount} others</strong> who split it equally</p>`);
         }
         else if (membersArray.length === 1) {
           const others_amount = membersArray.length

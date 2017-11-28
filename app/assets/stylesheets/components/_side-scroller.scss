@@ -3,9 +3,10 @@
   overflow-x: auto;
   white-space: nowrap;
 }
-.testimonial-group > .row > .col-xs-4 {
+.user-self {
   display: inline-block;
   float: none;
+  border-right: 1px solid rgba(0,0,0,0.1)
 }
 .testimonial-group > .row > .col-xs-3 {
   display: inline-block;
@@ -13,7 +14,7 @@
 }
 
 .side-scroller-base {
-  border-bottom: 1px solid rgba(0,0,0,0.1)
+  // border-bottom: 1px solid rgba(0,0,0,0.1)
 }
 
 .side-scroller-description {
@@ -37,7 +38,7 @@
 }
 
 .current-user {
-  border-right: 1px solid rgba(0,0,0,0.1)
+
 }
 
 // .col-xs-4 { background: $kittyblue; }
