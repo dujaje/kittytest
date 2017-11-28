@@ -1,20 +1,21 @@
 .list-item-tall {
   height: 64px;
   display: flex;
-  padding-left: 15px;
+  padding-left: 20px;
   align-items: center;
 }
 
 .list-item-short {
   height: 48px;
   display: flex;
-  padding-left: 15px;
+  margin-left: 20px;
   align-items: baseline;
 }
 
 .divider {
   flex-grow: 1;
   display: flex;
+  align-items: center;
   border-bottom: 1px solid rgba(0,0,0,0.1)
 }
 
@@ -33,8 +34,8 @@
 }
 
 .profile-img-container {
-  width: 75px;
-  padding: 5px;
+  width: 56px;
+  padding: 0;
 }
 
 p.list-item-text {
