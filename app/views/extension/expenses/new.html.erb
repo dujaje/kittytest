@@ -1,9 +1,10 @@
 <% @title = "#{@user.first_name}'s new expense" %>
 
+<div class="small-spacer"></div>
 <div class="mobile-container text-left">
-  <h4 class="lato heavy">Name your expense:</h4>
+  <h4 class="lato heavy">What did you pay for?</h4>
 <%= simple_form_for [:extension, @expense] do |f| %>
-  <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Sunday brunch" %>
+  <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Sunday Lunch" %>
 </div>
 
 <div class="mobile-container text-left">
@@ -24,7 +25,7 @@
 
     <!-- Rest of form below side-scroller -->
     <div class="testimonial-group side-scroller-base">
-    <div class="row text-center">
+    <div class="row">
       <div class="col-xs-3 user-self">
         <div class="user-selector-area text-center current-user">
           <%= image_tag @user.profile_picture_url, class: "avatar-scroll", data: { id: @user.id } %>
@@ -54,7 +55,7 @@
 
   <div class="mobile-container text-left">
     <h4 class="lato heavy">More Information:</h4>
-    <%= f.input :description, :class => 'lato heavy lighter form-item', :label => false, :type => "text" %>
+    <%= f.input :description, :class => 'lato heavy lighter form-item', :label => false, :type => "text", placeholder: "i.e. BEST LUNCH EVER!" %>
   </div>
 
 
@@ -65,7 +66,7 @@
 
   <div class="fixed-btn-section">
     <%= button_tag type: 'submit', class: "send-btn" do %>
-      <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add Expense</div>
+      <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add now</div>
     <% end %>
   </div>
 <% end %>
@@ -103,7 +104,7 @@
         else if (membersArray.length === 1 && document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
           const others_amount = membersArray.length - 1
           description.innerHTML = "";
-          description.insertAdjacentHTML('afterbegin',`<p>You want to make an expense with yourself? Even a cat doubts that...</p>`);
+          description.insertAdjacentHTML('afterbegin',`<p>You want to make an expense just with yourself? Even a cat doubts that...</p>`);
         }
         else if (document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
           const others_amount = membersArray.length - 1

@@ -37,8 +37,11 @@
   padding: 5px;
 }
 
-.list-item-text p {
+p.list-item-text {
   margin-bottom: 0;
   padding: 0;
-  size: 12px;
+}
+
+a list-item-short {
+  text-decoration: none;
 }

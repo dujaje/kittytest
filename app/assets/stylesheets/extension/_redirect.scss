@@ -8,12 +8,11 @@
     -webkit-transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(360deg);
+    -webkit-transform: rotate(-360deg);
   }
 }
 
-img.loading-logo-img
-{
+img.loading-logo-img {
     -webkit-animation-name:             rotate;
     -webkit-animation-duration:         0.5s;
     -webkit-animation-iteration-count:  infinite;
