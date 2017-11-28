@@ -4,9 +4,9 @@ class User < ApplicationRecord
   has_many :expenses
   has_many :splits
 
-  def outstanding_with_person(comparison_user)
-    user_owed_splits = Split.joins(:expense).where(expenses: {user_id: self.id}).where(user_id: comparison_user.id)
-    user_owes_splits = Split.joins(:expense).where(expenses: {user_id: comparison_user.id}).where(user_id: self.id)
+  def outstanding_with_person_in_group(comparison_user, group)
+    user_owed_splits = Split.joins(:expense).where(expenses: {user_id: self.id}).where(user_id: comparison_user.id).where(expenses: {group_id: group.id})
+    user_owes_splits = Split.joins(:expense).where(expenses: {user_id: comparison_user.id}).where(user_id: self.id).where(expenses: {group_id: group.id})
 
     user_owes_total = 0
     user_owed_total = 0

@@ -2,13 +2,12 @@
 .testimonial-group > .row {
   overflow-x: auto;
   white-space: nowrap;
+  margin-bottom: 10px;
 }
 .user-self {
-  display: inline-block;
-  float: none;
   border-right: 1px solid rgba(0,0,0,0.1)
 }
-.testimonial-group > .row > .col-xs-3 {
+.testimonial-group > .row > .col-xs-4 {
   display: inline-block;
   float: none;
 }
@@ -18,7 +17,7 @@
 }
 
 .side-scroller-description {
-  margin: 10px 0px;
+  margin: 0;
 }
 
 // .vertical-line {
@@ -38,7 +37,6 @@
 }
 
 .current-user {
-
 }
 
 // .col-xs-4 { background: $kittyblue; }

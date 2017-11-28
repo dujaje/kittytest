@@ -4,8 +4,8 @@ class Extension::GroupsController < ApplicationController
     @group = Group.find(params[:group_id])
     @group.kitty_created = true
     @group.save
-    @user_owes_splits_to_group = Split.where(user_id: @user.id)
-    @user_owed_splits_by_group = Split.joins(:expense).where(expenses: {user_id: @user.id})
+    @user_owes_splits_to_group = Split.joins(:expense).where(user_id: @user.id).where(expenses: {group_id: @group.id})
+    @user_owed_splits_by_group = Split.joins(:expense).where(expenses: {user_id: @user.id}).where(expenses: {group_id: @group.id})
     @user_outstanding_with_group = outstanding_with_group(@user_owes_splits_to_group, @user_owed_splits_by_group)
   end
 
