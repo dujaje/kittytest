@@ -1,1 +1,13 @@
 <% @title = @expense.title %>
+<div class="mobile-container text-left">
+  <h4 class="lato heavy"><%= @expense.title %></h4>
+</div>
+
+<div class="mobile-container text-left">
+  <h4 class="lato heavy">You split:</h4>
+  <h3 class="heavy">£ <%= (@expense.amount_cents / 100) %></h3>
+</div>
+
+<p><%= @expense.splits[0].user.first_name %></p>
+
+

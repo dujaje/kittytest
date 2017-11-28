@@ -73,7 +73,9 @@
             <p><%= expense.title %></p>
           </div>
           <div class="list-item-arrow-btn">
-            <p>info <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+            <%= link_to extension_expense_path(expense) do %>
+              <p>info <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+            <% end %>
           </div>
         </div>
       </div>

@@ -23,8 +23,7 @@ class Extension::ExpensesController < ApplicationController
   end
 
   def show
-    @user_id =
-    @group_id
+    @expense = Expense.find(params[:id].to_i)
   end
 
   private
@@ -43,7 +42,7 @@ class Extension::ExpensesController < ApplicationController
   end
 
   def getparams
-    params.require(:expense).permit(:title, :amount_cents, :description, :user_id, :group_id, :involved_group)
+    params.require(:expense).permit(:id, :split_type, :location, :settle, :title, :amount_cents, :description, :user_id, :group_id, :involved_group)
   end
 
 end
