@@ -48,9 +48,9 @@
           <% if @user.outstanding_with_person_in_group(member, @group) == 0 %>
             <p class="list-item-text" >You're all square</p>
           <% elsif @user.outstanding_with_person_in_group(member, @group) < 0 %>
-            <p class="list-item-text" >You owe <%= member.first_name %>: £<%= @user.outstanding_with_person_in_group(member, @group).to_f * -1 / 100 %></p>
+            <p class="list-item-text" >You owe: <span style="color:red"> £<%= @user.outstanding_with_person_in_group(member, @group).to_f * -1 / 100 %></span></p>
           <% else %>
-            <p class="list-item-text"><%= member.first_name %> owes you: £<%= @user.outstanding_with_person_in_group(member, @group).to_f / 100 %></p>
+            <p class="list-item-text">Owes you: <span style="color:green">£<%= @user.outstanding_with_person_in_group(member, @group).to_f / 100 %></span></p>
           <% end %>
         </div>
 
