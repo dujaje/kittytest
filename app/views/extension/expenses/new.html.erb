@@ -14,32 +14,34 @@
   <h4 class="lato heavy">Tap to split between...</h4>
 </div>
 
-<!-- Rest of form below side-scroller -->
-<div class="testimonial-group side-scroller-base">
-<div class="row text-center">
-  <div class="col-xs-4">
-    <div class="user-selector-area text-center current-user">
-      <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: @user.id } %>
-      <p><%= @user.first_name %></p>
-    </div>
-  </div>
-  <% @group.users.each do |member| %>
-    <% if member == @user %>
-      <% next %>
-    <% end %>
-    <div class="col-xs-3">
-      <div class="user-selector-area text-center">
-        <%= image_tag member.profile_picture_url, class: "avatar-scroll", data: { id: member.id } %>
-        <p><%= member.first_name %></p>
+  <!-- Rest of form below side-scroller -->
+  <div class="testimonial-group side-scroller-base">
+  <div class="row text-center">
+    <div class="col-xs-4">
+      <div class="user-selector-area text-center current-user">
+        <%= image_tag @user.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: @user.id } %>
+        <p><%= @user.first_name %></p>
       </div>
     </div>
-  <% end %>
+    <% @group.users.each do |member| %>
+      <% if member == @user %>
+        <% next %>
+      <% end %>
+      <div class="col-xs-3">
+        <div class="user-selector-area text-center">
+          <%= image_tag member.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: member.id } %>
+          <p><%= member.first_name %></p>
+        </div>
+      </div>
+    <% end %>
+    </div>
   </div>
-</div>
 
-<div class="mobile-container text-left">
-  <div class="side-scroller-description side-scroller-base">
-    <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
+  <div class="mobile-container text-left">
+    <div class="side-scroller-description side-scroller-base text-center">
+      <p><strong>Split equally</strong> between <strong>all members</strong> of the group</p>
+    </div>
+  <% end %>
   </div>
 </div>
 
@@ -66,68 +68,102 @@
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
-<script>
-  let avatars = document.querySelectorAll(".avatar-scroll")
-  avatars.forEach((avatar) => {
-    avatar.addEventListener("click", () => {
-      avatar.classList.toggle("avatar-highlighted");
-      let membersArray = []
-      avatars.forEach((avatar) => {
-        if (avatar.classList.contains("avatar-highlighted")) {
-          membersArray.push(avatar.dataset.id);
+  <script>
+    let avatars = document.querySelectorAll(".avatar-scroll");
+    let description = document.querySelector(".side-scroller-description");
+
+    avatars.forEach((avatar) => {
+      avatar.addEventListener("click", () => {
+        avatar.classList.toggle("avatar-highlighted");
+        let membersArray = []
+        avatars.forEach((avatar) => {
+          if (avatar.classList.contains("avatar-highlighted")) {
+            membersArray.push(avatar.dataset.id);
+          }
+        })
+        document.getElementById("involved_group_field").value = `${membersArray}`
+
+        if (membersArray.length === <%= @group.users.count %>) {
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin','<p><strong>Split equally</strong> between <strong>all members</strong> of the group</p>');
+        }
+        else if (membersArray.length > 2 && document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
+          const others_amount = membersArray.length - 1
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>Split equally</strong> between <strong>you and ${others_amount} others</strong></p>`);
+        }
+        else if (membersArray.length === 1 && document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
+          const others_amount = membersArray.length - 1
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p>You want to make an expense with yourself? Even a cat doubts that...</p>`);
+        }
+        else if (document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
+          const others_amount = membersArray.length - 1
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>Split equally</strong> between <strong>you and ${others_amount} other</strong></p>`);
+        }
+        else if (membersArray.length > 1) {
+          const others_amount = membersArray.length
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>You are owed everything</strong> by <strong>${others_amount} others</strong> equally</p>`);
+        }
+        else if (membersArray.length === 1) {
+          const others_amount = membersArray.length
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>You are owed everything</strong> by just <strong>${others_amount} person</strong></p>`);
+        }
+        else {
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p>Well this isn't going to work is it</p>`);
         }
       })
-      document.getElementById("involved_group_field").value = `${membersArray}`
-      console.log(document.getElementById("involved_group_field").value)
     })
-  })
 
 
-  document.querySelector(".send-btn").addEventListener("click", () => {
-    // console.log("<%= @user.first_name %>");
-    let message = {
-                  "attachment":{
-                    "type":"template",
-                    "payload":{
-                      "template_type":"generic",
-                      "elements": [{
-                        "title":"<%= @user.first_name %> just added an expense to your Kitty!",
-                        "subtitle": "Kitty: Money Sharing Made Simple",
-                        "default_action":{
-                          "type":"web_url",
-                          "url": "https://kittymoneysplitting.herokuapp.com/"
-                        },
-                        "buttons":[{
-                          "type":"web_url",
-                          "url":"<%= ENV['NGROK'] %>/extension/welcome/",
-                          "title":"Check Out Kitty",
-                          "messenger_extensions": true
+    document.querySelector(".send-btn").addEventListener("click", () => {
+      // console.log("<%= @user.first_name %>");
+      let message = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements": [{
+                          "title":"<%= @user.first_name %> just added an expense to your Kitty!",
+                          "subtitle": "Kitty: Money Sharing Made Simple",
+                          "default_action":{
+                            "type":"web_url",
+                            "url": "https://kittymoneysplitting.herokuapp.com/"
+                          },
+                          "buttons":[{
+                            "type":"web_url",
+                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                            "title":"Check Out Kitty",
+                            "messenger_extensions": true
+                          }]
                         }]
-                      }]
+                      }
                     }
-                  }
-                };
+                  };
 
-    MessengerExtensions.beginShareFlow(function(share_response) {
-      // User dismissed without error, but did they share the message?
-      if(share_response.is_sent){
-        // The user actually did share.
-        // Perhaps close the window w/ requestCloseBrowser().
-        MessengerExtensions.requestCloseBrowser(function success() {
-          // webview closed
-        }, function error(err) {
-          // an error occurred
-        });
-      }
-    },
-    function(errorCode, errorMessage) {
-    // An error occurred in the process
+      MessengerExtensions.beginShareFlow(function(share_response) {
+        // User dismissed without error, but did they share the message?
+        if(share_response.is_sent){
+          // The user actually did share.
+          // Perhaps close the window w/ requestCloseBrowser().
+          MessengerExtensions.requestCloseBrowser(function success() {
+            // webview closed
+          }, function error(err) {
+            // an error occurred
+          });
+        }
+      },
+      function(errorCode, errorMessage) {
+      // An error occurred in the process
 
-    },
-    message,
-    "current_thread");
-        });
+      },
+      message,
+      "current_thread");
+          });
 
-</script>
+  </script>
 <% end %>
-
