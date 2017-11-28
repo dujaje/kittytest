@@ -47,11 +47,11 @@
 
   <div class="mobile-container text-left">
     <h4 class="lato heavy">More Information:</h4>
+    <%= f.input :description, :class => 'lato heavy lighter form-item', :label => false, :type => "text" %>
   </div>
-  <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
 
 
-  <%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
+  <%= f.input :involved_group, as: :hidden, input_html: { value: "1,2,3", id: "involved_group_field" } %>
   <%= f.hidden_field :user_id, value: @user.id %>
   <%= f.hidden_field :group_id, value: @group.id %>
 
@@ -79,7 +79,9 @@
             membersArray.push(avatar.dataset.id);
           }
         })
+        console.log(membersArray)
         document.getElementById("involved_group_field").value = `${membersArray}`
+        console.log(document.getElementById("involved_group_field").value)
 
         if (membersArray.length === <%= @group.users.count %>) {
           description.innerHTML = "";
