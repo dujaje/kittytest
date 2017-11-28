@@ -7,7 +7,7 @@
 <!-- We dont want anything to show if you are the only one in the group -->
 <% if @group.users.length == 1 && @group.users[0] == @user %>
   <p>No else has joined the group chat yet...</p>
-  <% else %>
+<% else %>
   <div class="blue-back">
     <!-- need to add some owes/owed logic into this if statement later-->
 
