@@ -2,6 +2,14 @@
 <div class="blue-back text-center">
   <h4 class="lato white heavy"><%= @expense.title %></h4>
 </div>
+<div class="mobile-container text-center">
+  <h6 class="lato heavy"><%= @expense.created_at.strftime("%b %d, %Y") %></h6>
+</div>
+<% unless @expense.location.nil? %>
+  <div class="mobile-container text-center">
+    <h6 class="lato black heavy">At <%= @expense.location %></h6>
+  </div>
+<% end %>
 <% unless @expense.description == "" %>
   <div class="mobile-container text-center">
     <h6 class="lato">"<%= @expense.description %>"</h6>
@@ -9,20 +17,14 @@
 <% end %>
 
 <div class="mobile-container text-left">
-  <h4 class="lato heavy">Created by: <%= @expense.user.first_name %> <%= @expense.user.last_name %></h4>
+  <h4 class="lato heavy"><%= @expense.user.first_name %> paid </h4>
 </div>
 <div class="mobile-container text-left">
-  <h4 class="lato heavy">They paid: £ <%= (@expense.amount_cents.to_f / 100) %></h4>
+  <h4 class="lato heavy">The bill was £ <%= (@expense.amount_cents.to_f / 100) %></h4>
 </div>
-<div class="mobile-container text-left">
-  <h6 class="lato heavy">On: <%= @expense.created_at.strftime("%b %d, %Y") %></h6>
+<div class="horiz-pad">
+  <div class="spacing-bar" ></div>
 </div>
-<% unless @expense.location.nil? %>
-  <div class="mobile-container text-left">
-    <h6 class="lato black heavy">At: <%= @expense.location %></h6>
-  </div>
-<% end %>
-<div class="spacing-bar" ></div>
 
 <% @expense.splits.each do |split| %>
   <div class="list-item-tall">
