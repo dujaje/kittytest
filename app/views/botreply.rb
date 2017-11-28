@@ -18,10 +18,6 @@ def reply(sender)
                                       "url": "#{ENV['NGROK']}/extension/welcome",
                                       "title": "Open Kitty",
                                       "messenger_extensions": true
-                                    }, {
-                                      "type": "postback",
-                                      "title": "#{ENV['DEVELOPER_TOKEN']}: Meow",
-                                      "payload": "lalalalala",
                                     }],
                                   }]
                                 }
