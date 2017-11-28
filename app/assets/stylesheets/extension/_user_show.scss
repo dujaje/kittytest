@@ -1,10 +1,9 @@
-.name-section {
+.group-dynamic-data {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
   border-radius: 2px;
-  background-color: rgba(235, 235, 235, 1);
   width: 100%;
   margin: 0px;
   margin-bottom: 13px;
@@ -35,4 +34,21 @@ h1 {
 
 .button-placement {
 
+}
+
+.group-dynamic-data {
+
+}
+
+.group-card {
+  background-color: rgba(235, 235, 235, 1);
+  margin: 7px 7px 14px 7px;
+}
+
+#mag-glass-spacer {
+  width: 10px;
+}
+
+#mag-glass-font {
+  font-size: 24px;
 }
