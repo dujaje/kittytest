@@ -21,7 +21,9 @@
         <di class="group-profile-pictures">
 
         </div>
-        <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="32" width="32">View Group</div></button>
+    <%= link_to extension_group_path(user_id: @user.id, group_id: @g.id) do %>
+        <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="32" width="32">Go to group</div></button>
+      <% end %>
     </div>
     <% end %>
   </div>
