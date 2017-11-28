@@ -1,45 +1,54 @@
 <% @title = "#{@user.first_name} #{@user.last_name}" %>
-<h1 id="kittyblue">Howdy <%= @user.first_name.capitalize %>! These are your groups:</h1>
-<div class="group-content-container">
-  <div class="group-content">
-    <% @user.groups.each do |g| %>
-    <div class="group-card">
-      <div class="group-dynamic-data">
-        <div class="column">
-          <div class="group-name-time column-item">
-            <span id="group-name">
-              <%= g.name.capitalize %>
-            </span>
-            <span id="group-creation-time">
-              <%= g.created_at.strftime("%b %d, %Y") %>
-            </span>
-          </div>
-          <div class="column-item">
-            <span id="group-member-img">
-              <% if g.users.count <= 6 %>
-              <% g.users.each do |user| %>
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "32x32", class: "user-img avatar-list" %>
+
+<div class="blue-back">
+  <h4 class="lato white heavy">Howdy <%= @user.first_name.capitalize %>!</h4>
+</div>
+
+<div class="mobile-container text-left">
+  <h3 class="lato heavy">Your Groups</h3>
+</div>
+
+<div class="mobile-container">
+  <div class="group-content-container">
+    <div class="group-content">
+      <% @user.groups.each do |g| %>
+      <div class="group-card">
+        <div class="group-dynamic-data">
+          <div class="column">
+            <div class="group-name-time column-item">
+              <span id="group-name">
+                <%= g.name.capitalize %>
+              </span>
+              <span id="group-creation-time">
+                - <%= g.created_at.strftime("%b %d, %Y") %>
+              </span>
+            </div>
+            <div class="column-item" id="group-member-img">
+                <% if g.users.count <= 6 %>
+                <% g.users.each do |user| %>
+                  <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "36x36", class: "user-img avatar-list" %>
+                <% end %>
+              <% else %>
+                <% g.users.truncate(6).each do |user| %>
+                  <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "36x36", class: "user-img avatar-list" %>
+                <% end %>
               <% end %>
-            <% else %>
-              <% g.users.truncate(6).each do |user| %>
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "32x32", class: "user-img avatar-list" %>
-              <% end %>
-            <% end %>
-            </span>
-            <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
+              <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
+            </div>
           </div>
         </div>
+        <div class="button-placement">
+          <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="24" width="24"><div id="mag-glass-spacer"></div><span id="mag-glass-font">Go to group</span></div></button>
+          <% end %>
+        </div>
       </div>
-      <div class="button-placement">
-        <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="24" width="24"><div id="mag-glass-spacer"></div><span id="mag-glass-font">Go to group</span></div></button>
-        <% end %>
-      </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
-</div>
-<div class="user-content-container">
-  <div class="user-content">
+  <div class="user-content-container">
+    <div class="user-content">
 
+    </div>
   </div>
+
 </div>

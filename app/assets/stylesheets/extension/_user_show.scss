@@ -33,16 +33,18 @@ h1 {
 }
 
 .button-placement {
-
+  margin-bottom: 20px 14px;
+  padding-bottom: 14px;
 }
 
 .group-dynamic-data {
-
+  margin: 0px;
+  padding: 7px 14px 3px 25px;
 }
 
 .group-card {
-  background-color: rgba(235, 235, 235, 1);
   margin: 7px 7px 14px 7px;
+  background-color: white;
 }
 
 #mag-glass-spacer {
@@ -51,4 +53,13 @@ h1 {
 
 #mag-glass-font {
   font-size: 24px;
+}
+
+#group-member-img {
+  padding: 0px;
+  margin: 9px 0px;
+}
+
+.user-img {
+  margin: 10px 8px;
 }
