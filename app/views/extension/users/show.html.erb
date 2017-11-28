@@ -7,7 +7,7 @@
         <div class="static">
           Group name:
           <br>
-          Number of participants:
+          Participants:
           <br>
           Group started:
         </div>
@@ -16,9 +16,12 @@
            <br>
            <%= g.users.count %>
            <br>
-           <%= g.created_at.strftime("%B %d, %Y") %>
+           <%= g.created_at.strftime("%b %d, %Y") %>
         </div>
-        <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></button>
+        <di class="group-profile-pictures">
+
+        </div>
+        <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="32" width="32">View Group</div></button>
     </div>
     <% end %>
   </div>

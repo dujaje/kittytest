@@ -5,7 +5,7 @@ class CreateExpenses < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.string :title
       t.integer :amount_cents, default: 0
-      t.string :split_type
+      t.string :split_type, default: "equal"
       t.boolean :settled, default: false
       t.string :location
 

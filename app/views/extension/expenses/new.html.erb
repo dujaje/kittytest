@@ -1,13 +1,15 @@
+<% @title = "#{@user.first_name}'s new expense" %>
 
 <div class="mobile-container text-left">
   <h4 class="lato heavy">Name your expense:</h4>
 <%= simple_form_for [:extension, @expense] do |f| %>
-  <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Lunch at Dishoom" %>
+  <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Sunday brunch" %>
 </div>
 
 <div class="mobile-container text-left">
   <h4 class="lato heavy">How much did you pay?</h4>
-<%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "0" %>
+  <% @expense.amount_cents = nil %>
+  <%= f.input :amount_cents, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
 </div>
 
 
@@ -30,7 +32,7 @@
       <% end %>
       <div class="col-xs-3">
         <div class="user-selector-area text-center">
-          <%= image_tag member.profile_picture_url, class: "avatar-scroll", data: { id: member.id } %>
+          <%= image_tag member.profile_picture_url, class: "avatar-scroll avatar-highlighted", data: { id: member.id } %>
           <p><%= member.first_name %></p>
         </div>
       </div>
@@ -39,20 +41,23 @@
   </div>
 
   <div class="mobile-container text-left">
-    <div class="side-scroller-description side-scroller-base">
-      <p>A description of how this selection splits the expense which will be automatically filled but is currently a placeholder</p>
+    <div class="side-scroller-description side-scroller-base text-center">
+      <p><strong>Split equally</strong> between <strong>all members</strong> of the group</p>
     </div>
   </div>
 
+<div class="mobile-container text-left">
+  <h4 class="lato heavy">Where was this?</h4>
+  <%= f.input :location, :class => 'lato heavy lighter', :label => false, placeholder: "i.e. Wagamama" %>
+</div>
+
   <div class="mobile-container text-left">
     <h4 class="lato heavy">More Information:</h4>
-  </div>
-  <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text" %>
-
-
+  <%= f.input :description, :class => 'lato heavy lighter', :label => false, :type => "text", placeholder: "i.e. Need the money asap" %>
   <%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
   <%= f.hidden_field :user_id, value: @user.id %>
   <%= f.hidden_field :group_id, value: @group.id %>
+  </div>
 
   <div class="fixed-btn-section">
     <%= button_tag type: 'submit', class: "send-btn" do %>
@@ -66,7 +71,9 @@
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP AND CLOSE BROWSER -->
 <% content_for(:after_js) do %>
   <script>
-    let avatars = document.querySelectorAll(".avatar-scroll")
+    let avatars = document.querySelectorAll(".avatar-scroll");
+    let description = document.querySelector(".side-scroller-description");
+
     avatars.forEach((avatar) => {
       avatar.addEventListener("click", () => {
         avatar.classList.toggle("avatar-highlighted");
@@ -77,7 +84,40 @@
           }
         })
         document.getElementById("involved_group_field").value = `${membersArray}`
-        console.log(document.getElementById("involved_group_field").value)
+
+        if (membersArray.length === <%= @group.users.count %>) {
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin','<p><strong>Split equally</strong> between <strong>all members</strong> of the group</p>');
+        }
+        else if (membersArray.length > 2 && document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
+          const others_amount = membersArray.length - 1
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>Split equally</strong> between <strong>you and ${others_amount} others</strong></p>`);
+        }
+        else if (membersArray.length === 1 && document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
+          const others_amount = membersArray.length - 1
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p>You want to make an expense with yourself? Even a cat doubts that...</p>`);
+        }
+        else if (document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
+          const others_amount = membersArray.length - 1
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>Split equally</strong> between <strong>you and ${others_amount} other</strong></p>`);
+        }
+        else if (membersArray.length > 1) {
+          const others_amount = membersArray.length
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>You are owed everything</strong> by <strong>${others_amount} others</strong> equally</p>`);
+        }
+        else if (membersArray.length === 1) {
+          const others_amount = membersArray.length
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p><strong>You are owed everything</strong> by just <strong>${others_amount} person</strong></p>`);
+        }
+        else {
+          description.innerHTML = "";
+          description.insertAdjacentHTML('afterbegin',`<p>Well this isn't going to work is it</p>`);
+        }
       })
     })
 
@@ -129,4 +169,3 @@
 
   </script>
 <% end %>
-
