@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20171127115126) do
     t.bigint "user_id"
     t.string "title"
     t.integer "amount_cents", default: 0
-    t.string "split_type"
+    t.string "split_type", default: "equal"
     t.boolean "settled", default: false
     t.string "location"
     t.datetime "created_at", null: false
