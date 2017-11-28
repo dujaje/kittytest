@@ -1,5 +1,4 @@
 .loading-logo {
-  margin-top: 500%;
   transition: all 1s;
   transform: rotate(1080deg);
 }
@@ -20,6 +19,7 @@ img.loading-logo-img
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
 }
+
 .loading-container {
   background-color: $kittyblue;
   height: 100vh;
