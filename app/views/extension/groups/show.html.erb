@@ -16,9 +16,9 @@
     <% if @user_outstanding_with_group.to_f == 0 %>
       <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
     <% elsif @user_outstanding_with_group.to_f < 0 %>
-      <h4 class="lato white heavy">Overall, you owe: £<%= @user_outstanding_with_group.to_f * -1 / 100 %></h4>
+      <h4 class="lato white heavy">Overall, you owe: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f * -1 / 100) %></h4>
     <% else %>
-      <h4 class="lato white heavy">Overall, you are owed: £<%= @user_outstanding_with_group.to_f / 100 %></h4>
+      <h4 class="lato white heavy">Overall, you are owed: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f / 100) %></h4>
     <% end %>
   </div>
 
@@ -48,9 +48,9 @@
           <% if @user.outstanding_with_person_in_group(member, @group) == 0 %>
             <p class="list-item-text" >You're all square</p>
           <% elsif @user.outstanding_with_person_in_group(member, @group) < 0 %>
-            <p class="list-item-text" >You owe: <span style="color:red"> £<%= @user.outstanding_with_person_in_group(member, @group).to_f * -1 / 100 %></span></p>
+            <p class="list-item-text" >You owe: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, @group).to_f * -1 / 100) %></span></p>
           <% else %>
-            <p class="list-item-text">Owes you: <span style="color:green">£<%= @user.outstanding_with_person_in_group(member, @group).to_f / 100 %></span></p>
+            <p class="list-item-text">Owes you: <span style="color:green">£<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, @group).to_f / 100) %></span></p>
           <% end %>
         </div>
 

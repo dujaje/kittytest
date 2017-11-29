@@ -20,7 +20,7 @@
   <h4 class="lato heavy"><%= @expense.user.first_name %> paid </h4>
 </div>
 <div class="mobile-container text-left">
-  <h4 class="lato heavy">The bill was £ <%= (@expense.amount_cents.to_f / 100) %></h4>
+  <h4 class="lato heavy">The bill was £ <%= sprintf("%.2f", (@expense.amount_cents.to_f / 100)) %></h4>
 </div>
 <div class="horiz-pad">
   <div class="spacing-bar" ></div>
@@ -34,7 +34,7 @@
     <div class="divider">
       <div class="list-item-divider-content">
         <p class="list-item-text"><strong><%= split.user.first_name %> <%= split.user.last_name %></strong></p>
-        <p class="list-item-text" ><%= @expense.user.first_name %> lent him: £ <%= (split.amount_cents.to_f / 100).to_f %></p>
+        <p class="list-item-text" ><%= @expense.user.first_name %> lent him: £ <%= sprintf("%.2f", (split.amount_cents.to_f / 100)) %></p>
       </div>
     </div>
   </div>
