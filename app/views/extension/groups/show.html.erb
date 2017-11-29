@@ -11,14 +11,19 @@
   <h3 class="lato heavy">No else has joined the group chat yet...</h3>
 <% else %>
 
-  <div class="blue-back">
+  <div class="blue-back flex">
     <!-- need to add some owes/owed logic into this if statement later-->
-    <% if @user_outstanding_with_group.to_f == 0 %>
-      <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
-    <% elsif @user_outstanding_with_group.to_f < 0 %>
-      <h4 class="lato white heavy">Overall, you owe: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f * -1 / 100) %></h4>
-    <% else %>
-      <h4 class="lato white heavy">Overall, you are owed: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f / 100) %></h4>
+    <div width="70vw">
+      <% if @user_outstanding_with_group.to_f == 0 %>
+        <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
+      <% elsif @user_outstanding_with_group.to_f < 0 %>
+        <h4 class="lato white heavy">Overall, you owe: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f * -1 / 100) %></h4>
+      <% else %>
+        <h4 class="lato white heavy">Overall, you are owed: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f / 100) %></h4>
+      <% end %>
+    </div width="30vw">
+    <%= link_to extension_user_path(@user) do %>
+      <%= image_tag @user.profile_picture_url, class: "avatar-list rounded" %>
     <% end %>
   </div>
 
