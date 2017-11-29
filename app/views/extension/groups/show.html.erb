@@ -5,23 +5,29 @@
 <% end %>
 
 <% if @group.users.length == 1 && @group.users[0] == @user %>
+
   <div class="blue-back">
     <h4 class="lato white heavy"> <%= @group.name %> </h4>
   </div>
   <h3 class="lato heavy">No else has joined the group chat yet...</h3>
+
 <% else %>
 
 <div class="blue-back flex">
-  <%= link_to extension_user_path(@user) do %>
-    <%= image_tag @user.profile_picture_url, class: "avatar-list" %>
-  <% end %>
-  <% if @user_outstanding_with_group.to_f == 0 %>
-    <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
-  <% elsif @user_outstanding_with_group.to_f < 0 %>
-    <h4 class="lato white heavy">Overall, you owe: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f * -1 / 100) %></h4>
-  <% else %>
-    <h4 class="lato white heavy">Overall, you are owed: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f / 100) %></h4>
-  <% end %>
+  <div class="navbar-content text-left">
+    <% if @user_outstanding_with_group.to_f == 0 %>
+      <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
+    <% elsif @user_outstanding_with_group.to_f < 0 %>
+      <h4 class="lato white heavy">Overall, you owe: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f * -1 / 100) %></h4>
+    <% else %>
+      <h4 class="lato white heavy">Overall, you are owed: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f / 100) %></h4>
+    <% end %>
+  </div>
+  <div class="navbar-profile-pic">
+    <%= link_to extension_user_path(@user) do %>
+      <%= image_tag @user.profile_picture_url, class: "avatar-navbar" %>
+    <% end %>
+  </div>
 </div>
 
   <div class="mobile-container">
@@ -82,7 +88,7 @@
         <h3 class="lato heavy">Recent Expenses</h3>
       </div>
     </div>
-    <% @group.expenses.reverse.each do |expense| %>
+    <% @group.expenses.reverse.first(10).each do |expense| %>
       <%= link_to extension_expense_path(expense, user_id: @user.id, group_id: @group.id) do %>
         <div class="list-item-short">
           <div class="divider">
