@@ -1,12 +1,15 @@
 <% @title = "Loading..." %>
+
 <div class="loading-container">
   <%= image_tag("White on Colour.png", size: '200', alt: "Edit", class: "loading-logo-img centered") %>
+  <div class="loading-phrase">
+    <% fun_arr = ["Howdy!", "Well met!", "How you doin'?"] %>
+    <h3>
+      <%= fun_arr.sample %>
+    </h3>
+  </div>
 </div>
 
-<% fun_arr = ["Howdy!", "Well met!", "How you doin'?"] %>
-<h3>
-  <%= fun_arr.sample %>
-</h3>
 
 <script>
   window.extAsyncInit = function() {
