@@ -22,7 +22,15 @@ class WebhooksController < ApplicationController
       entry["messaging"].each do |messaging|
         if messaging["read"]
           # do nothing
-        else
+        elsif messaging["delivery"]
+          #do nothing
+        elsif messaging["postback"]
+          # Error check
+          if messaging["postback"]["payload"] == "We are Kitty!"
+            sender = messaging["sender"]["id"]
+            my_reply = get_started_reply(sender)
+          end
+        elsif messaging["message"]
           sender = messaging["sender"]["id"]
           text = messaging["message"]["text"]
           my_reply = reply(sender)

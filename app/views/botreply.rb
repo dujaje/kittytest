@@ -26,3 +26,16 @@ def reply(sender)
               }
   return my_reply
 end
+
+def get_started_reply(sender)
+  my_reply = {
+                "messaging_type": "RESPONSE",
+                "recipient": {
+                  "id": "#{sender}"
+                },
+                "message": {
+                  "text": "hey there, leave my sister alone"
+                }
+              }
+  return my_reply
+end
