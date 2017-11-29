@@ -69,17 +69,18 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "payload":"We are Kitty!"
   }
 }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAKziwfhwZC0BACq9bkcyPMfrd249H3TNapPL8gcDyBqykPixjFZANNR3kWb2ZAdEZBiXyQyogIhsHOqDeMmKw8PyLMXiZAM2phZCczLF4YrT9CSpYcj8JM1zIzaJEA2C8pzX3SfoV5ZA317J3WOfepIZARsmSZB9ZCJ7Lg5MqPIpU9QZDZD"
- My name is Kitty and I will help you split your expenses. To start, you can create a kitty in your group chats. Find me here when you want to look at all your expenses."
+
+#This is for the get started page
 
 
  curl -X POST -H "Content-Type: application/json" -d '{
  "greeting":[
      {
      "locale":"default",
-     "text":"Hi there, I AM Kitty. I will help you split your expenses. First, create a Kitty in a group chat. Find me here to see all your expenses."
+     "text":"Hi there, I'\''mKitty. I'\''ll help you split your expenses. First, create a Kitty in a group chat. Find me here to see all your expenses."
      }, {
      "locale":"en_US",
-     "text":'Hi there, I&#145;m Kitty. I will help you split your expenses. First, create a Kitty in a group chat. Find me here to see all your expenses.'
+     "text":"Hi there, I'\''m Kitty. I'\''ll help you split your expenses. First, create a Kitty in a group chat. Find me here to see all your expenses."
      }
  ]
  }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAKziwfhwZC0BACq9bkcyPMfrd249H3TNapPL8gcDyBqykPixjFZANNR3kWb2ZAdEZBiXyQyogIhsHOqDeMmKw8PyLMXiZAM2phZCczLF4YrT9CSpYcj8JM1zIzaJEA2C8pzX3SfoV5ZA317J3WOfepIZARsmSZB9ZCJ7Lg5MqPIpU9QZDZD"
