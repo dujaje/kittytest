@@ -4,7 +4,7 @@
 <div class="mobile-container text-left">
   <h4 class="lato heavy">What did you pay for?</h4>
   <%= simple_form_for [:extension, @expense] do |f| %>
-  <% pay_arr = ["Sunday Lunch", "Beers for the Boys", "Cinema and Crisps", "Pizza", "Cheeky Nandos"] %>
+  <% pay_arr = ["Sunday Lunch", "British Gas", "Beers for the Boys", "Cinema and Crisps", "Pizza", "Cheeky Nandos"] %>
   <%= f.input :title, :class => 'lato heavy lighter', input_html: { id: "title"}, :label => false, placeholder: "i.e #{pay_arr.sample}" %>
 
 </div>
