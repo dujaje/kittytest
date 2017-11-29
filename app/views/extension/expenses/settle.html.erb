@@ -9,11 +9,11 @@
     <% @expense.amount_cents = nil %>
     <%= f.input :amount_cents, :type => String, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
     <%= f.hidden_field :title, value: "#{@user.first_name} settled with #{@to_pay.first_name}" %>
-    <%= f.hidden_field :description, value: "A settle expense" %>
+    <%= f.hidden_field :description, value: "Settled" %>
     <%= f.hidden_field :user_id, value: @user.id %>
     <%= f.hidden_field :involved_group, value: "#{@to_pay.id}" %>
-    <%= f.hidden_field :location, value: "Nowhere of importance" %>
-
+    <%= f.hidden_field :location, value: "#{@expense.title}" %>
+    <%= f.hidden_field :topay, value: @to_pay.id %>
     <%= f.hidden_field :group_id, value: @group.id %>
   </div>
 
