@@ -34,7 +34,7 @@ def get_started_reply(sender)
                   "id": "#{sender}"
                 },
                 "message": {
-                  "text": "hey there, leave my sister alone"
+                  "text": "Hi there, I'm kitty. Type anything below and I'll give you a link where you can see all your Kitties"
                 }
               }
   return my_reply
