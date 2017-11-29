@@ -3,18 +3,23 @@
 <% else %>
   <% @title = "Expense Breakdown" %>
 <% end %>
-<div class="blue-back text-center">
+<div class="blue-back flex">
   <h4 class="lato white heavy"><%= @expense.title %></h4>
+  <div class="navbar-profile-pic">
+    <%= link_to extension_user_path(@user) do %>
+      <%= image_tag @user.profile_picture_url, class: "avatar-navbar" %>
+    <% end %>
+  </div>
 </div>
 <div class="mobile-container text-center">
   <h4 class="lato heavy"><%= @expense.created_at.strftime("%b %d, %Y") %></h4>
 </div>
-<% unless @expense.location == "" %>
+
+<% unless @expense.description == "Settled" %>
   <div class="mobile-container text-center">
     <h4 class="lato black heavy"><%= @expense.location %></h4>
   </div>
-<% end %>
-<% unless @expense.description == "" %>
+
   <div class="mobile-container text-center">
     <h5 class="lato">"<%= @expense.description %>"</h5>
   </div>
@@ -63,9 +68,9 @@
       <% if @expense.user.outstanding_with_person_in_group(split.user, @group) == 0 %>
         <h4 class="lato heavy"><%= @expense.user.first_name %> and <%= split.user.first_name %>are all square</h4>
       <% elsif @expense.user.outstanding_with_person_in_group(split.user, @group) < 0 %>
-        <h4 class="lato heavy"><%= @expense.user.first_name %> still owes <%= split.user.first_name %>: £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(split.user, @group).to_f * -1 / 100) %></h4>
+        <h4 class="lato heavy"><%= @expense.user.first_name %> still owes <%= split.user.first_name %>: £<%= sprintf("%.2f", @expense.user.outstanding_with_person_in_group(split.user, @group).to_f * -1 / 100) %></h4>
       <% else %>
-        <h4 class="lato heavy"><%= split.user.first_name %> now owes <%= @expense.user.first_name %>: £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(split.user, @group).to_f / 100) %></h4>
+        <h4 class="lato heavy"><%= split.user.first_name %> now owes <%= @expense.user.first_name %>: £<%= sprintf("%.2f", @expense.user.outstanding_with_person_in_group(split.user, @group).to_f / 100) %></h4>
       <% end %>
     <% end %>
   </div>
