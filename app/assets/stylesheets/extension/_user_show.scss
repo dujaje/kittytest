@@ -39,7 +39,7 @@ h1 {
 
 .group-dynamic-data {
   margin: 0px;
-  padding: 7px 14px 3px 25px;
+  padding: 7px 13px 3px 13px;
 }
 
 .group-card {
@@ -56,8 +56,11 @@ h1 {
 }
 
 #group-member-img {
-  padding: 0px;
-  margin: 9px 0px;
+  padding: 0px !important;
+  margin: 0px 0px !important;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .user-img {
@@ -68,6 +71,6 @@ h1 {
   font-weight: bolder;
 }
 
-.group-creation-time {
+.avatar-show {
 
 }
