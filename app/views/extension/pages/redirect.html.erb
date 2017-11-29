@@ -9,43 +9,44 @@
     </div>
 </div>
 
+<% content_for(:after_js) do %>
+  <script>
+    window.extAsyncInit = function() {
+      let getdetails = function(result) {
+        fetch("/api/v1/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user: result })
+          })
+            .then(response => response.json())
+            .then((data) => {
+              window.location.replace(data.url)
+            });
+      }
 
-<script>
-  window.extAsyncInit = function() {
-    let getdetails = function(result) {
-      fetch("/api/v1/users", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ user: result })
-        })
-          .then(response => response.json())
-          .then((data) => {
-            window.location.replace(data.url)
-          });
-    }
+      MessengerExtensions.getContext('2048729172013795',
+        getdetails,
+        function error(result){
+          document.body.append("error", result);
+        });
 
-    MessengerExtensions.getContext('2048729172013795',
-      getdetails,
-      function error(result){
-        document.body.append("error", result);
-      });
+      MessengerExtensions.askPermission(
+        function(permission_response) {
+          // Person grants or rejects the asked permission.
+          let permissions = permission_response.permissions; // list of all permissions granted
+          let isGranted = permission_response.isGranted;
+          // document.body.append(permissions);
+          if (isGranted) {
+            // User has granted user_profile permission
+          }
 
-    MessengerExtensions.askPermission(
-      function(permission_response) {
-        // Person grants or rejects the asked permission.
-        let permissions = permission_response.permissions; // list of all permissions granted
-        let isGranted = permission_response.isGranted;
-        // document.body.append(permissions);
-        if (isGranted) {
-          // User has granted user_profile permission
-        }
-
-      }, function(errorCode, errorMessage) {
-        // Error occurred
-      },
-      "user_profile"
-    );
-  };
-</script>
+        }, function(errorCode, errorMessage) {
+          // Error occurred
+        },
+        "user_profile"
+      );
+    };
+  </script>
+<% end %>

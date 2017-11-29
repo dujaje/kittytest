@@ -7,7 +7,7 @@
     <p class="list-item-text" >You owe <%= @to_pay.first_name %> in this group: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(@to_pay, @group).to_f * -1 / 100) %></span></p>
     <div class="button-spacer"></div>
     <% @expense.amount_cents = nil %>
-    <%= f.input :amount_cents, :type => String, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
+    <%= f.input :amount_cents, input_html: { id: "amount"}, :type => String, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
     <%= f.hidden_field :title, value: "#{@user.first_name} settled with #{@to_pay.first_name}" %>
     <%= f.hidden_field :description, value: "Settled" %>
     <%= f.hidden_field :user_id, value: @user.id %>
@@ -18,8 +18,56 @@
   </div>
 
   <div class="fixed-btn-section">
-    <%= button_tag type: 'submit', class: "send-btn" do %>
+    <%= button_tag type: '#', class: "send-btn" do %>
       <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add now</div>
     <% end %>
   </div>
+<% end %>
+
+<% content_for(:after_js) do %>
+  <script>
+
+    document.querySelector(".send-btn").addEventListener("click", () => {
+      // console.log("<%= @user.first_name %>");
+      var amount = document.getElementById('amount')
+      let message = {
+                    "attachment":{
+                      "type":"template",
+                      "payload":{
+                        "template_type":"generic",
+                        "elements": [{
+                          "title":"<%= @user.first_name %> just settled an expense with your Kitty!",
+                          "subtitle": `They paid £${amount.value}`,
+                          "buttons":[{
+                            "type":"web_url",
+                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                            "title":"View group",
+                            "messenger_extensions": true
+                          }]
+                        }]
+                      }
+                    }
+                  };
+
+      MessengerExtensions.beginShareFlow(function(share_response) {
+        // User dismissed without error, but did they share the message?
+        if(share_response.is_sent){
+          // The user actually did share.
+          // Perhaps close the window w/ requestCloseBrowser().
+          MessengerExtensions.requestCloseBrowser(function success() {
+            // webview closed
+          }, function error(err) {
+            // an error occurred
+          });
+        }
+      },
+      function(errorCode, errorMessage) {
+      // An error occurred in the process
+
+      },
+      message,
+      "current_thread");
+    });
+
+  </script>
 <% end %>
