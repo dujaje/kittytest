@@ -5,16 +5,21 @@ class Extension::ExpensesController < ApplicationController
     @group = Group.find(params[:group_id])
   end
 
+  def settle
+    @expense = Expense.new
+    @user = User.find(params[:user_id])
+    @group = Group.find(params[:group_id])
+    @to_pay = User.find(params[:to_pay_id])
+  end
+
   def create
     @user_id = getparams[:user_id]
     @group_id = getparams[:group_id]
     @title = getparams[:title]
-    @amount_cents = getparams[:amount_cents].to_i * 100
+    @amount_cents = getparams[:amount_cents].to_f * 100
     @description = getparams[:description]
     @involved_group_string = getparams[:involved_group]
     @location = getparams[:location]
-    puts getparams[:involved_group]
-    puts @involved_group_string
     @expense = Expense.create!(
       title: @title,
       description: @description,
@@ -23,11 +28,13 @@ class Extension::ExpensesController < ApplicationController
       group_id: @group_id,
       location: @location)
     equal_splitter(@expense, @involved_group_string)
-    redirect_to extension_group_path(@group_id, user_id: @user_id, group_id: @group_id)
+    redirect_to extension_expense_path(@expense, user_id: @user_id, group_id: @group_id)
   end
 
   def show
     @expense = Expense.find(params[:id].to_i)
+    @user = User.find(params[:user_id])
+    @group = Group.find(params[:group_id])
   end
 
   private
