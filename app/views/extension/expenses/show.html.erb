@@ -3,16 +3,16 @@
   <h4 class="lato white heavy"><%= @expense.title %></h4>
 </div>
 <div class="mobile-container text-center">
-  <h6 class="lato heavy"><%= @expense.created_at.strftime("%b %d, %Y") %></h6>
+  <h4 class="lato heavy"><%= @expense.created_at.strftime("%b %d, %Y") %></h4>
 </div>
 <% unless @expense.location.nil? %>
   <div class="mobile-container text-center">
-    <h6 class="lato black heavy">At <%= @expense.location %></h6>
+    <h4 class="lato black heavy">At <%= @expense.location %></h4>
   </div>
 <% end %>
 <% unless @expense.description == "" %>
   <div class="mobile-container text-center">
-    <h6 class="lato">"<%= @expense.description %>"</h6>
+    <h5 class="lato">"<%= @expense.description %>"</h5>
   </div>
 <% end %>
 
@@ -34,7 +34,7 @@
     <div class="divider">
       <div class="list-item-divider-content">
         <p class="list-item-text"><strong><%= split.user.first_name %> <%= split.user.last_name %></strong></p>
-        <p class="list-item-text" >Owed <%= @expense.user.first_name %>: £<%= (split.amount_cents.to_f / 100).to_f %></p>
+        <p class="list-item-text" ><%= @expense.user.first_name %> lent him: £ <%= (split.amount_cents.to_f / 100).to_f %></p>
       </div>
     </div>
   </div>
