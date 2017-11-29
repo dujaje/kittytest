@@ -1,13 +1,17 @@
-<% @title = "Expense Breakdown" %>
+<% if @expense.description == "Settled" %>
+  <% @title = "Settle Breakdown" %>
+<% else %>
+  <% @title = "Expense Breakdown" %>
+<% end %>
 <div class="blue-back text-center">
   <h4 class="lato white heavy"><%= @expense.title %></h4>
 </div>
 <div class="mobile-container text-center">
   <h4 class="lato heavy"><%= @expense.created_at.strftime("%b %d, %Y") %></h4>
 </div>
-<% unless @expense.location.nil? %>
+<% unless @expense.location == "" %>
   <div class="mobile-container text-center">
-    <h4 class="lato black heavy">At <%= @expense.location %></h4>
+    <h4 class="lato black heavy"><%= @expense.location %></h4>
   </div>
 <% end %>
 <% unless @expense.description == "" %>
@@ -16,12 +20,22 @@
   </div>
 <% end %>
 
-<div class="mobile-container text-left">
-  <h4 class="lato heavy"><%= @expense.user.first_name %> paid </h4>
-</div>
-<div class="mobile-container text-left">
-  <h4 class="lato heavy">The bill was £ <%= (@expense.amount_cents.to_f / 100) %></h4>
-</div>
+<% if @expense.description == "Settled" %>
+
+<% else %>
+  <div class="mobile-container text-left">
+    <h4 class="lato heavy"><%= @expense.user.first_name %> paid </h4>
+  </div>
+<% end %>
+
+<% if @expense.description == "Settled" %>
+
+<% else %>
+  <div class="mobile-container text-left">
+    <h4 class="lato heavy">The bill was £ <%= (@expense.amount_cents.to_f / 100) %></h4>
+  </div>
+<% end %>
+
 <div class="horiz-pad">
   <div class="spacing-bar" ></div>
 </div>
@@ -34,11 +48,16 @@
     <div class="divider">
       <div class="list-item-divider-content">
         <p class="list-item-text"><strong><%= split.user.first_name %> <%= split.user.last_name %></strong></p>
-        <p class="list-item-text" ><%= @expense.user.first_name %> lent him: £ <%= (split.amount_cents.to_f / 100).to_f %></p>
+        <% if @expense.description == "Settled" %>
+          <p class="list-item-text" ><%= @expense.user.first_name %> repayed <%= split.user.first_name %>: £ <%= (split.amount_cents.to_f / 100).to_f %></p>
+        <% else %>
+          <p class="list-item-text" ><%= @expense.user.first_name %> lent <%= split.user.first_name %>: £ <%= (split.amount_cents.to_f / 100).to_f %></p>
+        <% end %>
       </div>
     </div>
   </div>
 <% end %>
+
 <div class="fixed-btn-section">
   <%= link_to extension_group_path(group_id: @group.id, user_id: @user.id ) do %>
     <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane rotated" >Back to <%= @group.name %></div></button>
