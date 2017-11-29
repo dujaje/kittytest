@@ -24,7 +24,7 @@
   <div class="mobile-container text-left">
     <div class="side-scroller-description side-scroller-base text-center">
       <% if @involved_group_string %>
-        <p><span style="color:red">You forgot to select people!</span></p>
+        <p><span style="color:#a94442">You forgot to select people!</span></p>
       <% else %>
         <p>Go on then, who bought something?</p>
       <% end %>
@@ -70,6 +70,7 @@
 
   <%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
   <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.hidden_field :to_pay_id, value: @user.id %>
   <%= f.hidden_field :group_id, value: @group.id %>
   </div>
 
