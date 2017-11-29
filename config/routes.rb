@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     # get 'group', to: 'pages#group'
     resources :groups, only: [:show, :update]
     resources :expenses, only: [:new, :create, :show]
+    get 'settle', to: 'expenses#settle'
     resources :users, only: [:show]
   end
 

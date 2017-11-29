@@ -10,7 +10,7 @@
 <div class="mobile-container text-left">
   <h4 class="lato heavy">How much did you pay?</h4>
   <% @expense.amount_cents = nil %>
-  <%= f.input :amount_cents, :type => Integer, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
+  <%= f.input :amount_cents, :type => String, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
 </div>
 
 

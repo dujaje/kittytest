@@ -1,0 +1,25 @@
+<% @title = "Settle up with #{@to_pay.first_name}" %>
+
+
+<%= simple_form_for [:extension, @expense] do |f| %>
+  <div class="mobile-container text-left">
+    <h3 class="lato heavy">How much did you settle with <%= @to_pay.first_name %>?</h3>
+    <p class="list-item-text" >You owe <%= @to_pay.first_name %> in this group: <span style="color:red"> £<%= @user.outstanding_with_person_in_group(@to_pay, @group).to_f * -1 / 100 %></span></p>
+    <div class="button-spacer"></div>
+    <% @expense.amount_cents = nil %>
+    <%= f.input :amount_cents, :type => String, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
+    <%= f.hidden_field :title, value: "#{@user.first_name} settled with #{@to_pay.first_name}" %>
+    <%= f.hidden_field :description, value: "A settle expense" %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.hidden_field :involved_group, value: "#{@to_pay.id}" %>
+    <%= f.hidden_field :location, value: "Nowhere of importance" %>
+
+    <%= f.hidden_field :group_id, value: @group.id %>
+  </div>
+
+  <div class="fixed-btn-section">
+    <%= button_tag type: 'submit', class: "send-btn" do %>
+      <div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add now</div>
+    <% end %>
+  </div>
+<% end %>
