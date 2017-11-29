@@ -1,4 +1,4 @@
-# Facebook curls
+# Facebook curls. Replace the ngrok and the access token
 
 # this gets all info from fb
 curl -X GET "https://graph.facebook.com/v2.6/me/messenger_profile?fields=whitelisted_domains,payment_settings,target_audience,home_url,account_linking_url,greeting,persistent_menu,get_started&access_token=EAAB8DxnfIC0BAM4vUNAq4bhadiG9NQPp5yIL3MkXZAFZAOdOP5y0JaKVlCAw8s4DeYAZAKpVP0GzAQKMUcIOQtEd4ZAGKiiLMoJKas1uS9TCYJRYMvzGd7WvY9NbxaOOIMy2tw2EXp5K3p1ZCfoglJxuWresnAUHlvOUbwBvtLwZDZD"
@@ -23,16 +23,6 @@ curl -X POST -H "Content-Type: application/json" -d ' {
      "in_test":true
   }
 
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAKziwfhwZC0BACq9bkcyPMfrd249H3TNapPL8gcDyBqykPixjFZANNR3kWb2ZAdEZBiXyQyogIhsHOqDeMmKw8PyLMXiZAM2phZCczLF4YrT9CSpYcj8JM1zIzaJEA2C8pzX3SfoV5ZA317J3WOfepIZARsmSZB9ZCJ7Lg5MqPIpU9QZDZD"
-
-# This initiates the home url for a test of Kitty
-curl -X POST -H "Content-Type: application/json" -d ' {
-  "home_url" : {
-     "url": "https://cc2a797f.ngrok.io/extension/welcome",
-     "webview_height_ratio": "tall",
-     "webview_share_button": "hide",
-     "in_test":true
-  }
 }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAKziwfhwZC0BACq9bkcyPMfrd249H3TNapPL8gcDyBqykPixjFZANNR3kWb2ZAdEZBiXyQyogIhsHOqDeMmKw8PyLMXiZAM2phZCczLF4YrT9CSpYcj8JM1zIzaJEA2C8pzX3SfoV5ZA317J3WOfepIZARsmSZB9ZCJ7Lg5MqPIpU9QZDZD"
 
 # this initaites the greeting
