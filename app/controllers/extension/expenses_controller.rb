@@ -13,22 +13,26 @@ class Extension::ExpensesController < ApplicationController
   end
 
   def create
-    @user_id = getparams[:user_id]
-    @group_id = getparams[:group_id]
+    @user = User.find(getparams[:user_id])
+    @group = Group.find(getparams[:group_id])
     @title = getparams[:title]
     @amount_cents = getparams[:amount_cents].to_f * 100
     @description = getparams[:description]
     @involved_group_string = getparams[:involved_group]
     @location = getparams[:location]
-    @expense = Expense.create!(
+    @expense = Expense.new(
       title: @title,
       description: @description,
       amount_cents: @amount_cents,
-      user_id: @user_id,
-      group_id: @group_id,
+      user_id: @user.id,
+      group_id: @group.id,
       location: @location)
-    equal_splitter(@expense, @involved_group_string)
-    redirect_to extension_expense_path(@expense, user_id: @user_id, group_id: @group_id)
+    if @expense.save
+      equal_splitter(@expense, @involved_group_string)
+      redirect_to extension_expense_path(@expense, user_id: @user.id, group_id: @group.id)
+    else
+      render :new
+    end
   end
 
   def show
