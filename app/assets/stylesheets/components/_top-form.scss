@@ -16,13 +16,12 @@ input::placeholder {
   // text-decoration: underline;
 }
 
-input {
-  border: none !important;
-  box-shadow: inset 0 1px 1px $kittyblue;
-}
-
 .form-control {
   border-radius: 10px;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.14);
-  height: 44px;
+  box-shadow: 1px solid $kittyblue !important;
+  height: 50px;
+}
+
+.form-control:focus {
+  border: 1px solid $kittyblue !important;
 }
