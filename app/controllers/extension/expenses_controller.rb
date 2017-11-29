@@ -29,7 +29,7 @@ class Extension::ExpensesController < ApplicationController
       location: @location)
     if @expense.save
       equal_splitter(@expense, @involved_group_string)
-      redirect_to extension_expense_path(@expense, user_id: @user_id, group_id: @group_id)
+      redirect_to extension_expense_path(@expense, user_id: @user.id, group_id: @group.id)
     else
       render :new
     end
