@@ -23,7 +23,7 @@ class Extension::ExpensesController < ApplicationController
       group_id: @group_id,
       location: @location)
     equal_splitter(@expense, @involved_group_string)
-    redirect_to extension_group_path(@group_id, user_id: @user_id, group_id: @group_id)
+    redirect_to extension_expense_path(@expense)
   end
 
   def show
