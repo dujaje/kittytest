@@ -1,10 +1,10 @@
 <% @title = "Loading..." %>
 
-<div class="loading-container text-center lato white">
+<div class="loading-container text-center">
     <%= image_tag("White on Colour.png", size: '200', alt: "Edit", class: "loading-logo-img centered") %>
       <% fun_arr = ["Howdy!", "Well met!", "How you doin'?"] %>
     <div class="align-top">
-    <h3><%= fun_arr.sample %></h3>
+    <h3 class="lato white heavy"><%= fun_arr.sample %></h3>
 
     </div>
 </div>
