@@ -23,7 +23,11 @@
 
   <div class="mobile-container text-left">
     <div class="side-scroller-description side-scroller-base text-center">
-      <p>Go on then, who bought something?</p>
+      <% if @involved_group_string %>
+        <p><span style="color:red">You forgot to select people!</span></p>
+      <% else %>
+        <p>Go on then, who bought something?</p>
+      <% end %>
     </div>
 
     <!-- Rest of form below side-scroller -->
@@ -136,46 +140,52 @@
 
 
     document.querySelector(".send-btn").addEventListener("click", () => {
-      // console.log("<%= @user.first_name %>");
-      var amount = document.getElementById('amount')
-      var title = document.getElementById('title')
-      let message = {
-                    "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"generic",
-                        "elements": [{
-                          "title":"<%= @user.first_name %> just added an expense to your Kitty!",
-                          "subtitle": `They paid £${amount.value} for ${title.value}`,
-                          "buttons":[{
-                            "type":"web_url",
-                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
-                            "title":"View the Expense",
-                            "messenger_extensions": true
+      console.log(document.getElementById("involved_group_field").value)
+      if (document.getElementById("involved_group_field").value === "") {
+        console.log("You haven't selected anyone!");
+        description.innerHTML = "";
+      else {
+        // console.log("<%= @user.first_name %>");
+        var amount = document.getElementById('amount')
+        var title = document.getElementById('title')
+        let message = {
+                      "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements": [{
+                            "title":"<%= @user.first_name %> just added an expense to your Kitty!",
+                            "subtitle": `They paid £${amount.value} for ${title.value}`,
+                            "buttons":[{
+                              "type":"web_url",
+                              "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                              "title":"View the Expense",
+                              "messenger_extensions": true
+                            }]
                           }]
-                        }]
+                        }
                       }
-                    }
-                  };
+                    };
 
-      MessengerExtensions.beginShareFlow(function(share_response) {
-        // User dismissed without error, but did they share the message?
-        if(share_response.is_sent){
-          // The user actually did share.
-          // Perhaps close the window w/ requestCloseBrowser().
-          MessengerExtensions.requestCloseBrowser(function success() {
-            // webview closed
-          }, function error(err) {
-            // an error occurred
-          });
-        }
-      },
-      function(errorCode, errorMessage) {
-      // An error occurred in the process
+        MessengerExtensions.beginShareFlow(function(share_response) {
+          // User dismissed without error, but did they share the message?
+          if(share_response.is_sent){
+            // The user actually did share.
+            // Perhaps close the window w/ requestCloseBrowser().
+            MessengerExtensions.requestCloseBrowser(function success() {
+              // webview closed
+            }, function error(err) {
+              // an error occurred
+            });
+          }
+        },
+        function(errorCode, errorMessage) {
+        // An error occurred in the process
 
-      },
-      message,
-      "current_thread");
+        },
+        message,
+        "current_thread");
+      }
     });
 
   </script>
