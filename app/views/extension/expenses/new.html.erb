@@ -70,6 +70,7 @@
 
   <%= f.input :involved_group, as: :hidden, input_html: { value: "", id: "involved_group_field" } %>
   <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.hidden_field :to_pay_id, value: @user.id %>
   <%= f.hidden_field :group_id, value: @group.id %>
   </div>
 
