@@ -142,7 +142,7 @@
 
     document.querySelector(".send-btn").addEventListener("click", () => {
       console.log(document.getElementById("involved_group_field").value)
-      if (document.getElementById("involved_group_field").value === "" || document.getElementById("involved_group_field").value === ["1"]) {
+      if (document.getElementById("involved_group_field").value === "" || document.getElementById("involved_group_field").value === ["<%= @user.id %>"]) {
         console.log("You haven't selected anyone!");
         description.innerHTML = "";
       }
