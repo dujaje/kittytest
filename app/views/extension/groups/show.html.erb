@@ -56,7 +56,7 @@
 
         <% if @user.outstanding_with_person_in_group(member, @group) < 0 %>
           <div class="list-item-settle-btn">
-            <%= link_to new_extension_expense_path(user_id: @user.id, group_id: @group.id) do %>
+            <%= link_to extension_settle_path(user_id: @user.id, group_id: @group.id, to_pay_id: member.id) do %>
               <button class="settle-btn"><div class="settle-inner send-inner">Settle <img src="https://png.icons8.com/paper-plane/ios11/22/ffffff"></div></button>
             <% end %>
           </div>
@@ -77,7 +77,7 @@
 
     <div class="mobile-container">
       <div class="title-section">
-        <h3 class="lato heavy">Expenses</h3>
+        <h3 class="lato heavy">Recent Expenses</h3>
       </div>
     </div>
     <% @group.expenses.reverse.each do |expense| %>
