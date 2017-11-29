@@ -4,7 +4,9 @@
 <div class="mobile-container text-left">
   <h4 class="lato heavy">What did you pay for?</h4>
   <%= simple_form_for [:extension, @expense] do |f| %>
-  <%= f.input :title, :class => 'lato heavy lighter', input_html: { id: "title"},:label => false, placeholder: "i.e Sunday Lunch" %>
+  <% pay_arr = ["Sunday Lunch", "Beers for the Boys", "Cinema and Crisps", "Pizza", "Cheeky Nandos"] %>
+  <%= f.input :title, :class => 'lato heavy lighter', input_html: { id: "title"}, :label => false, placeholder: "i.e #{pay_arr.sample}" %>
+
 </div>
 
 <div class="mobile-container text-left">
@@ -51,12 +53,14 @@
 
   <div class="mobile-container text-left">
     <h4 class="lato heavy">Where was this?</h4>
-    <%= f.input :location, :class => 'lato heavy lighter', :label => false, placeholder: "i.e. Wagamama" %>
+    <% where_arr = ["Wagamama", "The Sloaney Pony", "Picturehouse", "Le Rac Shak", "PingPong Dim Sum", "Nandos"] %>
+    <%= f.input :location, :class => 'lato heavy lighter', :label => false, placeholder: "i.e. #{where_arr.sample}" %>
   </div>
 
   <div class="mobile-container text-left">
     <h4 class="lato heavy">More Information:</h4>
-    <%= f.input :description, :class => 'lato heavy lighter form-item', :label => false, :type => "text", placeholder: "i.e. BEST LUNCH EVER!" %>
+    <% extra_arr = ["Jamie's Birthday", "Open Mic Night", "Holiday on Mallorca", "Interrailing Charlotte", "Weekend trip to Wonderland"] %>
+    <%= f.input :description, :class => 'lato heavy lighter form-item', :label => false, :type => "text", placeholder: "i.e. #{extra_arr.sample} " %>
   </div>
 
 

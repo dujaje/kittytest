@@ -20,6 +20,7 @@
   </div>
 <% end %>
 
+
 <% if @expense.description == "Settled" %>
 
 <% else %>
@@ -32,10 +33,9 @@
 
 <% else %>
   <div class="mobile-container text-left">
-    <h4 class="lato heavy">The bill was £ <%= (@expense.amount_cents.to_f / 100) %></h4>
+    <h4 class="lato heavy">The bill was £ <%= sprintf("%.2f", (@expense.amount_cents.to_f / 100)) %></h4>
   </div>
 <% end %>
-
 <div class="horiz-pad">
   <div class="spacing-bar" ></div>
 </div>
@@ -49,10 +49,11 @@
       <div class="list-item-divider-content">
         <p class="list-item-text"><strong><%= split.user.first_name %> <%= split.user.last_name %></strong></p>
         <% if @expense.description == "Settled" %>
-          <p class="list-item-text" ><%= @expense.user.first_name %> repayed <%= split.user.first_name %>: £ <%= (split.amount_cents.to_f / 100).to_f %></p>
+          <p class="list-item-text" ><%= @expense.user.first_name %> repayed <%= split.user.first_name %>: £ <%= sprintf("%.2f", (split.amount_cents.to_f / 100)) %></p>
         <% else %>
-          <p class="list-item-text" ><%= @expense.user.first_name %> lent <%= split.user.first_name %>: £ <%= (split.amount_cents.to_f / 100).to_f %></p>
+          <p class="list-item-text" ><%= @expense.user.first_name %> lent <%= split.user.first_name %>: £ <%= sprintf("%.2f", (split.amount_cents.to_f / 100)) %></p>
         <% end %>
+
       </div>
     </div>
   </div>
