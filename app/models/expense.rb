@@ -6,4 +6,5 @@ class Expense < ApplicationRecord
   validates :amount_cents, presence: true
   validates :title, presence: true
   validates :split_type, presence: true
+  validates :amount_cents, numericality: { greater_than: 0 }
 end

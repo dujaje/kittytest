@@ -13,7 +13,7 @@
     <%= f.hidden_field :user_id, value: @user.id %>
     <%= f.hidden_field :involved_group, value: "#{@to_pay.id}" %>
     <%= f.hidden_field :location, value: "#{@expense.title}" %>
-    <%= f.hidden_field :topay, value: @to_pay.id %>
+    <%= f.hidden_field :to_pay_id, value: @to_pay.id %>
     <%= f.hidden_field :group_id, value: @group.id %>
   </div>
 
