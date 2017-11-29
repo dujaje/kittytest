@@ -80,7 +80,7 @@
         <h3 class="lato heavy">Expenses</h3>
       </div>
     </div>
-    <% @group.expenses.each do |expense| %>
+    <% @group.expenses.reverse.each do |expense| %>
       <%= link_to extension_expense_path(expense) do %>
         <div class="list-item-short">
           <div class="divider">
