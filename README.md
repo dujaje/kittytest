@@ -1,3 +1,5 @@
-Kitty. A bot to track your expenses on facebook. Create a kitty in a group chat to get started.
+Kitty. A bot to track your expenses on facebook.
 
-We <3 Kitty.
+Search for Kitty and create a kitty in a group chat to get started.
+
+We <3 Kitty. We hope you do too.
