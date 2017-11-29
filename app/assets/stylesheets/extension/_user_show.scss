@@ -66,6 +66,7 @@ h1 {
 .user-img {
   margin: 8px 8px;
   padding: 0px 3px;
+  border-radius: 3px !important;
 }
 
 #group-name {
@@ -79,3 +80,12 @@ h1 {
 #group-creation-time {
   margin: 0px;
 }
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rounded {
+  border-radius: 50% !important;
+}
+
