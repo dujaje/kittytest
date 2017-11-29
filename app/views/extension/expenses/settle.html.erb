@@ -30,45 +30,50 @@
   <script>
 
     document.querySelector(".send-btn").addEventListener("click", () => {
-      // console.log("<%= @user.first_name %>");
-      var amount = document.getElementById('amount')
-      let message = {
-                    "attachment":{
-                      "type":"template",
-                      "payload":{
-                        "template_type":"generic",
-                        "elements": [{
-                          "title":"<%= @user.first_name %> just settled an expense with your Kitty!",
-                          "subtitle": `They paid £${amount.value}`,
-                          "buttons":[{
-                            "type":"web_url",
-                            "url":"<%= ENV['NGROK'] %>/extension/welcome/",
-                            "title":"View group",
-                            "messenger_extensions": true
+      if (document.getElementById("amount").value === "" || document.getElementById("amount").value <= 0) {
+        console.log("You haven't selected anyone!");
+        description.innerHTML = "";
+      else {
+        // console.log("<%= @user.first_name %>");
+        var amount = document.getElementById('amount')
+        let message = {
+                      "attachment":{
+                        "type":"template",
+                        "payload":{
+                          "template_type":"generic",
+                          "elements": [{
+                            "title":"<%= @user.first_name %> just settled an expense with your Kitty!",
+                            "subtitle": `They paid £${amount.value}`,
+                            "buttons":[{
+                              "type":"web_url",
+                              "url":"<%= ENV['NGROK'] %>/extension/welcome/",
+                              "title":"View group",
+                              "messenger_extensions": true
+                            }]
                           }]
-                        }]
+                        }
                       }
-                    }
-                  };
+                    };
 
-      MessengerExtensions.beginShareFlow(function(share_response) {
-        // User dismissed without error, but did they share the message?
-        if(share_response.is_sent){
-          // The user actually did share.
-          // Perhaps close the window w/ requestCloseBrowser().
-          MessengerExtensions.requestCloseBrowser(function success() {
-            // webview closed
-          }, function error(err) {
-            // an error occurred
-          });
-        }
-      },
-      function(errorCode, errorMessage) {
-      // An error occurred in the process
+        MessengerExtensions.beginShareFlow(function(share_response) {
+          // User dismissed without error, but did they share the message?
+          if(share_response.is_sent){
+            // The user actually did share.
+            // Perhaps close the window w/ requestCloseBrowser().
+            MessengerExtensions.requestCloseBrowser(function success() {
+              // webview closed
+            }, function error(err) {
+              // an error occurred
+            });
+          }
+        },
+        function(errorCode, errorMessage) {
+        // An error occurred in the process
 
-      },
-      message,
-      "current_thread");
+        },
+        message,
+        "current_thread");
+      }
     });
 
   </script>
