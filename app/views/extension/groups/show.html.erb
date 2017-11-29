@@ -80,8 +80,8 @@
         <h3 class="lato heavy">Recent Expenses</h3>
       </div>
     </div>
-    <% @group.expenses.reverse.first(20).each do |expense| %>
-      <%= link_to extension_expense_path(expense) do %>
+    <% @group.expenses.reverse.each do |expense| %>
+      <%= link_to extension_expense_path(expense, user_id: @user.id, group_id: @group.id) do %>
         <div class="list-item-short">
           <div class="divider">
             <div class="list-item-divider-content .align-baseline">

@@ -27,13 +27,13 @@
               <% if g.users.count <= 8 %>
               <% g.users.each do |user| %>
                 <div class="col-xs-3" id="group-member-img">
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "54x54", class: "user-img avatar-scroll" %>
+                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "64x64", class: "user-img avatar-show" %>
                 </div>
               <% end %>
             <% else %>
               <% g.users.first(7).each do |user| %>
                 <div class="col-xs-3" id="group-member-img">
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "54x54", class: "user-img avatar-scroll" %>
+                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "64x64", class: "user-img avatar-show" %>
                 </div>
               <% end %>
                 <div class="col-xs-3" id="group-member-img">

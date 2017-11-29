@@ -4,13 +4,14 @@
 <div class="mobile-container text-left">
   <h4 class="lato heavy">What did you pay for?</h4>
   <%= simple_form_for [:extension, @expense] do |f| %>
-  <%= f.input :title, :class => 'lato heavy lighter', :label => false, placeholder: "i.e Sunday Lunch" %>
+  <%= f.input :title, :class => 'lato heavy lighter', input_html: { id: "title"},:label => false, placeholder: "i.e Sunday Lunch" %>
 </div>
 
 <div class="mobile-container text-left">
   <h4 class="lato heavy">How much did you pay?</h4>
   <% @expense.amount_cents = nil %>
-  <%= f.input :amount_cents, :type => String, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
+
+  <%= f.input :amount_cents, :type => String, input_html: { id: "amount"}, :class => 'lato heavy lighter', :label => false, placeholder: "£0.00" %>
 </div>
 
 
@@ -129,8 +130,11 @@
     })
 
 
+
     document.querySelector(".send-btn").addEventListener("click", () => {
       // console.log("<%= @user.first_name %>");
+      var amount = document.getElementById('amount')
+      var title = document.getElementById('title')
       let message = {
                     "attachment":{
                       "type":"template",
@@ -138,15 +142,11 @@
                         "template_type":"generic",
                         "elements": [{
                           "title":"<%= @user.first_name %> just added an expense to your Kitty!",
-                          "subtitle": "Kitty: Money Sharing Made Simple",
-                          "default_action":{
-                            "type":"web_url",
-                            "url": "https://kittymoneysplitting.herokuapp.com/"
-                          },
+                          "subtitle": `They paid £${amount.value} for ${title.value}`,
                           "buttons":[{
                             "type":"web_url",
                             "url":"<%= ENV['NGROK'] %>/extension/welcome/",
-                            "title":"Check Out Kitty",
+                            "title":"View the Expense",
                             "messenger_extensions": true
                           }]
                         }]
