@@ -71,7 +71,7 @@
             <div class="grouptext">
               <h5 class="lato heavy">You paid <%= expense.title.split.last %> back</h5>
               <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
-              <p class="lato green">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></p>
+              <p class="lato red">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></p>
             </div>
           </div>
             <div class="groupimages">
