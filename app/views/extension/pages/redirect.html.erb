@@ -17,21 +17,18 @@
       let getdetails = function(result) {
         document.getElementById('header').innerText = 'starting ajax';
         fetch("/api/v1/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ user: result })
-          })
-            .then(response => {
-              response.json();
-              document.getElementById('header').innerText = 'parsing resposne as json';
-
-            })
-            .then((data) => {
-              document.getElementById('header').innerText = 'the url ' + data;
-              window.location.replace(data.url)
-            });
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ user: result })
+        }).then(response => {
+          response.json();
+          document.getElementById('header').innerText = response;
+        }).then(data => {
+          // document.getElementById('header').innerText = 'the url ' + data;
+          window.location.replace(data.url)
+        });
       }
 
       document.getElementById('header').innerText = 'starting get context';
