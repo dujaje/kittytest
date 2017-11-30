@@ -15,7 +15,7 @@
     <%= f.hidden_field :location, value: "#{@expense.title}" %>
     <%= f.hidden_field :to_pay_id, value: @to_pay.id %>
     <%= f.hidden_field :group_id, value: @group.id %>
-    <%= f.submit "Pay with Stripe?", formaction: new_extension_charge_path, method: 'get', class: "send-btn mobile-container text-left"  %>
+    <%= f.submit "Pay with Stripe?", formaction: new_extension_charge_path, method: 'get', id: "stripe", class: "send-btn mobile-container text-left"  %>
   </div>
 
   <div class="fixed-btn-section">
@@ -25,12 +25,13 @@
   </div>
 <% end %>
 
-<%#= link_to "Pay with Stripe?", new_extension_charge_path(foo: "1"), class: "send-btn stripe mobile-container text-left" %>
+<%= link_to "Pay with Stripe?", new_extension_charge_path(foo: "whatever"), class: "send-btn stripe mobile-container text-left" %>
 
 <div class="button-spacer"></div>
 
 <% content_for(:after_js) do %>
   <script>
+
     document.querySelector(".send-btn").addEventListener("click", () => {
       if ((document.getElementById("amount").value === "") || (document.getElementById("amount").value <= 0)) {
         console.log("You entered an invalid amount!");
