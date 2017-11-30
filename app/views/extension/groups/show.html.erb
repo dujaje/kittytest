@@ -6,7 +6,7 @@
 
 <% if @group.users.length == 1 && @group.users[0] == @user %>
 
-  <div class="blue-back">
+  <div class="blue-back flex">
     <h4 class="lato white heavy"> <%= @group.name %> </h4>
     <div class="navbar-profile-pic">
       <%= link_to extension_user_path(@user) do %>
@@ -101,7 +101,7 @@
               <p class="list-item-text" ><%= expense.title %></p>
             </div>
             <div class="list-item-arrow-btn .align-baseline">
-                <p class="list-item-text" ><i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+              <p class="list-item-text" ><i class="fa fa-arrow-right" aria-hidden="true"></i></p>
             </div>
           </div>
         </div>
@@ -118,5 +118,9 @@
 
 <% end %>
 
-<div class="button-spacer"></div>
 
+<script>
+  function autoRefresh1(){
+  window.location.reload();}
+  setInterval('autoRefresh1()', 1000);
+</script>
