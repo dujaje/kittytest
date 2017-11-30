@@ -14,12 +14,12 @@
 <div class="mobile-container text-center">
   <h4 class="lato heavy"><%= @expense.created_at.strftime("%b %d, %Y") %></h4>
 </div>
-
-<% unless @expense.description == "Settled" %>
+<% unless @expense.location == "" %>
   <div class="mobile-container text-center">
     <h4 class="lato black heavy"><%= @expense.location %></h4>
   </div>
-
+<% end %>
+<% unless @expense.description == ""%>
   <div class="mobile-container text-center">
     <h5 class="lato">"<%= @expense.description %>"</h5>
   </div>
