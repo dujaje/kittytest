@@ -1,4 +1,4 @@
-<% @title = "Pay params[:amount] with stripe" %>
+<% @title = "Pay with stripe" %>
 
 <div class="mobile-container text-left">
   <%= form_tag extension_charges_path(@expense) do %>
@@ -9,13 +9,13 @@
       </div>
     <% end %>
     <label class="amount">
-      <span><%= params[:amount] %></span>
+      <span>You will be paying <%= params[:amount] %></span>
     </label>
   </article>
 </div>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="A month's subscription"
-          data-amount="500"
+          data-amount="params[:amount]"
           data-locale="auto"></script>
 <% end %>
