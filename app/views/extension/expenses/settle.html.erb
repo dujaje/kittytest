@@ -24,7 +24,7 @@
   </div>
 <% end %>
 
-<%= link_to "Pay with Stripe?", new_extension_charge_path, class: "send-btn stripe mobile-container text-left" %>
+<%= link_to "Pay with Stripe?", new_extension_charge_path(foo: sprintf("%.2f", @user.outstanding_with_person_in_group(@to_pay, @group).to_f * -1 / 100)), class: "send-btn stripe mobile-container text-left" %>
 
 <div class="button-spacer"></div>
 
