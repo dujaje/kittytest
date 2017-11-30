@@ -24,6 +24,9 @@
   </div>
 <% end %>
 
+<% simple_form_for [:extension, @charge] do |f|%>
+  <%= f.button :submit %>
+<% end %>
 <div class="button-spacer"></div>
 
 <% content_for(:after_js) do %>
