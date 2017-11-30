@@ -36,7 +36,7 @@
 
       document.getElementById('header').innerText = 'starting get context';
 
-      MessengerExtensions.getContext(ENV['APP_ID'],
+      MessengerExtensions.getContext(<%= ENV['APP_ID'] %>,
         getdetails,
         function error(result){
           document.getElementById('header').innerText = 'error in get context'
