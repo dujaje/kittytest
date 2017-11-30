@@ -72,7 +72,7 @@
             <h5 class="lato heavy">You paid <%= expense.title.split.last %> back</h5>
             <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
             <h5><%= expense.location %></h5>
-            <h5 class="lato heavy">£ <%= expense.amount_cents/100 %></h5>
+            <h5 class="lato heavy red">£ <%= expense.amount_cents/100 %></h5>
           </div>
           <% payee = User.find_by first_name: payeename %>
           <div class="groupimages">
@@ -88,7 +88,7 @@
           <div class="grouptext">
             <h5 class="lato heavy">You paid for <%= expense.title %></h5>
             <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
-            <h5 class="lato heavy">£ <%= expense.amount_cents/100 %></h5>
+            <h5 class="lato heavy red">£ <%= expense.amount_cents/100 %></h5>
           </div>
         <% end %>
       </div>

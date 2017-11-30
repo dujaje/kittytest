@@ -44,7 +44,7 @@ div.tab button.active {
 .groupimages {
   display: flex;
   align-items: center;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 .pic {
   height: 44px;
@@ -60,7 +60,9 @@ div.tab button.active {
 .group-container {
   padding: 10px;
 }
-
+.red {
+  color: red !important;
+}
 
 
 
