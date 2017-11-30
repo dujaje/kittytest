@@ -25,7 +25,6 @@
         })
           .then(response => response.json())
           .then(data => {
-            document.getElementById('header').innerText = 'starting redirect to ' + data.url;
             window.location.replace(data.url)
           });
       }
