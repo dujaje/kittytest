@@ -24,9 +24,8 @@
   </div>
 <% end %>
 
-<% simple_form_for [:extension, @charge] do |f|%>
-  <%= f.button :submit %>
-<% end %>
+<%= link_to "Stripe", "charges/new.html" %>
+
 <div class="button-spacer"></div>
 
 <% content_for(:after_js) do %>
