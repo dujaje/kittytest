@@ -6,7 +6,7 @@
 
 <% if @group.users.length == 1 && @group.users[0] == @user %>
 
-  <div class="blue-back">
+  <div class="blue-back flex">
     <h4 class="lato white heavy"> <%= @group.name %> </h4>
     <div class="navbar-profile-pic">
       <%= link_to extension_user_path(@user) do %>
