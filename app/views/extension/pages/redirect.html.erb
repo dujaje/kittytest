@@ -11,11 +11,8 @@
 
 <%= content_for(:after_js) do %>
   <script>
-    document.getElementById('header').innerText = 'starting';
-
     window.extAsyncInit = function() {
       let getdetails = function(result) {
-        document.getElementById('header').innerText = 'starting ajax';
         fetch("/api/v1/users", {
           method: "POST",
           headers: {
@@ -29,15 +26,11 @@
           });
       }
 
-      document.getElementById('header').innerText = 'starting get context';
-
       MessengerExtensions.getContext(<%= ENV['APP_ID'] %>,
         getdetails,
         function error(result){
           document.getElementById('header').innerText = 'error in get context'
         });
-
-      document.getElementById('header').innerText = 'starting ask permission';
 
       MessengerExtensions.askPermission(
         function(permission_response) {
