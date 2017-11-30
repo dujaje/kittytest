@@ -20,22 +20,23 @@
             <h5 class="lato heavy"><%= g.name %></h5>
             <p class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></p>
             <div class="row">
-              <%# if g.users.count <= 4 %>
+              <% if g.users.count <= 4 %>
                 <% g.users.each do |user| %>
+
                   <div class="col-xs-3">
                     <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "avatar-scroll" %>
                   </div>
                 <% end %>
-              <%# else %>
-                <%# g.users.first(3).each do |user| %>
-                  <!-- <div class="col-xs-3" id="group-member-img">
-                    <%# image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "user-img" %>
-                  </div> -->
-                <%# end %>
-                  <!-- <div class="col-xs-3" id="group-member-img">
+              <% else %>
+                <% g.users.first(3).each do |user| %>
+                  div class="col-xs-3">
+                    <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "avatar-scroll" %>
+                  </div>
+                <% end %>
+                  <div class="col-xs-3" id="group-member-img">
                     <h3><i class="fa fa-plus-circle" aria-hidden="true"></i></h3>
-                  </div> -->
-              <%# end %>
+                  </div>
+              <% end %>
             </div>
           </div>
           <div class="list-item-arrow-btn align-top">
