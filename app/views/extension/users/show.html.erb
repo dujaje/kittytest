@@ -6,75 +6,77 @@
 <div class="tab">
   <button class="tablinks lato heavy white" id="groupstab" onclick="openCity(event, 'Groups')">Groups</button>
   <button class="tablinks lato heavy white" onclick="openCity(event, 'Expenses')">Paid</button>
-  <button class="tablinks lato heavy white" onclick="openCity(event, 'Received')">Received</button>
+  <button class="tablinks lato heavy white" onclick="openCity(event, 'Received')">People</button>
 </div>
 
 <!-- GROUPS BODY -->
 
 <div id="Groups" class="tabcontent">
-  <% @user.groups.each do |g| %>
-    <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
-      <div class="group">
-        <div class="grouptext">
-          <h5 class="lato heavy"><%= g.name %></h5>
-          <p class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></p>
-          <% g.memberships.each do |member| %>
-            <% if @user.outstanding_with_person_in_group(member, g) == 0 %>
+  <div class="mobile-container">
+    <% @user.groups.each do |g| %>
+      <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
+        <div class="group">
+          <div class="grouptext">
+            <h5 class="lato heavy"><%= g.name %></h5>
+            <p class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></p>
+            <% g.memberships.each do |member| %>
+              <% if @user.outstanding_with_person_in_group(member, g) == 0 %>
 
-            <% elsif @user.outstanding_with_person_in_group(member, g) < 0 %>
-              <h5 class="lato heavy">You owe: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f * -1 / 100) %></span></h5>
-            <% else %>
-              <% ower = User.find(member.user_id) %>
-              <h5 class="lato heavy"><%= ower.first_name %> owes you: <span style="color:green">£<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f / 100) %></span></h5>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="groupimages">
-          <div class="row">
-            <div class="col-sx-1">
-              <% if g.users.count <= 4 %>
-                <% g.users.each do |user| %>
-                  <% if user == @user %>
-                  <% else %>
-                    <div>
-                      <%= image_tag user.profile_picture_url, class: "avatar-list" %>
-                    </div>
-                  <% end %>
-                <% end %>
+              <% elsif @user.outstanding_with_person_in_group(member, g) < 0 %>
+                <h5 class="lato heavy">You owe: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f * -1 / 100) %></span></h5>
               <% else %>
-                <% g.users.first(4).each do |user| %>
-                  <% if user == @user %>
-                  <% else %>
-                    <div>
-                      <%= image_tag user.profile_picture_url, class: "avatar-list" %>
-                    </div>
-                  <% end %>
-                <% end %>
+                <% ower = User.find(member.user_id) %>
+                <h5 class="lato heavy"><%= ower.first_name %> owes you: <span style="color:green">£<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f / 100) %></span></h5>
               <% end %>
-            </div>
+            <% end %>
           </div>
+          <div class="list-item-arrow-btn align-center">
+              <p class="list-item-text" ><i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+          </div>
+          <!-- <div class="groupimages">
+            <div class="row">
+              <div class="col-sx-1">
+                <%# if g.users.count <= 4 %>
+                  <%# g.users.each do |user| %>
+                    <%# if user == @user %>
+                    <%# else %>
+                      <div>
+                        <%# image_tag user.profile_picture_url, class: "avatar-list" %>
+                      </div>
+                    <%# end %>
+                  <%# end %>
+                <%# else %>
+                  <%# g.users.first(4).each do |user| %>
+                    <%# if user == @user %>
+                    <%# else %>
+                      <div>
+                        <%# image_tag user.profile_picture_url, class: "avatar-list" %>
+                      </div>
+                    <%# end %>
+                  <%# end %>
+                <%# end %>
+              </div>
+            </div>
+          </div> -->
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
 <!-- PAID BODY -->
 
 <div id="Expenses" class="tabcontent">
-  <% expenses = Expense.where(:user_id == @user) %>
-  <% expenses.each do |expense| %>
-    <%= link_to extension_expense_path(expense, user_id: @user, group_id: expense) do %>
+  <% @expenses_paid.reverse.each do |expense| %>
+    <%= link_to extension_expense_path(expense, user_id: @user, group_id: expense.group_id) do %>
       <div class="group">
         <% if /(settled with)+/.match(expense.title) %>
-          <%payeename = expense.title.split.last %>
+          <% payee = User.find_by(id: expense.splits.last.user_id) %>
           <div class="grouptext">
             <h5 class="lato heavy">You paid <%= expense.title.split.last %> back</h5>
             <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
-            <h5><%= expense.location %></h5>
-            <h5 class="lato heavy red">£ <%= expense.amount_cents/100 %></h5>
+            <h5 class="lato heavy green">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></h5>
           </div>
-          <% payee = User.find_by first_name: payeename %>
           <div class="groupimages">
             <div class="row">
               <div class="col-sx-1">
@@ -88,7 +90,7 @@
           <div class="grouptext">
             <h5 class="lato heavy">You paid for <%= expense.title %></h5>
             <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
-            <h5 class="lato heavy red">£ <%= expense.amount_cents/100 %></h5>
+            <h5 class="lato heavy red">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></h5>
           </div>
         <% end %>
       </div>
@@ -99,6 +101,65 @@
 <!-- RECEIVED BODY BODY -->
 
 <div id="Received" class="tabcontent">
+
+  <div class="mobile-container">
+    <div class="title-section">
+      <h3 class="lato heavy">You are owed</h3>
+    </div>
+  </div>
+
+  <% @users.each do |member| %>
+
+    <% if member == @user %>
+      <% next %>
+    <% elsif @user.outstanding_with_person_overall(member) == 0 %>
+      <% next %>
+    <% elsif @user.outstanding_with_person_overall(member) > 0 %>
+      <div class="list-item-tall">
+        <div class="profile-img-container">
+          <%= image_tag member.profile_picture_url, class: "avatar-list" %>
+        </div>
+        <div class="divider">
+          <div class="list-item-divider-content">
+            <p class="list-item-text"><strong><%= member.first_name %> <%= member.last_name %></strong></p>
+            <p class="list-item-text">Owes you: <span style="color:green">£<%= sprintf("%.2f", @user.outstanding_with_person_overall(member).to_f / 100) %></span></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+      <%# link_to "#", class: "fb-blue" do %>
+        <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
+      <%# end %>
+  <div class="mobile-container">
+    <div class="title-section">
+      <h3 class="lato heavy">You owe</h3>
+      <%# link_to "#", class: "fb-blue" do %>
+        <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
+      <%# end %>
+    </div>
+  </div>
+
+  <% @users.each do |member| %>
+    <% if member == @user %>
+      <% next %>
+    <% elsif @user.outstanding_with_person_overall(member) == 0 %>
+      <% next %>
+    <% elsif @user.outstanding_with_person_overall(member) < 0 %>
+      <div class="list-item-tall">
+        <div class="profile-img-container">
+          <%= image_tag member.profile_picture_url, class: "avatar-list" %>
+        </div>
+        <div class="divider">
+          <div class="list-item-divider-content">
+            <p class="list-item-text"><strong><%= member.first_name %> <%= member.last_name %></strong></p>
+            <p class="list-item-text" >You owe: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_overall(member).to_f * -1 / 100) %></span></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
 </div>
 
 <!-- Script that controls tab activation -->
