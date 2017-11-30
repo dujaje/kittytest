@@ -4,15 +4,18 @@
     <%= image_tag("White on Colour.png", size: '200', alt: "Edit", class: "loading-logo-img centered") %>
       <% fun_arr = ["Howdy!", "Using litter responsibly!", "Licking paws...", "Well met!", "Busy mouse hunting!","Compawling the database...","How you doin'?"] %>
     <div class="align-top">
-    <h3 class="lato white heavy"><%= fun_arr.sample %></h3>
+    <h3 class="lato white heavy" id="header"><%= fun_arr.sample %></h3>
 
     </div>
 </div>
 
 <%= content_for(:after_js) do %>
   <script>
+    document.getElementById('header').innerText = 'hello';
+
     window.extAsyncInit = function() {
       let getdetails = function(result) {
+        document.getElementById('header').innerText = 'starting ajax';
         fetch("/api/v1/users", {
             method: "POST",
             headers: {
@@ -22,8 +25,11 @@
           })
             .then(response => {
               response.json();
+              document.getElementById('header').innerText = 'parsing resposne as json';
+
             })
             .then((data) => {
+              document.getElementById('header').innerText = 'the url ' + data;
               window.location.replace(data.url)
             });
       }
@@ -31,7 +37,7 @@
       MessengerExtensions.getContext(ENV['APP_ID'],
         getdetails,
         function error(result){
-          document.body.append("error", result);
+          document.getElementById('header').innerText = 'error in get context'
         });
 
       MessengerExtensions.askPermission(
