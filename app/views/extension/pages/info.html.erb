@@ -1,4 +1,5 @@
 <% @title = "Welcome to Kitty" %>
+
 <div>
   <%= image_tag 'primary_logo_and_text.png', style: 'height:auto;width:100%;' %>
   <h4 class="welcome-text nunito">Splitting money <br> made simple</h4>
@@ -13,7 +14,7 @@
 </div>
 
 <div class="fixed-btn-section">
-  <%= link_to extension_group_path(@group, user_id: @user.id, group_id: @group.id)) do %>
+  <%= link_to extension_group_path(@group, user_id: @user.id, group_id: @group.id) do %>
     <button class="send-btn heavy"><div class="send-inner">Pay for something</div></button>
   <% end %>
 </div>
