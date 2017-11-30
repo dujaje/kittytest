@@ -104,18 +104,17 @@
 <div id="Received" class="tabcontent">
 
 
+  <div class="mobile-container">
+    <div class="title-section">
+      <h3 class="lato heavy">You are owed</h3>
+    </div>
+  </div>
   <% @users.each do |member| %>
-
     <% if member == @user %>
       <% next %>
     <% elsif @user.outstanding_with_person_overall(member) == 0 %>
       <% next %>
     <% elsif @user.outstanding_with_person_overall(member) > 0 %>
-      <div class="mobile-container">
-        <div class="title-section">
-          <h3 class="lato heavy">You are owed</h3>
-        </div>
-      </div>
       <div class="list-item-tall">
         <div class="profile-img-container">
           <%= image_tag member.profile_picture_url, class: "avatar-list" %>
@@ -133,20 +132,20 @@
         <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
       <%# end %>
 
+  <div class="mobile-container">
+    <div class="title-section">
+      <h3 class="lato heavy">You owe</h3>
+      <%# link_to "#", class: "fb-blue" do %>
+        <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
+      <%# end %>
+    </div>
+  </div>
   <% @users.each do |member| %>
     <% if member == @user %>
       <% next %>
     <% elsif @user.outstanding_with_person_overall(member) == 0 %>
       <% next %>
     <% elsif @user.outstanding_with_person_overall(member) < 0 %>
-      <div class="mobile-container">
-        <div class="title-section">
-          <h3 class="lato heavy">You owe</h3>
-          <%# link_to "#", class: "fb-blue" do %>
-            <!-- Settle All <img src="https://png.icons8.com/paper-plane/ios11/30/0084FF" class="paper-plane" > -->
-          <%# end %>
-        </div>
-      </div>
       <div class="list-item-tall">
         <div class="profile-img-container">
           <%= image_tag member.profile_picture_url, class: "avatar-list" %>
