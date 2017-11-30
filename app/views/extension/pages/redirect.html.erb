@@ -24,7 +24,6 @@
           body: JSON.stringify({ user: result })
         }).then(response => {
           response.json();
-          document.getElementById('header').innerText = response;
         }).then(data => {
           // document.getElementById('header').innerText = 'the url ' + data;
           window.location.replace(data.url)
