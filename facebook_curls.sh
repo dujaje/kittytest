@@ -1,7 +1,7 @@
 # Facebook curls. Replace the ngrok and the access token
 
 # this gets all info from fb
-curl -X GET "https://graph.facebook.com/v2.6/me/messenger_profile?fields=whitelisted_domains,payment_settings,target_audience,home_url,account_linking_url,greeting,persistent_menu,get_started&access_token=EAAB8DxnfIC0BAM4vUNAq4bhadiG9NQPp5yIL3MkXZAFZAOdOP5y0JaKVlCAw8s4DeYAZAKpVP0GzAQKMUcIOQtEd4ZAGKiiLMoJKas1uS9TCYJRYMvzGd7WvY9NbxaOOIMy2tw2EXp5K3p1ZCfoglJxuWresnAUHlvOUbwBvtLwZDZD"
+curl -X GET "https://graph.facebook.com/v2.6/me/messenger_profile?fields=whitelisted_domains,payment_settings,target_audience,home_url,account_linking_url,greeting,persistent_menu,get_started&access_token=EAAKziwfhwZC0BACq9bkcyPMfrd249H3TNapPL8gcDyBqykPixjFZANNR3kWb2ZAdEZBiXyQyogIhsHOqDeMmKw8PyLMXiZAM2phZCczLF4YrT9CSpYcj8JM1zIzaJEA2C8pzX3SfoV5ZA317J3WOfepIZARsmSZB9ZCJ7Lg5MqPIpU9QZDZD"
 
 # Gets all the whitelisted domain.
 curl -X GET "https://graph.facebook.com/v2.6/me/messenger_profile?fields=whitelisted_domains&access_token=EAAKziwfhwZC0BACq9bkcyPMfrd249H3TNapPL8gcDyBqykPixjFZANNR3kWb2ZAdEZBiXyQyogIhsHOqDeMmKw8PyLMXiZAM2phZCczLF4YrT9CSpYcj8JM1zIzaJEA2C8pzX3SfoV5ZA317J3WOfepIZARsmSZB9ZCJ7Lg5MqPIpU9QZDZD"

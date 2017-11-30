@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<% content_for(:after_js) do %>
+<%= content_for(:after_js) do %>
   <script>
     window.extAsyncInit = function() {
       let getdetails = function(result) {
@@ -20,7 +20,10 @@
             },
             body: JSON.stringify({ user: result })
           })
-            .then(response => response.json())
+            .then(response => {
+              response.json();
+              document.body.append(response);
+            })
             .then((data) => {
               window.location.replace(data.url)
             });
