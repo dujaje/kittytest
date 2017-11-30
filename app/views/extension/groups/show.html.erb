@@ -120,12 +120,13 @@
 
 <div class="button-spacer"></div>
 
-<% content_for(:after_js) do %>
-<script>
-  console.log(1);
-  function autoRefresh1(){
-    window.location.reload();
-  }
-  setInterval('autoRefresh1()', 1000);
-</script>
+
+<% if @group.count == 1 %>
+  <script>
+
+    function autoRefresh1(){
+      window.location.reload();
+    }
+    setInterval('autoRefresh1()', 5000);
+  </script>
 <% end %>
