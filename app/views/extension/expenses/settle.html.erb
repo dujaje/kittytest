@@ -15,7 +15,6 @@
     <%= f.hidden_field :location, value: "#{@expense.title}" %>
     <%= f.hidden_field :to_pay_id, value: @to_pay.id %>
     <%= f.hidden_field :group_id, value: @group.id %>
-    <%= f.submit "Pay with Stripe?", formaction: new_extension_charge_path, method: 'get', id: "stripe", class: "send-btn mobile-container text-left"  %>
   </div>
 
   <div class="fixed-btn-section">
@@ -25,7 +24,7 @@
   </div>
 <% end %>
 
-<%= link_to "Pay with Stripe?", new_extension_charge_path(foo: "whatever"), method: "get", class: "send-btn stripe mobile-container text-left" %>
+<%= link_to "Pay with Stripe?", new_extension_charge_path(amount: sprintf("%.2f", @user.outstanding_with_person_in_group(@to_pay, @group).to_f * -1 / 100), foo: "whatever", test: @user.outstanding_with_person_in_group(@to_pay, @group).to_f), method: "get", class: "send-btn stripe mobile-container text-left" %>
 
 <div class="button-spacer"></div>
 
