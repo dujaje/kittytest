@@ -21,10 +21,11 @@
     <%= button_tag type: '#', class: "send-btn" do %>
       <div class="send-inner eighteen lato heavy"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Add now</div>
     <% end %>
+    <%= f.submit "Pay with Stripe?", formaction: new_extension_charge_path, class: "send-btn mobile-container text-left"  %>
   </div>
 <% end %>
 
-<%= link_to "Pay with Stripe?", new_extension_charge_path(foo: "1"), class: "send-btn stripe mobile-container text-left" %>
+<%#= link_to "Pay with Stripe?", new_extension_charge_path(foo: "1"), class: "send-btn stripe mobile-container text-left" %>
 
 <div class="button-spacer"></div>
 
