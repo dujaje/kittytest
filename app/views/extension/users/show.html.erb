@@ -16,7 +16,7 @@
     <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
       <div class="group">
         <div class="grouptext">
-          <h4 class="lato heavy"><%= g.name %></h4>
+          <h5 class="lato heavy"><%= g.name %></h5>
           <h6 class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></h6>
         </div>
         <div class="groupimages">
@@ -52,24 +52,33 @@
 <!-- EXPENSES BODY -->
 
 <div id="Expenses" class="tabcontent">
-  <% @user.expenses.each do |g| %>
-    <%= link_to extension_expenses_path(g, user_id: @user.id, group_id: g.id) do %>
-      <div class="group">
-        <div class="grouptext">
-          <h4><%= g.title %></h4>
-          <h6><%= g.created_at.strftime("%b %d, %Y") %></h6>
-        </div>
+  <h4 class="text-center">Times you've paid:</h4>
+  <% expenses = Expense.where(:user_id == @user && :description != Settled) %>
+  <% expenses.each do |expense| %>
+    <div class="group">
+      <div class="grouptext">
+        <h5 class="lato heavy"><%= expense.title %></h5>
+        <h5><%= expense.id %></h5>
+        <h5><%= expense.description %></h5>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
 
 <!-- SETTLES BODY -->
 
 <div id="Settles" class="tabcontent">
-  <h3>SETTLES</h3>
-  <p>SETTLES HERE.</p>
-
+  <h4 class="text-center">Times you've settled</h4>
+  <% settles = Expense.where(:user_id == @user && :description == "Settled") %>
+  <% settles.each do |settle| %>
+    <div class="group">
+      <div class="grouptext">
+        <% expense = Expense.where(:title == settle.location) %>
+        <h3>settled amount<%= settle.amount_cents %></h3>
+        <h3>other amountpe <%= settle.location %>  </h3>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <!-- Script that controls tab activation -->
