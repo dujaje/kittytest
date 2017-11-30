@@ -19,7 +19,7 @@
     <h4 class="lato black heavy"><%= @expense.location %></h4>
   </div>
 <% end %>
-<% unless @expense.description == "Settled" || @expense.description == ""%>
+<% unless @expense.description == ""%>
   <div class="mobile-container text-center">
     <h5 class="lato">"<%= @expense.description %>"</h5>
   </div>
