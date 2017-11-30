@@ -1,7 +1,5 @@
-<% @title = "Pay with stripe" %>
-<%= params[:foo] %>
-<%= params[:test] %>
-<%= params[:amount] %>
+<% @title = "Pay params[:amount] with stripe" %>
+
 <div class="mobile-container text-left">
   <%= form_tag extension_charges_path(@expense) do %>
   <article>
@@ -11,7 +9,7 @@
       </div>
     <% end %>
     <label class="amount">
-      <span><%= params[:foo] %></span>
+      <span><%= params[:amount] %></span>
     </label>
   </article>
 </div>
