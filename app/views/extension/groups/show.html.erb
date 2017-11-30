@@ -8,8 +8,13 @@
 
   <div class="blue-back">
     <h4 class="lato white heavy"> <%= @group.name %> </h4>
+    <div class="navbar-profile-pic">
+      <%= link_to extension_user_path(@user) do %>
+        <%= image_tag @user.profile_picture_url, class: "avatar-navbar" %>
+      <% end %>
+    </div>
   </div>
-  <h3 class="lato heavy">No else has joined the group chat yet...</h3>
+  <h5 class="lato heavy">No else has joined the group chat yet...</h5>
 
 <% else %>
 
@@ -107,7 +112,7 @@
 
     <div class="fixed-btn-section">
       <%= link_to new_extension_expense_path(user_id: @user.id, group_id: @group.id) do %>
-        <button class="send-btn"><div class="send-inner">Pay for something</div></button>
+        <button class="send-btn heavy"><div class="send-inner">Pay for something</div></button>
       <% end %>
     </div>
 

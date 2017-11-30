@@ -47,4 +47,9 @@ a list-item-short {
   text-decoration: none;
 }
 
+.align-center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
