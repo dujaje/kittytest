@@ -16,7 +16,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 # ADAPT this to whitelist domain. "add" != "remove"
 curl -X POST -H "Content-Type: application/json" -d '{
   "setting_type" : "domain_whitelisting",
-  "whitelisted_domains" : ["https://a91dbaef.ngrok.io"],
+  "whitelisted_domains" : ["https://dc0ab981.ngrok.io"],
   "domain_action_type": "add"
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAB8DxnfIC0BAM4vUNAq4bhadiG9NQPp5yIL3MkXZAFZAOdOP5y0JaKVlCAw8s4DeYAZAKpVP0GzAQKMUcIOQtEd4ZAGKiiLMoJKas1uS9TCYJRYMvzGd7WvY9NbxaOOIMy2tw2EXp5K3p1ZCfoglJxuWresnAUHlvOUbwBvtLwZDZD"
 
@@ -24,7 +24,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 # This initiates the home url for Kitty
 curl -X POST -H "Content-Type: application/json" -d ' {
   "home_url" : {
-     "url": "https://a91dbaef.ngrok.io/extension/welcome",
+     "url": "https://dc0ab981.ngrok.io/extension/welcome",
      "webview_height_ratio": "tall",
      "webview_share_button": "hide",
      "in_test":true

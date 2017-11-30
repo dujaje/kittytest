@@ -1,3 +1,69 @@
+div.tab {
+    overflow: hidden;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+  height: 44px;
+  width: 33.33333333333%;
+  background-color: $kittyblue;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 18px;
+  opacity: 0.3;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+  opacity: 1;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 0px 6px 12px;
+    // border: 1px solid $kittyblue;
+    // border-left: none;
+    // border-right: none;
+    // border-bottom: none;
+}
+
+// group cards
+.group {
+
+  border-bottom: 1px solid $kittyblue;
+  display: flex;
+  justify-content: space-between;
+}
+.groupimages {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+.pic {
+  height: 44px;
+  width: 44px;
+}
+.solopic {
+  height: 88px;
+  width: 88px;
+}
+.pics-container {
+  border-radius: 8px;
+}
+.group-container {
+  padding: 10px;
+}
+
+
+
+
 .group-dynamic-data {
   display: flex;
   justify-content: space-between;

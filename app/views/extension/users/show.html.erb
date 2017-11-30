@@ -1,61 +1,98 @@
+
 <% @title = "#{@user.first_name} #{@user.last_name}" %>
 
-<div class="blue-back">
-  <h4 class="lato white heavy">Howdy <%= @user.first_name.capitalize %>!</h4>
+<!-- TAB BAR -->
+
+<div class="tab">
+  <button class="tablinks lato heavy white" id="groupstab" onclick="openCity(event, 'Groups')">Groups</button>
+  <button class="tablinks lato heavy white" onclick="openCity(event, 'Expenses')">Expenses</button>
+  <button class="tablinks lato heavy white" onclick="openCity(event, 'Settles')">Settles</button>
 </div>
 
-<div class="mobile-container text-left">
-  <h3 class="lato heavy">Your Groups</h3>
-</div>
+<!-- GROUPS BODY -->
 
-<div class="mobile-container">
-  <div class="group-content-container">
-    <div class="group-content">
-      <% @user.groups.each do |g| %>
-      <div class="group-card">
-        <div class="group-dynamic-data">
-          <div class="column">
-            <div class="group-name-time column-item">
-              <span id="group-name">
-                <%= g.name.capitalize %>
-              </span>
-              <p id="group-creation-time">
-                <%= g.created_at.strftime("%b %d, %Y") %>
-              </p>
-            </div>
-            <div class="row">
-              <% if g.users.count <= 8 %>
-              <% g.users.each do |user| %>
-                <div class="col-xs-3" id="group-member-img">
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "user-img" %>
-                </div>
+<div id="Groups" class="tabcontent">
+  <% @user.groups.each do |g| %>
+    <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
+      <div class="group">
+        <div class="grouptext">
+          <h4 class="lato heavy"><%= g.name %></h4>
+          <h6 class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></h6>
+        </div>
+        <div class="groupimages">
+          <div class="row">
+            <div class="col-sx-1">
+              <% if g.users.count <= 4 %>
+                <% g.users.each do |user| %>
+                  <% if user == @user %>
+                  <% else %>
+                    <div>
+                      <%= image_tag user.profile_picture_url, class: "avatar-list" %>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% g.users.first(4).each do |user| %>
+                  <% if user == @user %>
+                  <% else %>
+                    <div>
+                      <%= image_tag user.profile_picture_url, class: "avatar-list" %>
+                    </div>
+                  <% end %>
+                <% end %>
               <% end %>
-            <% else %>
-              <% g.users.first(7).each do |user| %>
-                <div class="col-xs-3" id="group-member-img">
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "user-img" %>
-                </div>
-              <% end %>
-                <div class="col-xs-3" id="group-member-img">
-                  <h3><i class="fa fa-plus-circle" aria-hidden="true"></i></h3>
-                </div>
-              <% end %>
-              <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
             </div>
           </div>
         </div>
-        <div class="button-placement">
-          <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="24" width="24"><div id="mag-glass-spacer"></div><span id="mag-glass-font">Go to group</span></div></button>
-          <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- EXPENSES BODY -->
+
+<div id="Expenses" class="tabcontent">
+  <% @user.expenses.each do |g| %>
+    <%= link_to extension_expenses_path(g, user_id: @user.id, group_id: g.id) do %>
+      <div class="group">
+        <div class="grouptext">
+          <h4><%= g.title %></h4>
+          <h6><%= g.created_at.strftime("%b %d, %Y") %></h6>
         </div>
       </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="user-content-container">
-    <div class="user-content">
+    <% end %>
+  <% end %>
+</div>
 
-    </div>
-  </div>
+<!-- SETTLES BODY -->
+
+<div id="Settles" class="tabcontent">
+  <h3>SETTLES</h3>
+  <p>SETTLES HERE.</p>
 
 </div>
+
+<!-- Script that controls tab activation -->
+
+<script>
+  const groups = document.getElementById("Groups");
+  groups.style.display = "block";
+  const groupstab = document.getElementById("groupstab")
+  groupstab.className += " active";
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
+
+
+
