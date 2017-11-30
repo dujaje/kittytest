@@ -138,16 +138,13 @@
       })
     })
 
-
-
     document.querySelector(".send-btn").addEventListener("click", () => {
       console.log(document.getElementById("involved_group_field").value)
       if (document.getElementById("involved_group_field").value === "" || document.getElementById("involved_group_field").value === ["<%= @user.id %>"]) {
-        console.log("You haven't selected anyone!");
+        document.body.append("You haven't selected anyone!");
         description.innerHTML = "";
       }
       else {
-        // console.log("<%= @user.first_name %>");
         var amount = document.getElementById('amount')
         var title = document.getElementById('title')
         let message = {
