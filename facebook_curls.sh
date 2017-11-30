@@ -9,7 +9,7 @@ curl -X GET "https://graph.facebook.com/v2.6/me/messenger_profile?fields=whiteli
 # ADAPT this to whitelist domain. "add" != "remove"
 curl -X POST -H "Content-Type: application/json" -d '{
   "setting_type" : "domain_whitelisting",
-  "whitelisted_domains" : ["https://dc0ab981.ngrok.io"],
+  "whitelisted_domains" : ["https://kittysplit.herokuapp.com/"],
   "domain_action_type": "add"
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAAKziwfhwZC0BACq9bkcyPMfrd249H3TNapPL8gcDyBqykPixjFZANNR3kWb2ZAdEZBiXyQyogIhsHOqDeMmKw8PyLMXiZAM2phZCczLF4YrT9CSpYcj8JM1zIzaJEA2C8pzX3SfoV5ZA317J3WOfepIZARsmSZB9ZCJ7Lg5MqPIpU9QZDZD"
 
@@ -17,7 +17,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 # This initiates the home url for Kitty
 curl -X POST -H "Content-Type: application/json" -d ' {
   "home_url" : {
-     "url": "https://dc0ab981.ngrok.io/extension/welcome",
+     "url": "https://kittysplit.herokuapp.com/extension/welcome",
      "webview_height_ratio": "tall",
      "webview_share_button": "hide",
      "in_test":true
