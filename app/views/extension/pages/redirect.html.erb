@@ -21,14 +21,13 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ user: result })
-        }).then(response => {
-          document.getElementById('header').innerText = 'starting json';
-          response.json();
-        }).then(data => {
-          document.getElementById('header').innerText = 'starting redirect to ' + data.url;
-          window.location.replace(data.url)
-        });
+          body: JSON.stringify({ 'user': result })
+        })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('header').innerText = 'starting redirect to ' + data.url;
+            window.location.replace(data.url)
+          });
       }
 
       document.getElementById('header').innerText = 'starting get context';
