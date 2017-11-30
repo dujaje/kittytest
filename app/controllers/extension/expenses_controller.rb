@@ -28,7 +28,7 @@ class Extension::ExpensesController < ApplicationController
       user_id: @user.id,
       group_id: @group.id,
       location: @location)
-    if @expense.save
+    if @involved_group_string != "" && @involved_group_string != [@user.id.to_s] && @expense.save
       equal_splitter(@expense, @involved_group_string)
       redirect_to extension_expense_path(@expense, user_id: @user.id, group_id: @group.id)
     elsif @expense.description == "Settled"
