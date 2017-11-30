@@ -34,17 +34,21 @@ class Api::V1::UsersController < Api::V1::BaseController
     if group
       if group.kitty_created
         url = Rails.application.routes.url_helpers.extension_group_url(group, user_id: user.id, group_id: group.id)
+        puts "1 #{url}"
       else
         url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
+        puts "2 #{url}"
       end
     else
       group = Group.create(tid: get_params[:tid], name: "Your Kitty")
       group.thread_type = get_params[:thread_type]
       url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
+      puts "3 #{url}"
     end
 
     if get_params[:thread_type] == "USER_TO_PAGE"
       url = Rails.application.routes.url_helpers.extension_user_url(user)
+      puts "4 #{url}"
     else
       # Finds or Creates a Membership
       Membership.find_or_create_by(group: group, user: user)
