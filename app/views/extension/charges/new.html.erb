@@ -1,7 +1,7 @@
 <% @title = "Pay with stripe" %>
 
 <div class="mobile-container text-left">
-  <%= form_tag extension_charges_path do %>
+  <%= form_tag extension_expense_charges_path(@expense) do %>
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -9,7 +9,7 @@
       </div>
     <% end %>
     <label class="amount">
-      <span>Amount: $5.00</span>
+      <span><%= @expense.amount_cents %></span>
     </label>
   </article>
 </div>

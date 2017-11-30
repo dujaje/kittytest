@@ -10,10 +10,12 @@ Rails.application.routes.draw do
     get 'create_kitty', to: 'pages#create_kitty'
     get 'info', to: 'pages#info'
     resources :groups, only: [:show, :update]
-    resources :expenses, only: [:new, :create, :show]
+    resources :expenses, only: [:new, :create, :show] do
+      resources :charges
+    end
     get 'settle', to: 'expenses#settle'
     resources :users, only: [:show]
-    resources :charges
+    # resources :charges
   end
 
   namespace :api, defaults: { format: :json } do
