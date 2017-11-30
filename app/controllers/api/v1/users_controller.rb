@@ -51,6 +51,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         end
       else
         user.first_sign_in = false
+        user.save
         url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
         puts "2 #{url}"
       end
