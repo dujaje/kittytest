@@ -40,6 +40,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       if group.kitty_created
         if user.first_sign_in
           url = Rails.application.routes.url_helpers.extension_info_url(user_id: user.id, group_id: group.id)
+          user.first_sign_in = false
         else
           url = Rails.application.routes.url_helpers.extension_group_url(group, user_id: user.id, group_id: group.id)
           puts "1 #{url}"
