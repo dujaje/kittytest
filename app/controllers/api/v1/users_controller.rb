@@ -27,7 +27,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     user.address = parsed_response[:locale]
     user.timezone = parsed_response[:timezone]
     # Saves User with all data
+    puts "hello1"
     user.save!
+    puts "hello2"
     # Finds or Creates a New Group
     group = Group.find_by(tid: get_params[:tid])
 
@@ -53,6 +55,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       # Finds or Creates a Membership
       Membership.find_or_create_by(group: group, user: user)
     end
+
+    puts "*** #{url} ***"
 
     render json: {url: url}, status: :created
   end
