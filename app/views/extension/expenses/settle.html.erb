@@ -6,7 +6,7 @@
     <h3 class="lato heavy">How much did you settle with <%= @to_pay.first_name %>?</h3>
     <p class="list-item-text" >You owe <%= @to_pay.first_name %> in this group: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(@to_pay, @group).to_f * -1 / 100) %></span></p>
 
-    <%= link_to "Pay with Stripe?", new_extension_expense_charge_path(@expense), class: "send-btn stripe mobile-container text-left" %>
+    <%= link_to "Pay with Stripe?", new_extension_expense_charge_path(expense_id: @expense.id), class: "send-btn stripe mobile-container text-left" %>
 
     <div class="button-spacer"></div>
     <% @expense.amount_cents = nil %>
