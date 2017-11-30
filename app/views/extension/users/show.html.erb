@@ -1,5 +1,5 @@
 
-<% @title = "#{@user.first_name} #{@user.last_name}" %>
+<% @title = "#{@user.first_name}'s Dashboard" %>
 
 <!-- TAB BAR -->
 
@@ -19,83 +19,83 @@
           <div class="grouptext">
             <h5 class="lato heavy"><%= g.name %></h5>
             <p class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></p>
-            <% g.memberships.each do |member| %>
-              <% if @user.outstanding_with_person_in_group(member, g) == 0 %>
-
-              <% elsif @user.outstanding_with_person_in_group(member, g) < 0 %>
-                <h5 class="lato heavy">You owe: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f * -1 / 100) %></span></h5>
-              <% else %>
-                <% ower = User.find(member.user_id) %>
-                <h5 class="lato heavy"><%= ower.first_name %> owes you: <span style="color:green">£<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f / 100) %></span></h5>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="list-item-arrow-btn align-center">
-              <p class="list-item-text" ><i class="fa fa-arrow-right" aria-hidden="true"></i></p>
-          </div>
-          <!-- <div class="groupimages">
             <div class="row">
-              <div class="col-sx-1">
-                <%# if g.users.count <= 4 %>
-                  <%# g.users.each do |user| %>
-                    <%# if user == @user %>
-                    <%# else %>
-                      <div>
-                        <%# image_tag user.profile_picture_url, class: "avatar-list" %>
-                      </div>
-                    <%# end %>
-                  <%# end %>
-                <%# else %>
-                  <%# g.users.first(4).each do |user| %>
-                    <%# if user == @user %>
-                    <%# else %>
-                      <div>
-                        <%# image_tag user.profile_picture_url, class: "avatar-list" %>
-                      </div>
-                    <%# end %>
-                  <%# end %>
+              <%# if g.users.count <= 4 %>
+                <% g.users.each do |user| %>
+                  <div class="col-xs-3">
+                    <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "avatar-scroll" %>
+                  </div>
+                <% end %>
+              <%# else %>
+                <%# g.users.first(3).each do |user| %>
+                  <!-- <div class="col-xs-3" id="group-member-img">
+                    <%# image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "user-img" %>
+                  </div> -->
                 <%# end %>
-              </div>
+                  <!-- <div class="col-xs-3" id="group-member-img">
+                    <h3><i class="fa fa-plus-circle" aria-hidden="true"></i></h3>
+                  </div> -->
+              <%# end %>
             </div>
-          </div> -->
+          </div>
+          <div class="list-item-arrow-btn align-top">
+            <p class="list-item-text" ><i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+          </div>
         </div>
       <% end %>
     <% end %>
   </div>
 </div>
+            <%# g.memberships.each do |member| %>
+              <%# if @user.outstanding_with_person_in_group(member, g) == 0 %>
+
+              <%# elsif @user.outstanding_with_person_in_group(member, g) < 0 %>
+                <!-- <h5 class="lato heavy">You owe: <span style="color:red"> £<%# sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f * -1 / 100) %></span></h5> -->
+              <%# else %>
+                <%# ower = User.find(member.user_id) %>
+                <!-- <h5 class="lato heavy"><%# ower.first_name %> owes you: <span style="color:green">£<%# sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f / 100) %></span></h5> -->
+              <%# end %>
+            <%# end %>
 
 <!-- PAID BODY -->
 
 <div id="Expenses" class="tabcontent">
+  <div class="mobile-container">
   <% @expenses_paid.reverse.each do |expense| %>
     <%= link_to extension_expense_path(expense, user_id: @user, group_id: expense.group_id) do %>
       <div class="group">
         <% if /(settled with)+/.match(expense.title) %>
-          <% payee = User.find_by(id: expense.splits.last.user_id) %>
           <div class="grouptext">
-            <h5 class="lato heavy">You paid <%= expense.title.split.last %> back</h5>
-            <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
-            <h5 class="lato heavy green">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></h5>
+            <% payee = User.find_by(id: expense.splits.last.user_id) %>
+            <div class="grouptext">
+              <h5 class="lato heavy">You paid <%= expense.title.split.last %> back</h5>
+              <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
+              <p class="lato green">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></p>
+            </div>
           </div>
-          <div class="groupimages">
-            <div class="row">
-              <div class="col-sx-1">
-                <div>
-                  <%= image_tag payee.profile_picture_url, class: "avatar-list" %>
+            <div class="groupimages">
+              <div class="row">
+                <div class="col-sx-1">
+                  <div>
+                    <%= image_tag payee.profile_picture_url, class: "avatar-list" %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
         <% else %>
           <div class="grouptext">
             <h5 class="lato heavy">You paid for <%= expense.title %></h5>
             <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
-            <h5 class="lato heavy red">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></h5>
+            <p class="lato red">£ <%= sprintf("%.2f", expense.amount_cents.to_f / 100) %></p>
           </div>
         <% end %>
+        <div class="list-item-arrow-btn align-center">
+          <p class="list-item-text" ><i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+        </div>
       </div>
     <% end %>
   <% end %>
+  </div>
 </div>
 
 <!-- RECEIVED BODY BODY -->
