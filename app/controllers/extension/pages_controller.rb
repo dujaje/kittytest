@@ -9,4 +9,9 @@ class Extension::PagesController < ApplicationController
     puts @user
     puts @group
   end
+
+  def info
+    @user = User.find(params[:user_id])
+    @group = Group.find(params[:group_id])
+  end
 end

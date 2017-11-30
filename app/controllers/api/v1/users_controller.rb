@@ -38,10 +38,15 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     if group
       if group.kitty_created
-        url = Rails.application.routes.url_helpers.extension_group_url(group, user_id: user.id, group_id: group.id)
-        puts "1 #{url}"
+        if user.first_sign_in
+          url = Rails.application.routes.url_helpers.extension_info_url(user_id: user.id, group_id: group.id)
+        else
+          url = Rails.application.routes.url_helpers.extension_group_url(group, user_id: user.id, group_id: group.id)
+          puts "1 #{url}"
+        end
       else
         url = Rails.application.routes.url_helpers.extension_create_kitty_url(user_id: user.id, group_id: group.id)
+        user.first_sign_in = false
         puts "2 #{url}"
       end
     else
