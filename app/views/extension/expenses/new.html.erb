@@ -54,7 +54,6 @@
     </div>
   </div>
 
-
   <div class="mobile-container text-left">
     <h4 class="lato heavy">Where was this?</h4>
     <% where_arr = ["Wagamama", "The Sloaney Pony", "Picturehouse", "Le Rac Shak", "PingPong Dim Sum", "Nandos", "Theater"] %>
@@ -114,7 +113,7 @@
         else if (membersArray.length === 1 && document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
           const others_amount = membersArray.length - 1
           description.innerHTML = "";
-          description.insertAdjacentHTML('afterbegin',`<p>You want to make an expense just with yourself? Even a cat doubts that...</p>`);
+          description.insertAdjacentHTML('afterbegin',`<p>You want to make an expense just with yourself? Or just been reading too much Locke?</p>`);
         }
         else if (document.getElementById("involved_group_field").value.includes(<%= @user.id.to_s %>)) {
           const others_amount = membersArray.length - 1
