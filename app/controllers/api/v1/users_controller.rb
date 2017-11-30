@@ -12,13 +12,16 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     # Finds or Creates a New User
     user = User.find_or_create_by(psid: get_params[:psid])
+    puts '1'
 
     # If creating New User, Gets Information From Facebook
     facebook_service = FacebookService.new
+    puts '2'
     response = facebook_service.get_profile(user)
+    puts '3'
     # puts response.body, response.code, response.message, response.headers.inspect
     parsed_response = JSON.parse(response, symbolize_names: true)
-
+    puts '4'
     # gender = parsed_response[:gender]
 
     user.first_name = parsed_response[:first_name]
