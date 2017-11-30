@@ -5,8 +5,8 @@
 
 <div class="tab">
   <button class="tablinks lato heavy white" id="groupstab" onclick="openCity(event, 'Groups')">Groups</button>
-  <button class="tablinks lato heavy white" onclick="openCity(event, 'Expenses')">Expenses</button>
-  <button class="tablinks lato heavy white" onclick="openCity(event, 'Settles')">Settles</button>
+  <button class="tablinks lato heavy white" onclick="openCity(event, 'Expenses')">Paid</button>
+  <button class="tablinks lato heavy white" onclick="openCity(event, 'Received')">Received</button>
 </div>
 
 <!-- GROUPS BODY -->
@@ -17,7 +17,17 @@
       <div class="group">
         <div class="grouptext">
           <h5 class="lato heavy"><%= g.name %></h5>
-          <h6 class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></h6>
+          <p class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></p>
+          <% g.memberships.each do |member| %>
+            <% if @user.outstanding_with_person_in_group(member, g) == 0 %>
+
+            <% elsif @user.outstanding_with_person_in_group(member, g) < 0 %>
+              <h5 class="lato heavy">You owe: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f * -1 / 100) %></span></h5>
+            <% else %>
+              <% ower = User.find(member.user_id) %>
+              <h5 class="lato heavy"><%= ower.first_name %> owes you: <span style="color:green">£<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f / 100) %></span></h5>
+            <% end %>
+          <% end %>
         </div>
         <div class="groupimages">
           <div class="row">
@@ -49,36 +59,46 @@
   <% end %>
 </div>
 
-<!-- EXPENSES BODY -->
+<!-- PAID BODY -->
 
 <div id="Expenses" class="tabcontent">
-  <h4 class="text-center">Times you've paid:</h4>
-  <% expenses = Expense.where(:user_id == @user && :description != Settled) %>
+  <% expenses = Expense.where(:user_id == @user) %>
   <% expenses.each do |expense| %>
-    <div class="group">
-      <div class="grouptext">
-        <h5 class="lato heavy"><%= expense.title %></h5>
-        <h5><%= expense.id %></h5>
-        <h5><%= expense.description %></h5>
+    <%= link_to extension_expense_path(expense, user_id: @user, group_id: expense) do %>
+      <div class="group">
+        <% if /(settled with)+/.match(expense.title) %>
+          <%payeename = expense.title.split.last %>
+          <div class="grouptext">
+            <h5 class="lato heavy">You paid <%= expense.title.split.last %> back</h5>
+            <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
+            <h5><%= expense.location %></h5>
+            <h5 class="lato heavy">£ <%= expense.amount_cents/100 %></h5>
+          </div>
+          <% payee = User.find_by first_name: payeename %>
+          <div class="groupimages">
+            <div class="row">
+              <div class="col-sx-1">
+                <div>
+                  <%= image_tag payee.profile_picture_url, class: "avatar-list" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="grouptext">
+            <h5 class="lato heavy">You paid for <%= expense.title %></h5>
+            <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
+            <h5 class="lato heavy">£ <%= expense.amount_cents/100 %></h5>
+          </div>
+        <% end %>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 
-<!-- SETTLES BODY -->
+<!-- RECEIVED BODY BODY -->
 
-<div id="Settles" class="tabcontent">
-  <h4 class="text-center">Times you've settled</h4>
-  <% settles = Expense.where(:user_id == @user && :description == "Settled") %>
-  <% settles.each do |settle| %>
-    <div class="group">
-      <div class="grouptext">
-        <% expense = Expense.where(:title == settle.location) %>
-        <h3>settled amount<%= settle.amount_cents %></h3>
-        <h3>other amountpe <%= settle.location %>  </h3>
-      </div>
-    </div>
-  <% end %>
+<div id="Received" class="tabcontent">
 </div>
 
 <!-- Script that controls tab activation -->
