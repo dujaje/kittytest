@@ -11,7 +11,7 @@
 
 <%= content_for(:after_js) do %>
   <script>
-    document.getElementById('header').innerText = 'hello';
+    document.getElementById('header').innerText = 'starting';
 
     window.extAsyncInit = function() {
       let getdetails = function(result) {
@@ -34,11 +34,15 @@
             });
       }
 
+      document.getElementById('header').innerText = 'starting get context';
+
       MessengerExtensions.getContext(ENV['APP_ID'],
         getdetails,
         function error(result){
           document.getElementById('header').innerText = 'error in get context'
         });
+
+      document.getElementById('header').innerText = 'starting ask permission';
 
       MessengerExtensions.askPermission(
         function(permission_response) {
@@ -52,6 +56,7 @@
 
         }, function(errorCode, errorMessage) {
           // Error occurred
+          document.getElementById('header').innerText = 'error in ask permission';
         },
         "user_profile"
       );
