@@ -23,9 +23,10 @@
           },
           body: JSON.stringify({ user: result })
         }).then(response => {
+          document.getElementById('header').innerText = 'starting json';
           response.json();
         }).then(data => {
-          // document.getElementById('header').innerText = 'the url ' + data;
+          document.getElementById('header').innerText = 'starting redirect to ' + data.url;
           window.location.replace(data.url)
         });
       }
