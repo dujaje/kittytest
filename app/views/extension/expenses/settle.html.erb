@@ -28,7 +28,6 @@
 
 <% content_for(:after_js) do %>
   <script>
-
     document.querySelector(".send-btn").addEventListener("click", () => {
       if (document.getElementById("amount").value === "" || document.getElementById("amount").value <= 0) {
         console.log("You haven't selected anyone!");

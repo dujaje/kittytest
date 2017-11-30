@@ -20,5 +20,6 @@ class User < ApplicationRecord
     end
 
     return user_owed_total - user_owes_total
+
   end
 end

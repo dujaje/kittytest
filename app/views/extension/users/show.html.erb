@@ -1,61 +1,127 @@
+
 <% @title = "#{@user.first_name} #{@user.last_name}" %>
 
-<div class="blue-back">
-  <h4 class="lato white heavy">Howdy <%= @user.first_name.capitalize %>!</h4>
+<!-- TAB BAR -->
+
+<div class="tab">
+  <button class="tablinks lato heavy white" id="groupstab" onclick="openCity(event, 'Groups')">Groups</button>
+  <button class="tablinks lato heavy white" onclick="openCity(event, 'Expenses')">Paid</button>
+  <button class="tablinks lato heavy white" onclick="openCity(event, 'Received')">Received</button>
 </div>
 
-<div class="mobile-container text-left">
-  <h3 class="lato heavy">Your Groups</h3>
-</div>
+<!-- GROUPS BODY -->
 
-<div class="mobile-container">
-  <div class="group-content-container">
-    <div class="group-content">
-      <% @user.groups.each do |g| %>
-      <div class="group-card">
-        <div class="group-dynamic-data">
-          <div class="column">
-            <div class="group-name-time column-item">
-              <span id="group-name">
-                <%= g.name.capitalize %>
-              </span>
-              <p id="group-creation-time">
-                <%= g.created_at.strftime("%b %d, %Y") %>
-              </p>
-            </div>
-            <div class="row">
-              <% if g.users.count <= 8 %>
-              <% g.users.each do |user| %>
-                <div class="col-xs-3" id="group-member-img">
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "user-img" %>
-                </div>
-              <% end %>
+<div id="Groups" class="tabcontent">
+  <% @user.groups.each do |g| %>
+    <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
+      <div class="group">
+        <div class="grouptext">
+          <h5 class="lato heavy"><%= g.name %></h5>
+          <p class="lato">Since <%= g.created_at.strftime("%b %d, %Y") %></p>
+          <% g.memberships.each do |member| %>
+            <% if @user.outstanding_with_person_in_group(member, g) == 0 %>
+
+            <% elsif @user.outstanding_with_person_in_group(member, g) < 0 %>
+              <h5 class="lato heavy">You owe: <span style="color:red"> £<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f * -1 / 100) %></span></h5>
             <% else %>
-              <% g.users.first(7).each do |user| %>
-                <div class="col-xs-3" id="group-member-img">
-                <%= image_tag user.profile_picture_url || "avatar_icon2.svg", size: "60x60", class: "user-img" %>
-                </div>
+              <% ower = User.find(member.user_id) %>
+              <h5 class="lato heavy"><%= ower.first_name %> owes you: <span style="color:green">£<%= sprintf("%.2f", @user.outstanding_with_person_in_group(member, g).to_f / 100) %></span></h5>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="groupimages">
+          <div class="row">
+            <div class="col-sx-1">
+              <% if g.users.count <= 4 %>
+                <% g.users.each do |user| %>
+                  <% if user == @user %>
+                  <% else %>
+                    <div>
+                      <%= image_tag user.profile_picture_url, class: "avatar-list" %>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <% g.users.first(4).each do |user| %>
+                  <% if user == @user %>
+                  <% else %>
+                    <div>
+                      <%= image_tag user.profile_picture_url, class: "avatar-list" %>
+                    </div>
+                  <% end %>
+                <% end %>
               <% end %>
-                <div class="col-xs-3" id="group-member-img">
-                  <h3><i class="fa fa-plus-circle" aria-hidden="true"></i></h3>
-                </div>
-              <% end %>
-              <%= link_to extension_group_path(user_id: @user.id, group_id: g.id) do %>
             </div>
           </div>
         </div>
-        <div class="button-placement">
-          <button class="send-btn inverted-img"><div class="send-inner"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png" class="mag-glass" height="24" width="24"><div id="mag-glass-spacer"></div><span id="mag-glass-font">Go to group</span></div></button>
-          <% end %>
-        </div>
       </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="user-content-container">
-    <div class="user-content">
-
-    </div>
-  </div>
-
+    <% end %>
+  <% end %>
 </div>
+
+<!-- PAID BODY -->
+
+<div id="Expenses" class="tabcontent">
+  <% expenses = Expense.where(:user_id == @user) %>
+  <% expenses.each do |expense| %>
+    <%= link_to extension_expense_path(expense, user_id: @user, group_id: expense) do %>
+      <div class="group">
+        <% if /(settled with)+/.match(expense.title) %>
+          <%payeename = expense.title.split.last %>
+          <div class="grouptext">
+            <h5 class="lato heavy">You paid <%= expense.title.split.last %> back</h5>
+            <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
+            <h5><%= expense.location %></h5>
+            <h5 class="lato heavy red">£ <%= expense.amount_cents/100 %></h5>
+          </div>
+          <% payee = User.find_by first_name: payeename %>
+          <div class="groupimages">
+            <div class="row">
+              <div class="col-sx-1">
+                <div>
+                  <%= image_tag payee.profile_picture_url, class: "avatar-list" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <div class="grouptext">
+            <h5 class="lato heavy">You paid for <%= expense.title %></h5>
+            <p class="lato"><%= expense.created_at.strftime("%b %d, %Y") %></p>
+            <h5 class="lato heavy red">£ <%= expense.amount_cents/100 %></h5>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- RECEIVED BODY BODY -->
+
+<div id="Received" class="tabcontent">
+</div>
+
+<!-- Script that controls tab activation -->
+
+<script>
+  const groups = document.getElementById("Groups");
+  groups.style.display = "block";
+  const groupstab = document.getElementById("groupstab")
+  groupstab.className += " active";
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
+
+
+
