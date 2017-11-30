@@ -42,6 +42,7 @@ class Api::V1::UsersController < Api::V1::BaseController
           puts "we are in the if"
           user.first_sign_in = false
           puts user.first_sign_in
+          user.save
           url = Rails.application.routes.url_helpers.extension_info_url(user_id: user.id, group_id: group.id)
         else
           puts "we are in the else"
