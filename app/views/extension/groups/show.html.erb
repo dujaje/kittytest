@@ -21,7 +21,7 @@
 <div class="blue-back flex">
   <div class="navbar-content text-left">
     <% if @user_outstanding_with_group.to_f == 0 %>
-      <h4 class="lato white heavy">You're all square <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
+      <h4 class="lato white heavy">You're all square  <i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
     <% elsif @user_outstanding_with_group.to_f < 0 %>
       <h4 class="lato white heavy">Overall, you owe: £<%=sprintf("%.2f", @user_outstanding_with_group.to_f * -1 / 100) %></h4>
     <% else %>
