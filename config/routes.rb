@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     resources :charges, only: [:new, :create]
     get 'settle', to: 'expenses#settle'
     resources :users, only: [:show]
-    # resources :charges
   end
 
   namespace :api, defaults: { format: :json } do
