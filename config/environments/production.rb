@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  routes.default_url_options[:host] = 'https://kittysplit.herokuapp.com/'
+  routes.default_url_options[:host] = 'https://kittysplit.herokuapp.com'
 
   # Code is not reloaded between requests.
   config.cache_classes = true
