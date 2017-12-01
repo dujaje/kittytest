@@ -33,8 +33,10 @@ class WebhooksController < ApplicationController
         elsif messaging["message"]
           sender = messaging["sender"]["id"]
           text = messaging["message"]["text"]
+          if text == "help"
+            help_reply(sender)
+          end
           my_reply = reply(sender)
-
           HTTP.post(url, json: my_reply)
         end
       end

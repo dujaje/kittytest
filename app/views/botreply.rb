@@ -39,3 +39,16 @@ def get_started_reply(sender)
               }
   return my_reply
 end
+
+def help_reply(sender)
+  my_reply = {
+                "messaging_type": "RESPONSE",
+                "recipient": {
+                  "id": "#{sender}"
+                },
+                "message": {
+                  "text": "Hi there, I'm kitty. I'll help you share your expenses. Type anything below and I'll give you a link where you can see all your Kitties"
+                }
+              }
+  return my_reply
+end
