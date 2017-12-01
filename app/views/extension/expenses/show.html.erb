@@ -19,7 +19,7 @@
     <h4 class="lato black heavy"><%= @expense.location %></h4>
   </div>
 <% end %>
-<% unless @expense.description == "" || @expense.description == "settled" %>
+<% unless @expense.description == "" || @expense.description == "Settled" %>
   <div class="mobile-container text-center">
     <h5 class="lato">"<%= @expense.description %>"</h5>
   </div>
@@ -81,6 +81,6 @@
 
 <div class="fixed-btn-section">
   <%= link_to extension_group_path(group_id: @group.id, user_id: @user.id ) do %>
-    <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane rotated" >Back to <%= @group.name %></div></button>
+    <button class="send-btn lato eighteen heavy"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane rotated" >Back to <%= @group.name %></div></button>
   <% end %>
 </div>
