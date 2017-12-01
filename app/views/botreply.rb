@@ -43,7 +43,7 @@ end
 def help_reply(sender)
   puts "in here"
   my_reply = {
-                "messaging_type": "POSTBACK",
+                "messaging_type": "RESPONSE",
                 "recipient": {
                   "id": "#{sender}"
                 },
