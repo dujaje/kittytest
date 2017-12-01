@@ -3,22 +3,22 @@
   <%= image_tag 'primary_logo_and_text.png', style: 'height:auto;width:100%;' %>
   <h4 class="welcome-text nunito">Splitting money <br> made simple</h4>
 </div>
-<div class="container no-top-marg">
+<div class="container no-top-marg text-left">
   <h3 class="lato heavy"><strong>How it works:</strong></h3>
-  <div class="line-spaced"><p class="less-pad">Setup Kitty in any group chat</p></div>
+  <div class="line-spaced"><p class="less-pad">Name Your Kitty</p></div>
+    <% @group.name = nil %>
+    <%= simple_form_for [:extension, @group] do |f| %>
+      <div class="r-l-pad"><%= f.input :name, :maxlength => "18", :label => false, :required => true, :placeholder => "i.e. #{@user.first_name} and friends' Kitty", :class => "lato name-input form-control" %></div>
   <div class="line-spaced"><p class="less-pad">Easily track shared expenses </p></div>
   <div class="line-spaced"><p class="less-pad">Let Kitty simplify the repayments</p></div>
   <div class="line-spaced"><p class="less-pad">Automatically tell others when you repay!</p></div>
 </div>
-<div class="central mini-margin">
+<!-- <div class="mini-margin">
     <h6 class="heavy">Name your kitty:</h6>
-</div>
-<% @group.name = nil %>
-<%= simple_form_for [:extension, @group] do |f| %>
-  <div class="r-l-pad"><%= f.input :name, :maxlength => "18", :label => false, :required => true, :placeholder => "i.e. #{@user.first_name} and friends' Kitty", :class => "lato name-input form-control" %></div>
+</div> -->
   <%= f.input :user_id, as: :hidden, input_html: { value: @user.id } %>
   <%= f.input :group_id, as: :hidden, input_html: { value: @group.id } %>
-  <button class="send-btn"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></button>
+  <button class="send-btn lato eighteen heavy"><div class="send-inner"><img src="https://png.icons8.com/paper-plane/ios11/30/ffffff" class="paper-plane" >Setup Your Group Kitty</div></button>
 <% end %>
 
 <!-- JAVASCRIPT FOR THE BUTTON TO SEND TO GROUP, TURN KITTY_CREATED=TRUE AND REDIRECT -->
