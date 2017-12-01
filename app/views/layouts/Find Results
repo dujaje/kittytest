@@ -1,0 +1,33 @@
+Searching 290 files for "White on Colour" (regex)
+
+/Users/jamiedujardin/code/dujaje/kittytest/app/views/extension/pages/redirect.html.erb:
+    2
+    3  <div class="loading-container text-center">
+    4:     <%= image_tag("White on Colour.png", size: '200', alt: "Edit", class: "loading-logo-img centered") %>
+    5        <% fun_arr = ["Using litter responsibly!", "Licking paws...", "Busy mouse hunting!", "Compawling the database...", "Purrsuade your mates to join", "All pawsitive here", "Operating purrrfectly", "Feline good today?", "Cat-aloging your expenses", "I'm feline awesome!", "Preventing cat-astrophe" ] %>
+    6      <div class="align-top">
+
+1 match in 1 file
+
+
+Searching 290 files for "White on Colour" (regex)
+
+0 matches
+
+Searching 290 files for "favicon" (regex)
+
+/Users/jamiedujardin/code/dujaje/kittytest/app/views/extension/pages/redirect.html.erb:
+    2
+    3  <div class="loading-container text-center">
+    4:     <%= image_tag("icon_welcome.png", size: '200', alt: "Edit", class: "loading-logo-img centered") %>
+    5        <% fun_arr = ["Using litter responsibly!", "Licking paws...", "Busy mouse hunting!", "Compawling the database...", "Purrsuade your mates to join", "All pawsitive here", "Operating purrrfectly", "Feline good today?", "Cat-aloging your expenses", "I'm feline awesome!", "Preventing cat-astrophe" ] %>
+    6      <div class="align-top">
+
+/Users/jamiedujardin/code/dujaje/kittytest/app/views/layouts/application.html.erb:
+    8       <%= @title || "Kitty - In chat money splitter" %>
+    9      </title>
+   10:     <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
+   11
+   12      <meta name="description" content="Easily tracked shared expenses with your friends, right inside Facebook messenger">
+
+3 matches across 2 files
