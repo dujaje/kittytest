@@ -5,8 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>
-     <%= @title %>
+     <%= @title || "Kitty - In chat money splitter" %>
     </title>
+    <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
+
+    <meta name="description" content="Easily tracked shared expenses with your friends, right inside Facebook messenger">
+
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title" content="Kitty Money Splitter" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kittysplit.herokuapp.com" />
+    <meta property="og:image" content="<%= image_path 'primary_logo_and_text_large.png' %>" />
+    <meta property="og:description" content="Easily tracked shared expenses with your friends, right inside Facebook messenger" />
+    <meta property="og:site_name" content="Kitty Money Splitter" />
+
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
