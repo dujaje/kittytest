@@ -34,7 +34,7 @@ class WebhooksController < ApplicationController
           sender = messaging["sender"]["id"]
           text = messaging["message"]["text"]
           if text == "help"
-            help_reply(sender)
+            my_reply = help_reply(sender)
           else
             my_reply = reply(sender)
           end

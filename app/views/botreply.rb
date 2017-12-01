@@ -41,8 +41,9 @@ def get_started_reply(sender)
 end
 
 def help_reply(sender)
+  puts "in here"
   my_reply = {
-                "messaging_type": "RESPONSE",
+                "messaging_type": "POSTBACK",
                 "recipient": {
                   "id": "#{sender}"
                 },
