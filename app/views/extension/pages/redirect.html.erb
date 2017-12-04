@@ -12,7 +12,9 @@
 <%= content_for(:after_js) do %>
   <script>
     window.extAsyncInit = function() {
+      <%= puts "SDK LOADED" %>
       let getdetails = function(result) {
+        <%= puts "GETS DETAILS RUNS" %>
         fetch("/api/v1/users", {
           method: "POST",
           headers: {
@@ -44,7 +46,7 @@
 
         }, function(errorCode, errorMessage) {
           // Error occurred
-          document.getElementById('header').innerText = 'error in ask permission';
+          document.getElementById('header').innerText = 'Not available on this device';
         },
         "user_profile"
       );
